@@ -1,4 +1,4 @@
-//疫情入汉图
+
 var rectTree = document.getElementById('rectTree');
 var rectTreeEchart = echarts.init(rectTree);
 
