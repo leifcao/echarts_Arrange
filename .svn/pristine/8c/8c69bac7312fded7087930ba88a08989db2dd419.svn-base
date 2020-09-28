@@ -1,0 +1,477 @@
+// ----柱状图----------
+var histogramOne = document.getElementById('histogramFirst')
+var histogramFirst = echarts.init(histogramOne)
+
+
+histogramOneOption = {
+    backgroundColor: '',
+    title: {
+        text: "",
+        x: "center",
+        y: "4%",
+        textStyle: {
+            color: textColor,
+            fontSize: '22'
+        },
+        subtextStyle: {
+            color: textColor,
+            fontSize: '16',
+
+        },
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        top: '20%',
+        right: '3%',
+        left: '10%',
+        bottom: '20%'
+    },
+    xAxis: [{
+        type: 'category',
+        data: ['制造业', '建筑业', '农林牧渔', '房地产', '金融业', '其他'],
+        axisLine: {
+            lineStyle: {
+                // color: 'rgba(255,255,255,0.12)',
+                color: textColor
+            }
+        },
+        axisTick: {
+            show: false
+        },
+        interval: 0,
+        axisLabel: {
+            // margin: 10,
+            color: textColor,
+            rotate: 40,
+            interval: 0,
+            textStyle: {
+                fontSize: 12
+            },
+        },
+    }],
+    yAxis: [{
+        name: '万元',
+        axisLabel: {
+            formatter: '{value}',
+            color: textColor,
+
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                // color: 'rgba(255,255,255,1)',
+                color: textColor
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                color: 'rgba(255,255,255,0.12)'
+            }
+        }
+    }],
+    series: [{
+        type: 'bar',
+        data: [4800, 2600, 1300, 1300, 1250, 1500],
+        barWidth: 10,
+        itemStyle: {
+            normal: {
+                color: colorList[0],
+                barBorderRadius: [20, 20, 20, 20],
+                shadowColor: 'rgba(0,160,221,1)',
+                shadowBlur: 2,
+            }
+        },
+        label: {
+            normal: {
+                show: true,
+                lineHeight: 24,
+                width: 60,
+                height: 24,
+                backgroundColor: 'rgba(0,160,221,0.1)',
+                borderRadius: 200,
+                position: ['-12', '-46'],
+                distance: 1,
+                formatter: [
+                    '    {d|●}',
+                    ' {a|{c}}   \n'
+                ].join(''),
+                rich: {
+                    d: {
+                        color: '#3CDDCF',
+                    },
+                    a: {
+                        color: textColor,
+                        align: 'center',
+                    },
+
+                }
+            }
+        },
+        animationDelay: function(idx) {
+            return idx * 600;
+        },
+
+    }],
+    animationEasing: 'elasticOut',
+
+};
+
+histogramFirst.setOption(histogramOneOption)
+
+
+// ------多系列柱图------------
+var histogramTwo = document.getElementById('histogramSecond')
+var histogramSecond = echarts.init(histogramTwo)
+
+
+histogramTwoOption = {
+    backgroundColor: '',
+    title: {
+        text: '',
+        textStyle: {
+            color: textColor, //坐标的字体颜色
+        }
+    },
+    grid: {
+        top: '20%',
+        right: '3%',
+        left: '10%',
+        bottom: '12%'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['高一', '高二', '高三'],
+        textStyle: {
+            color: textColor, //坐标的字体颜色
+        },
+    },
+
+    xAxis: [{
+        axisTick: {
+            show: false
+        },
+        axisLine: { //X轴线的宽度及颜色
+            show: true,
+            lineStyle: {
+                color: 'rgba(255,255,255,0.1)',
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                color: textColor,
+                fontSize: 12
+            }
+        },
+        type: 'category',
+        data: ['语文', '数学', '英语', '生物', '化学', '物理', '地理', '历史', '政治']
+    }],
+    yAxis: [
+
+        {
+            type: 'value',
+            name: '人数',
+            nameTextStyle: {
+                color: textColor,
+            },
+            interval: 100,
+            axisLabel: {
+                textStyle: {
+                    color: textColor, //坐标的字体颜色
+                },
+                formatter: '{value} '
+            },
+            axisLine: { //Y轴线的颜色
+                show: false,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.1)',
+                }
+            },
+            splitLine: { //Y轴网格线
+                show: true,
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.1)',
+                }
+            },
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: 'rgba(255,255,255,1)'
+                }
+            },
+            axisTick: {
+                // show: false
+                lineStyle: {
+                    color: 'rgba(255,255,255,1)'
+                }
+            },
+        }
+    ],
+
+    series: [{
+            name: '高一',
+            type: 'bar',
+            // barWidth: '10px',
+            data: [202, 340, 460, 120, 235, 184, 245, 375, 444],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 10,
+                    borderWidth: 0,
+                    borderColor: '',
+                    color: ''
+
+                }
+            },
+            animationDelay: function(idx) {
+                return idx * 600;
+            },
+
+        },
+        {
+            name: '高二',
+            type: 'bar',
+            data: [150, 225, 137, 346, 330, 227, 434, 323, 141],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 10,
+                    borderWidth: 0,
+                    borderColor: '',
+                    color: ''
+                }
+            },
+            animationDelay: function(idx) {
+                return idx * 600;
+            },
+
+        },
+        {
+            name: '高三',
+            type: 'bar',
+            data: [250, 325, 127, 360, 123, 178, 313, 212, 323],
+            itemStyle: {
+                normal: {
+                    barBorderRadius: 10,
+                    borderWidth: 0,
+                    borderColor: '',
+                    color: ''
+                }
+            },
+            animationDelay: function(idx) {
+                return idx * 600;
+            },
+
+        }
+    ],
+    animationEasing: 'elasticOut',
+};
+// 颜色设置
+setSeriesColor(histogramTwoOption.series);
+histogramSecond.setOption(histogramTwoOption)
+
+
+// -----------堆积柱图------------
+var histogramThree = document.getElementById('histogramThird')
+var histogramThird = echarts.init(histogramThree)
+
+histogramThreeOption = {
+        backgroundColor: '',
+        tooltip: {
+            trigger: "axis",
+            axisPointer: {
+                type: "shadow",
+                textStyle: {
+                    color: textColor
+                }
+
+            },
+        },
+        grid: {
+            top: '20%',
+            right: '3%',
+            left: '10%',
+            bottom: '23%'
+        },
+        legend: {
+            x: 'center',
+            y: '2',
+            itemWidth: 15,
+            itemHeight: 5,
+            textStyle: {
+                color: textColor,
+                fontSize: 12
+            },
+
+        },
+        calculable: true,
+        xAxis: [{
+            type: "category",
+            name: '设备名称',
+            axisLine: { //X轴线的宽度及颜色
+                show: true,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.1)',
+                }
+            },
+            splitLine: {
+                show: false
+            },
+            axisTick: {
+                show: false
+            },
+            splitArea: {
+                show: false
+            },
+            axisLabel: {
+                textStyle: {
+                    color: textColor,
+                    fontSize: 12
+                },
+                rotate: 40,
+                interval: 0,
+            },
+            data: ['接入设备1', '接入设备2', '接入设备3', '接入设备4', '接入设备5', '接入设备6'],
+        }],
+        yAxis: [{
+            type: "value",
+            name: "数量",
+            nameTextStyle: {
+                color: textColor,
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.12)'
+                }
+            },
+            axisLine: { //Y轴线的颜色
+                show: false,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.1)',
+                }
+            },
+            axisTick: {
+                // show: false
+                lineStyle: {
+                    color: 'rgba(255,255,255,1)'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: textColor,
+                    fontSize: 12
+                }
+            },
+            splitArea: {
+                show: false
+            },
+
+        }],
+        series: [{
+                name: "大货车",
+                type: "bar",
+                stack: "总量",
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        color: '',
+                        barBorderRadius: [0, 0, 8, 8], //柱状图圆角设置
+                    }
+                },
+                barWidth: 12, //柱状图宽度
+                animationDelay: function(idx) {
+                    return idx * 600;
+                },
+                data: [233, 312, 424, 244, 134, 229]
+            },
+            {
+                name: "大客车",
+                type: "bar",
+                stack: "总量",
+                barWidth: 12,
+                itemStyle: {
+                    normal: {
+                        color: ""
+                    }
+                },
+                animationDelay: function(idx) {
+                    return idx * 600;
+                },
+                data: [180, 244, 244, 244, 413, 213]
+            },
+            {
+                name: "特大货车",
+                type: "bar",
+                stack: "总量",
+                barWidth: 12,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        color: ""
+                    }
+                },
+                data: [223, 213, 234, 134, 104, 524],
+                animationDelay: function(idx) {
+                    return idx * 600;
+                }
+            },
+            {
+                name: "小货车",
+                type: "bar",
+                stack: "总量",
+                barWidth: 12,
+                itemStyle: {
+                    normal: {
+                        color: ""
+                    }
+                },
+                data: [123, 321, 134, 241, 425, 255],
+                animationDelay: function(idx) {
+                    return idx * 600;
+                }
+            },
+            {
+                name: "中货车",
+                type: "bar",
+                stack: "总量",
+                barWidth: 12,
+                barGap: "10%",
+                itemStyle: {
+                    normal: {
+                        color: ""
+                    }
+                },
+                data: [131, 534, 135, 523, 245, 632],
+                animationDelay: function(idx) {
+                    return idx * 600;
+                }
+            },
+
+            {
+                name: "中小客车",
+                type: "bar",
+                barWidth: 12,
+                stack: "总量",
+                itemStyle: {
+                    normal: {
+                        color: '',
+                        barBorderRadius: [8, 8, 0, 0], //柱状图圆角设置
+                    }
+                },
+                animationDelay: function(idx) {
+                    return idx * 600;
+                },
+                data: [134, 452, 535, 535, 324, 242],
+
+            }
+        ],
+        animationEasing: 'elasticOut',
+    }
+    // 设置主题颜色
+setSeriesColor(histogramThreeOption.series);
+
+histogramThird.setOption(histogramThreeOption);

@@ -31,19 +31,29 @@
 
      // 气泡图
      bubblesFirst.resize();
-     bubblesSecond.resize();
-     dashboardThird.resize();
+     bubbleSecond.resize();
      // 折线图
      lineChart.resize();
      areaLineChart.resize();
      doubleLinesChart.resize();
      lineBarChart.resize();
      // 迁徙图
-     mapFirst.resize();
+     mapMigrateEchart.resize();
+     mapImmigrateEchart.resize();
+     mapBubbleEchart.resize();
      mapUnderEcharts.resize();
 
+     //K线图
+     k_lineFirst.resize();
+     k_lineSecond.resize();
      //词云图
      wordCloud_chart.resize();
+
+     //矩形树图
+     rectTreeEchart.resize();
+
+     //桑基图
+     sankeyEchart.resize();
 
      //线柱混搭图表
      echartPart.resize()

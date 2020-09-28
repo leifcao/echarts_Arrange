@@ -76,7 +76,7 @@ function initEcharts(mapData, mapJson) {
 
     //这里加true是为了让地图重新绘制，不然如果你有筛选的时候地图会飞出去
     mapUnderEcharts.setOption({
-        backgroundColor: 'rgb(20,28,52)',
+        backgroundColor: "#013954",
         tooltip: {
             trigger: "item",
             formatter: p => {
@@ -96,7 +96,7 @@ function initEcharts(mapData, mapJson) {
             text: cityName[cityName.length - 1] + "地图实现点击下钻",
             textStyle: {
                 color: "#fff",
-                fontSize: 16
+                fontSize: 13
             }
         },
         dataRange: {
@@ -147,38 +147,15 @@ function initEcharts(mapData, mapJson) {
             zoom: 1, //缩放比例
             data: mapData,
             itemStyle: {
-                /* normal: {
-                   show: true,
-                   areaColor: 'rgba(0,0,0,0)',
-                   borderColor: 'rgb(185, 220, 227)',
-                   borderWidth: '1',
-                 },*/
                 normal: {
-                    borderColor: 'rgba(147, 235, 248, 1)',
-                    borderWidth: 1,
-                    areaColor: {
-                        type: 'radial',
-                        x: 0.5,
-                        y: 0.5,
-                        r: 0.8,
-                        colorStops: [{
-                            offset: 0,
-                            color: 'rgba(147, 235, 248, 0)' // 0% 处的颜色
-                        }, {
-                            offset: 1,
-                            color: 'rgba(147, 235, 248, .2)' // 100% 处的颜色
-                        }],
-                        globalCoord: false // 缺省为 false
-                    },
-                    shadowColor: 'rgba(128, 217, 248, 1)',
-                    // shadowColor: 'rgba(255, 255, 255, 1)',
-                    shadowOffsetX: -2,
-                    shadowOffsetY: 2,
-                    shadowBlur: 10
+                    color: 'rgba(51, 69, 89, .5)', //地图背景色
+                    borderColor: '#516a89', //省市边界线00fcff 516a89
+                    borderWidth: 1
                 },
                 emphasis: {
-                    // 地图区域的高亮颜色
-                    areaColor: "#70e8e1"
+                    // color: 'rgba(37, 43, 61, .5)' //悬浮背景
+                    areaColor:'rgba(51, 69, 89, .5)',//地图背景色
+
                 }
             },
             label: {
@@ -194,7 +171,7 @@ function initEcharts(mapData, mapJson) {
                     show: true,
                     textStyle: {
                         // color: "#000",
-                        color: "#6b6b6b"
+                        color: "#ffffff"
                     },
 
                 }

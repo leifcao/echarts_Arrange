@@ -504,7 +504,6 @@ var pieChirtSixOption = {
             clockWise: true,
             radius: ['70%', '80%'],
             itemStyle: dataStyle,
-
             hoverAnimation: false,
             data: [{
                     value: 300,
@@ -573,9 +572,9 @@ var pieChirtSixOption = {
             ]
         },
 
-
-
-    ]
+    ],
+    animationDuration: 2800,
+    animationEasing: "cubicInOut",
 };
 
 pieChirtSixth.setOption(pieChirtSixOption);
