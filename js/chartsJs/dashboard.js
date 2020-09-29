@@ -158,9 +158,15 @@ var dashboardTwoOption = {
                 color: '#c9c9c9'
             }
         },
-        // title: {
-        //     offsetCenter: [0, "100%"],
-        // },
+        title: {
+            // offsetCenter: [0, "100%"],
+            textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                // fontWeight: 'bolder',
+                // fontSize: 10,
+                color:textColor
+            }
+        },
+
         pointer: {
             show: false,
             length: '65%',
@@ -169,7 +175,7 @@ var dashboardTwoOption = {
         data: [{
             "name": "水资源",
             "value": gaugeData.value,
-        }]
+        }],
     }]
 }
 
