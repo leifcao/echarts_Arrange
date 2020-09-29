@@ -12,83 +12,82 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="599">
-              <caret line="209" column="30" selection-start-line="209" selection-start-column="30" selection-end-line="209" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-224">
-              <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/chartsJs/relationTree.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/chartsJs/sankey.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="65" column="12" selection-start-line="65" selection-end-line="65" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/treeJson/VerticalTree.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3791">
-              <caret line="369" column="52" lean-forward="true" selection-start-line="369" selection-start-column="52" selection-end-line="369" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/resize.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
-              <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/chartsJs/immigration.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9156">
-              <caret line="327" selection-start-line="327" selection-end-line="328" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/chartsJs/bubble.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10836">
-              <caret line="387" column="12" selection-start-line="387" selection-end-line="387" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="235">
+                  <caret line="141" column="55" lean-forward="true" selection-start-line="141" selection-start-column="55" selection-end-line="141" selection-end-column="55" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="56">
+                  <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/resize.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="179">
+                  <caret line="43" column="30" lean-forward="true" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/immigration.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="627">
+                  <caret line="327" selection-start-line="327" selection-end-line="328" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="392">
+                  <caret line="267" selection-start-line="267" selection-end-line="268" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/bubble.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="441">
+                  <caret line="387" column="12" selection-start-line="387" selection-end-line="387" selection-end-column="12" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="140">
+                  <caret line="92" selection-start-line="92" selection-end-line="92" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -100,7 +99,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dashboardSecond</find>
       <find>bubblesSecond</find>
       <find>datas</find>
       <find>bubbleTwodatas</find>
@@ -127,6 +125,10 @@
       <find>calculateMA</find>
       <find>rectTreeEchart</find>
       <find>data0</find>
+      <find>data.</find>
+      <find>getTableLine</find>
+      <find>shape</find>
+      <find>lineList</find>
     </findStrings>
     <replaceStrings>
       <replace>convertBubbleData</replace>
@@ -151,7 +153,6 @@
         <option value="$PROJECT_DIR$/js/chartsJs/sankey.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/KLine.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/kLine.js" />
-        <option value="$PROJECT_DIR$/js/resize.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/relationEchart.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/pie.js" />
         <option value="$PROJECT_DIR$/js/treeJson/HorizontalTree.json" />
@@ -159,7 +160,10 @@
         <option value="$PROJECT_DIR$/js/chartsJs/rectTree.js" />
         <option value="$PROJECT_DIR$/js/treeJson/VerticalTree.json" />
         <option value="$PROJECT_DIR$/js/chartsJs/relationTree.js" />
+        <option value="$PROJECT_DIR$/js/chartsJs/NewChart.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/resize.js" />
+        <option value="$PROJECT_DIR$/js/chartsJs/dataCharts.js" />
       </list>
     </option>
   </component>
@@ -190,7 +194,7 @@
               <item name="echarts-Arrange" type="b2602c69:ProjectViewProjectNode" />
               <item name="echarts-Arrange" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="treeJson" type="462c0819:PsiDirectoryNode" />
+              <item name="chartsJs" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -235,12 +239,12 @@
       <option name="presentableId" value="Default" />
       <updated>1601190619531</updated>
       <workItem from="1601190620657" duration="16683000" />
-      <workItem from="1601281662161" duration="2134000" />
+      <workItem from="1601281662161" duration="11107000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18817000" />
+    <option name="totallyTimeSpent" value="27790000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -339,34 +343,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/NewChart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/resize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/immigration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9156">
-          <caret line="327" selection-start-line="327" selection-end-line="328" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/bubble.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10836">
-          <caret line="387" column="12" selection-start-line="387" selection-end-line="387" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/chartsJs/horizontalTree..js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -391,6 +367,13 @@
     <entry file="file://$PROJECT_DIR$/js/chartsJs/rectTree.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/treeJson/VerticalTree.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="241" column="6" lean-forward="true" selection-start-line="241" selection-start-column="6" selection-end-line="241" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/chartsJs/sankey.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
@@ -398,34 +381,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/treeJson/VerticalTree.json">
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/relationTree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3791">
-          <caret line="369" column="52" lean-forward="true" selection-start-line="369" selection-start-column="52" selection-end-line="369" selection-end-column="52" />
+        <state relative-caret-position="403">
+          <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/bubble.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="387" column="12" selection-start-line="387" selection-end-line="387" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224">
-          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="56">
+          <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/relationTree.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="82" column="24" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="24" />
+        <state relative-caret-position="235">
+          <caret line="141" column="55" lean-forward="true" selection-start-line="141" selection-start-column="55" selection-end-line="141" selection-end-column="55" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/js/resize.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="209" column="30" selection-start-line="209" selection-start-column="30" selection-end-line="209" selection-end-column="30" />
+        <state relative-caret-position="179">
+          <caret line="43" column="30" lean-forward="true" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/immigration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="327" selection-start-line="327" selection-end-line="328" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="92" selection-start-line="92" selection-end-line="92" />
         </state>
       </provider>
     </entry>

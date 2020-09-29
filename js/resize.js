@@ -56,5 +56,7 @@
      sankeyEchart.resize();
 
      //线柱混搭图表
-     echartPart.resize()
+     echartPart.resize();
+     //数据图表
+     datacharts.resize();
  }
