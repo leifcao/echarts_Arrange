@@ -24,11 +24,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="56">
-                  <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
+                <state relative-caret-position="476">
+                  <caret line="575" column="28" lean-forward="true" selection-start-line="575" selection-start-column="28" selection-end-line="575" selection-end-column="28" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
@@ -54,11 +54,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="392">
-                  <caret line="267" selection-start-line="267" selection-end-line="268" />
+                <state relative-caret-position="336">
+                  <caret line="295" column="20" lean-forward="true" selection-start-line="295" selection-start-column="20" selection-end-line="295" selection-end-column="20" />
                 </state>
               </provider>
             </entry>
@@ -77,10 +77,13 @@
       <split-second>
         <leaf>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
+            <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="140">
-                  <caret line="92" selection-start-line="92" selection-end-line="92" />
+                <state relative-caret-position="4032">
+                  <caret line="444" column="40" selection-start-line="444" selection-start-column="30" selection-end-line="444" selection-end-column="40" />
+                  <folding>
+                    <element signature="n#!!doc" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -154,7 +157,6 @@
         <option value="$PROJECT_DIR$/js/chartsJs/KLine.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/kLine.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/relationEchart.js" />
-        <option value="$PROJECT_DIR$/js/chartsJs/pie.js" />
         <option value="$PROJECT_DIR$/js/treeJson/HorizontalTree.json" />
         <option value="$PROJECT_DIR$/js/chartsJs/horizontalTree..js" />
         <option value="$PROJECT_DIR$/js/chartsJs/rectTree.js" />
@@ -164,10 +166,11 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/resize.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/dataCharts.js" />
+        <option value="$PROJECT_DIR$/js/chartsJs/pie.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="46" />
     <option name="y" value="206" />
     <option name="width" value="1711" />
@@ -239,12 +242,12 @@
       <option name="presentableId" value="Default" />
       <updated>1601190619531</updated>
       <workItem from="1601190620657" duration="16683000" />
-      <workItem from="1601281662161" duration="11107000" />
+      <workItem from="1601281662161" duration="12859000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27790000" />
+    <option name="totallyTimeSpent" value="29542000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -395,16 +398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="59" lean-forward="true" selection-start-line="2" selection-start-column="59" selection-end-line="2" selection-end-column="59" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -428,8 +421,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/chartsJs/dataCharts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="336">
+          <caret line="295" column="20" lean-forward="true" selection-start-line="295" selection-start-column="20" selection-end-line="295" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="575" column="28" lean-forward="true" selection-start-line="575" selection-start-column="28" selection-end-line="575" selection-end-column="28" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

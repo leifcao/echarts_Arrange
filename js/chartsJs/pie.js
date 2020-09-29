@@ -574,7 +574,7 @@ var pieChirtSixOption = {
 
     ],
     animationDuration: 2800,
-    animationEasing: "cubicInOut",
+    animationEasing: "elasticOut",
 };
 
 pieChirtSixth.setOption(pieChirtSixOption);
