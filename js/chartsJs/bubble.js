@@ -135,13 +135,7 @@ bubblesOneOption = {
             shadowBlur: 10,
             shadowColor: 'rgba(120, 36, 50, 0.5)',
             shadowOffsetY: 5,
-            color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                offset: 0,
-                color: 'rgb(67, 200, 162)'
-            }, {
-                offset: 1,
-                color: 'rgb(56, 195, 132)'
-            }])
+            color: colorList[0]
         }
     }, {
         name: '2015',
@@ -163,13 +157,8 @@ bubblesOneOption = {
             shadowBlur: 10,
             shadowColor: 'rgba(25, 100, 150, 0.5)',
             shadowOffsetY: 5,
-            color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                offset: 0,
-                color: 'rgb(129, 227, 238)'
-            }, {
-                offset: 1,
-                color: 'rgb(25, 183, 207)'
-            }])
+            color:colorList[1]
+
         }
     }]
 };
@@ -312,8 +301,8 @@ let bubblesTwoOption = {
         dimension: 5,
         inRange: {
             color: [
-                '#fed8a7',
-                '#ee2021',
+              colorList[0],
+              colorList[colorList.length-1],
             ],
         }
     }, ],

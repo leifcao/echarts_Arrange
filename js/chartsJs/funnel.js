@@ -31,13 +31,13 @@ funnelOneOption = {
             sort: 'descending', // 'ascending', 'descending'
             gap: 0,
             data: [
-                { value: 30, name: '访问' },
-                { value: 10, name: '咨询' },
-                { value: 5, name: '订单' },
-                { value: 50, name: '点击' },
-                { value: 80, name: '展现' }
+                { value: 20, name: '访问' },
+                { value: 40, name: '咨询' },
+                { value: 60, name: '订单' },
+                { value: 80, name: '点击' },
+                { value: 100, name: '展现' }
 
-            ].sort(function(a, b) { return a.value - b.value }),
+            ].sort(function(a, b) { return b.value - a.value }),
             roseType: true,
             label: {
                 normal: {
@@ -49,11 +49,11 @@ funnelOneOption = {
             },
             itemStyle: {
                 normal: {
-                    borderWidth: 0,
-                    shadowBlur: 30,
-                    shadowOffsetX: 0,
-                    shadowOffsetY: 10,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    // borderWidth: 0,
+                    // shadowBlur: 30,
+                    // shadowOffsetX: 0,
+                    // shadowOffsetY: 10,
+                    // shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             }
 

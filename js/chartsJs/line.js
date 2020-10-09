@@ -510,21 +510,7 @@ lineBarOption = {
             },
             data: rateData
         },
-        {
-            name: '占比',
-            type: 'line',
-            smooth: true,
-            showAllSymbol: true,
-            symbol: 'emptyCircle',
-            symbolSize: 8,
-            yAxisIndex: 1,
-            itemStyle: {
-                normal: {
-                    color: ''
-                },
-            },
-            data: rateData
-        },
+
         {
             name: '实际用量',
             type: 'bar',

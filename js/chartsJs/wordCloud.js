@@ -468,3 +468,6 @@ wordCloudOption.series[0].data = JosnList;
 
 
 wordCloud_chart.setOption(wordCloudOption, true)
+
+
+

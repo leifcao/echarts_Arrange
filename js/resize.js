@@ -59,4 +59,12 @@
      echartPart.resize();
      //数据图表
      datacharts.resize();
+
+     //关系图
+     relationFirst.resize();
+
+     //树图
+     horizontalTreeEchart.resize();
+     verticalTreeEchart.resize();
+
  }

@@ -128,7 +128,7 @@ var dashboardTwoOption = {
         axisLine: {
             lineStyle: {
                 color: [
-                    [gaugeData.value, '#5DD1FA'], //外环基础色
+                    [gaugeData.value, colorList[0]], //外环基础色
                     [1, "#f7f9fc"]
                 ],
                 width: 10
@@ -155,7 +155,7 @@ var dashboardTwoOption = {
             textStyle: {
                 fontSize: '32',
                 fontWeight: '600',
-                color: '#c9c9c9'
+                color: textColor
             }
         },
         title: {

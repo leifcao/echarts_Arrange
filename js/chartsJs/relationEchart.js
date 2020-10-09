@@ -7,6 +7,7 @@ let relationOneOpton = {
   title: {
     text: ''
   },
+  color:colorList,
   tooltip: {},
   animationDurationUpdate: 1500,
   animationEasingUpdate: 'quinticInOut',
@@ -35,21 +36,21 @@ let relationOneOpton = {
         name: '朋友',
         itemStyle: {
           normal: {
-            color: "#009800",
+            color: colorList[0],
           }
         }
       }, {
         name: '战友',
         itemStyle: {
           normal: {
-            color: "#4592FF",
+            color: colorList[1],
           }
         }
       }, {
         name: '亲戚',
         itemStyle: {
           normal: {
-            color: "#3592F",
+            color: colorList[2]
           }
         }
       }],

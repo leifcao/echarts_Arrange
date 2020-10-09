@@ -28,7 +28,11 @@ $.get('js/treeJson/HorizontalTree.json', function (data) {
           position: 'left',
           verticalAlign: 'middle',
           align: 'right',
-          fontSize: 9
+          fontSize: 9,
+          color:textColor,
+        },
+        itemStyle:{
+          borderColor:colorList[0]
         },
 
         leaves: {
@@ -36,7 +40,10 @@ $.get('js/treeJson/HorizontalTree.json', function (data) {
             position: 'right',
             verticalAlign: 'middle',
             align: 'left'
-          }
+          },
+          itemStyle:{
+            borderColor:colorList[0]
+          },
         },
         expandAndCollapse: true,
         animationDuration: 550,
@@ -81,7 +88,11 @@ $.get('js/treeJson/VerticalTree.json', function (data) {
           rotate: 0,
           verticalAlign: 'middle',
           align: 'center',
-          fontSize: 9
+          fontSize: 9,
+          color:textColor,
+        },
+        itemStyle:{
+          borderColor:colorList[0]
         },
 
         leaves: {
@@ -90,6 +101,9 @@ $.get('js/treeJson/VerticalTree.json', function (data) {
             rotate: -90,
             verticalAlign: 'middle',
             align: 'left'
+          },
+          itemStyle:{
+            borderColor:colorList[0]
           }
         },
 
