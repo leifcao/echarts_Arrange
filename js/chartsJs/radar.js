@@ -44,8 +44,8 @@ radarOneOption = {
         // areaStyle: { color: 'rgba(188,188,188, 0.4)' },
         // symbol: 'circle',
         symbolSize: 5, //圈圈大小
-        itemStyle: { color: 'rgba(127,255,210,0.8)', borderColor: 'rgba(127,255,210,0.2)', borderWidth: 10, },
-        lineStyle: { color: 'rgba(193,236,188, 1)', width: 3 },
+        itemStyle: { color: colorList[0], borderColor: textColor, borderWidth: 1, },
+        lineStyle: { color: colorList[0], width: 3 },
         label: { show: false, },
         data: [{
             value: [4300, 10000, 28000, 35000, 50000, 19000, 21000],
@@ -113,8 +113,8 @@ radarTwoOption = {
             // areaStyle: { color: 'rgba(188,188,188, 0.4)' },
             // symbol: 'circle',
             symbolSize: 5, //圈圈大小
-            itemStyle: { color: 'rgba(193,236,188,0.8)', borderColor: 'rgba(127,255,210,0.2)', borderWidth: 1, },
-            lineStyle: { color: 'rgba(193,236,188, 1)', width: 3 },
+            itemStyle: { color: colorList[0], borderColor: textColor, borderWidth: 1, },
+            lineStyle: { color: colorList[0], width: 3 },
             label: { show: false, },
             data: [
                 [4600, 13000, 25000, 23500, 25000]
@@ -126,8 +126,8 @@ radarTwoOption = {
             // areaStyle: { color: 'rgba(188,188,188, 0.4)' },
             // symbol: 'circle',
             symbolSize: 5, //圈圈大小
-            itemStyle: { color: 'rgba(251,202,197,0.8)', borderColor: 'rgba(255,237,145,0.2)', borderWidth: 1, },
-            lineStyle: { color: 'rgba(251,202,197, 1)', width: 3 },
+            itemStyle: { color: colorList[1], borderColor: textColor, borderWidth: 1, },
+            lineStyle: { color: colorList[1], width: 3 },
             data: [
                 [5300, 15000, 12800, 13500, 15000]
             ]
