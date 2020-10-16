@@ -76,7 +76,7 @@ function initEcharts(mapData, mapJson) {
 
     //这里加true是为了让地图重新绘制，不然如果你有筛选的时候地图会飞出去
     mapUnderEcharts.setOption({
-        backgroundColor: "#013954",
+        // backgroundColor: "#013954",
         tooltip: {
             trigger: "item",
             formatter: p => {
@@ -144,7 +144,7 @@ function initEcharts(mapData, mapJson) {
             type: "map",
             map: "Map",
             roam: true, //是否可缩放
-            zoom: 1, //缩放比例
+            zoom: 1.2, //缩放比例
             data: mapData,
             itemStyle: {
                 normal: {

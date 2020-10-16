@@ -12,11 +12,13 @@
      histogramFirst.resize();
      histogramSecond.resize();
      histogramThird.resize();
+     histogramFourth.resize();
      // 条形图
      barChartFirst.resize();
      barChartSecond.resize();
      barChartThird.resize();
      barChartFourth.resize();
+     barChartFifth.resize();
      // 雷达图
      radarFirst.resize();
      radarSecond.resize();

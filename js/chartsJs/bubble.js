@@ -6,38 +6,28 @@ var bubblesFirst = echarts.init(bubblesOne)
 
 
 var getname = ['SCI', 'SSCI','EI','ISTP','AHCI','ISSHP','其他'];
-var getvalue = [3222,2700,3397,3541,2000,2233,3397];
 var getamount = [60.3,40,75.4,65.5,22.3,15.6,75.4];
 var getorderCount = [4500,5000,11000,14000,15000,20000,20121];
 
 var getname2 = ['SCI', 'SSCI','EI','ISTP','AHCI','ISSHP','其他'];
-var getvalue2 = [3522,3200,3597,4041,2500,2733,3897];
 var getamount2 = [65.3,35,82.4,72.5,45.3,20.6,80.4];
 var getorderCount2 = [5000,6000,12000,16000,18000,23000,27121];
 
 
-var bubble_datas = [];
-for (var i = 0; i < getname.length; i++) {
-    bubble_datas.push({
-        name: getname[i],
-        value: getvalue[i],
-        amount: getamount[i],
-        orderCount: getorderCount[i],
-    })
-}
+//数据数组封装
+function packList(name,params,secondParams){
+    let list = [];
 
-var bubble_datas2 = [];
-for (var i = 0; i < getname2.length; i++) {
-    bubble_datas2.push({
-        name: getname2[i],
-        value: getvalue2[i],
-        amount: getamount2[i],
-        orderCount: getorderCount2[i],
+    list = name.map((data,index)=>{
+        let value = params[index] /  secondParams[index] ;
+        return [params[index],secondParams[index],data,value]
     })
-}
 
-bubble_datas = handleDatas(bubble_datas);
-bubble_datas2 = handleDatas(bubble_datas2);
+    return list;
+}
+bubble_datas = packList(getname,getorderCount,getamount)
+bubble_datas2 = packList(getname2,getorderCount2,getamount2)
+
 
 let bubblesOneOption= {
     grid: {
@@ -62,7 +52,7 @@ let bubblesOneOption= {
         extraCssText: 'padding-right:8px;padding-left:8px;line-height:30px;background:rgba(255,255,255,1);box-shadow:1px 5px 20px 0px rgba(1,11,19,0.2);border-radius:6px;',
         textStyle: {
             fontSize: '13',
-            color: '#656565',
+            color: textColor,
         },
         formatter: function(obj) {
             var value = obj.value;
@@ -70,9 +60,9 @@ let bubblesOneOption= {
               '年份：' + obj.seriesName +
               '</div>' +
               '收录期刊：' + value[2] + '<br/>' +
-              '总被引用次数：' + value[0] + '<br/>' +
+              '总被引用次数：' + value[3].toFixed(2) + '<br/>' +
               '人均发表篇次：' + value[1].toFixed(1) + '<br/>' +
-              '发表论文总数：' + value[3] + '<br/>';
+              '发表论文总数：' + value[0] + '<br/>';
         }
     },
     xAxis: {
@@ -198,17 +188,6 @@ let bubblesOneOption= {
     }]
 };
 
-function handleDatas(datas) {
-    let packedDatas = datas.map((data) => {
-        let name = data['name'];
-        let dispathCount = data['orderCount'];
-        let refs = data['amount'];
-        let avt = data['value'];
-        return [dispathCount, refs, name, avt ];
-    });
-
-    return packedDatas;
-}
 setSeriesColor(bubblesOneOption.series)
 
 bubblesFirst.setOption(bubblesOneOption);
@@ -318,11 +297,10 @@ let bubblesTwoOption = {
             var value = obj.value;
             return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
               value[2] +
-              '（' + value[3] + '）' +
               '</div>' +
               '订单数：' + value[0] + '<br>' +
               '消费金额：' + value[1] + '<br>' +
-              'AVT：' + value[4].toFixed(2) + '<br>';
+              'AVT：' + value[3].toFixed(2) + '<br>';
         }
     },
     xAxis: {
@@ -382,18 +360,12 @@ function packDatas(datas) {
 
     let packedDatas = datas.map((data) => {
         let name = data['name'];
-        let periods = data['period'].split('.');
-        let period = periods[0] + ' 年 ' + periods[1] + ' 个月';
         let orderCount = data['orderCount'];
         let amount = data['amount'];
         //计算avt
         let avt = amount / orderCount;
-        let monthCount = Number.parseInt(periods[0]) * 12 + Number.parseInt(periods[1]);
 
-        Bublle_min = Bublle_min > 0 ? Math.min(Bublle_min, monthCount) : monthCount;
-        Bublle_max = Math.max(Bublle_max, monthCount);
-
-        return [orderCount, amount, name, period, avt, monthCount];
+        return [orderCount, amount, name, avt];
     });
 
     return packedDatas;

@@ -9,8 +9,8 @@ var chartName = ['角鲨烷', '水解胶原', '羟苯甲酯', '羊毛脂', '咪�
 let barChartOneOption = {
     backgroundColor: '',
     grid: {
-        left: '5%',
-        right: '15%',
+        left: '1%',
+        right: '8%',
         bottom: '5%',
         top: '5%',
         containLabel: true
@@ -42,7 +42,7 @@ let barChartOneOption = {
     yAxis: {
         type: 'category',
         name: '', //排名
-        // inverse:true, 
+        // inverse:true,
         axisLabel: {
             textStyle: {
                 color: textColor
@@ -50,7 +50,7 @@ let barChartOneOption = {
         },
         data: chartName,
         axisLabel: {
-            show: false,
+            show: true,
         },
         axisTick: {
             show: false
@@ -88,7 +88,7 @@ let barChartOneOption = {
                     for (i = 0; i < chartData.length; i++) {
                         sum += chartData[i];
                     }
-                    return '{a|' + chartName[data.dataIndex] + '} (' + ((chartData[data.dataIndex] / sum) * 100).toFixed(0) + '%)';
+                    return '' + ((chartData[data.dataIndex] / sum) * 100).toFixed(0) + '%';
                 },
                 rich: {
                     a: {
@@ -235,8 +235,8 @@ var barChartThree = document.getElementById('barChartThird')
 var barChartThird = echarts.init(barChartThree)
 
 /**
- * 照着一个案例改的 
- * 增加下面的数值显示 
+ * 照着一个案例改的
+ * 增加下面的数值显示
  * */
 var myData = ['一审服', '撤诉率', '调解率', '实际', '裁判率', '执行标', '再审']
 var lineData = [100, 100, 100, 100, 100, 100, 100]
@@ -595,6 +595,83 @@ let barChartFourOption = {
 
 barChartFourth.setOption(barChartFourOption);
 
+
+// 条形多柱图
+
+// 正负条形图
+let barChartFive = document.getElementById('barChartFifth');
+let barChartFifth = echarts.init(barChartFive);
+
+let barChartfiveOption = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        },
+    },
+    legend: {
+        data: ['2019年', '2020年'],
+        itemWidth: 10,
+        itemHeight: 10,
+    },
+    color:colorList,
+    grid: {
+        left: '3%',
+        right: '6%',
+        top: '10%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        name:'万人',
+        boundaryGap: [0, 0.02]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['巴西', '印尼', '美国', '印度', '中国', '世界人口']
+    },
+    series: [
+        {
+            name: '2019年',
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [0, 8, 8, 0],
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'right',
+                    formatter: function(params) { return params.value+'万' }
+                }
+            },
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        },
+        {
+            name: '2020年',
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    barBorderRadius: [0, 8, 8, 0],
+                }
+            },
+
+            label: {
+                normal: {
+                    position: 'right',
+                    show: true,
+                    formatter: function(params) { return params.value+'万' }
+                }
+            },
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        }
+    ]
+};
+
+
+barChartFifth.setOption(barChartfiveOption);
 
 
 // 条形图点击事件

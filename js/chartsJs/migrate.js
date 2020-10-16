@@ -2,32 +2,15 @@ var mapMigrate = document.getElementById('mapMigrate')
 var mapMigrateEchart = echarts.init(mapMigrate)
 
 var chinaGeoCoordMap = {
-    "福建": [119.4543, 25.9222],
-    "泉州": [118.4543, 25.0222],
     '大庆': [126.9688, 45.868],
-    '内蒙古': [110.3467, 41.4899],
-    "吉林": [125.8154, 44.2584],
     '北京': [116.4551, 40.2539],
-    "辽宁": [123.1238, 42.1216],
-    "河北": [114.4995, 38.1006],
-    "天津": [117.4219, 39.4189],
-    "山西": [112.3352, 37.9413],
-    "陕西": [109.1162, 34.2004],
     "甘肃": [103.5901, 36.3043],
-    "宁夏": [106.3586, 38.1775],
     "青海": [101.4038, 36.8207],
     "新疆": [87.9236, 43.5883],
     "西藏": [91.11, 29.97],
     "四川": [103.9526, 30.7617],
-    "重庆": [108.384366, 30.439702],
-    "山东": [117.1582, 36.8701],
-    "河南": [113.4668, 34.6234],
-    "江苏": [118.8062, 31.9208],
-    "安徽": [117.29, 32.0581],
-    "湖北": [114.3896, 30.6628],
     "浙江": [119.5313, 29.8773],
     '黑龙江': [127.9688, 45.368],
-    "江西": [116.0046, 28.6633],
     "湖南": [113.0823, 28.2568],
     "贵州": [106.6992, 26.7682],
     "云南": [102.9199, 25.4663],
@@ -42,40 +25,8 @@ var chinaDatas = [
         value: 0
     }],
     [{
-        name: '内蒙古',
-        value: 0
-    }],
-    [{
-        name: '吉林',
-        value: 0
-    }],
-    [{
-        name: '辽宁',
-        value: 0
-    }],
-    [{
-        name: '河北',
-        value: 0
-    }],
-    [{
         name: '北京',
         value: 0.83
-    }],
-    [{
-        name: '天津',
-        value: 0
-    }],
-    [{
-        name: '山西',
-        value: 0
-    }],
-    [{
-        name: '陕西',
-        value: 0
-    }],
-    [{
-        name: '宁夏',
-        value: 0
     }],
     [{
         name: '云南',
@@ -86,39 +37,7 @@ var chinaDatas = [
         value: 1
     }],
     [{
-        name: '重庆',
-        value: 0
-    }],
-    [{
-        name: '山东',
-        value: 0
-    }],
-    [{
-        name: '河南',
-        value: 0
-    }],
-    [{
-        name: '江苏',
-        value: 0
-    }],
-    [{
-        name: '安徽',
-        value: 0
-    }],
-    [{
-        name: '湖北',
-        value: 0
-    }],
-    [{
         name: '浙江',
-        value: 0
-    }],
-    [{
-        name: '福建',
-        value: 0
-    }],
-    [{
-        name: '江西',
         value: 0
     }],
     [{
@@ -164,7 +83,7 @@ var mapMigrateSeries = [];
 [
     ['北京', chinaDatas]
 ].forEach(function(item, i) {
-    console.log(item)
+    // console.log(item)
     mapMigrateSeries.push({
           type: 'lines',
           zlevel: 2,
@@ -262,7 +181,7 @@ var mapMigrateSeries = [];
 let mapMigrateOption = {
     tooltip: {
         trigger: 'item',
-        backgroundColor: 'rgba(166, 200, 76, 0.82)',
+        // backgroundColor: 'rgba(166, 200, 76, 0.82)',
         borderColor: '#FFFFCC',
         showDelay: 0,
         hideDelay: 0,
@@ -278,20 +197,21 @@ let mapMigrateOption = {
             return res;
         }
     },
-    backgroundColor: "#013954",
+    // backgroundColor: "#013954",
     visualMap: { //图例值控制
         min: 0,
         max: 1,
         calculable: true,
         show: true,
         color: ['#f44336', '#fc9700', '#ffde00', '#ffde00', '#00eaff'],
+        // color: colorList,
         textStyle: {
             color: '#fff'
         }
     },
     geo: {
         map: 'china',
-        // zoom: 1.2,
+        zoom: 1.2,
         label: {
             emphasis: {
                 show: false
@@ -300,8 +220,9 @@ let mapMigrateOption = {
         roam: true, //是否允许缩放
         itemStyle: {
             normal: {
-                color: 'rgba(51, 69, 89, .5)', //地图背景色
-                borderColor: '#516a89', //省市边界线00fcff 516a89
+                color: '#e4e4e4', //地图背景色
+                // color: 'rgba(51, 69, 89, .5)', //地图背景色
+                borderColor: '#a7a7a7', //省市边界线00fcff 516a89
                 borderWidth: 1
             },
             emphasis: {
