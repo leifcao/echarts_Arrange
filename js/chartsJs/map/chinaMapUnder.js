@@ -158,17 +158,13 @@ function initEcharts(mapData, mapJson) {
                 color: ['#eeeeee']
             }
         },
-
-        series: [{
-            name: "地图",
-            type: "map",
-            map: "Map",
-            roam: true, //是否可缩放
-            zoom: 1.2, //缩放比例
-            data: mapData,
+        geo:{
+            zoom:1.2,
+            map:'Map',
+            roam:true,
             itemStyle: {
                 normal: {
-                    color: '#ffffff', //地图背景色
+                    color: mapTheme_item, //地图背景色
                     borderColor: mapBorder, //省市边界线00fcff 516a89
                     borderWidth: 1
                 },
@@ -195,8 +191,13 @@ function initEcharts(mapData, mapJson) {
 
                 }
             }
-        }],
-
+        },
+        series: [{
+            type: 'map',
+            name:'map',
+            geoIndex: 0,
+            data: mapData,
+        }]
     }, true)
 
     mapUnderEcharts.on('click', echartsMapClick);

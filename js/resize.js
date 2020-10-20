@@ -49,7 +49,7 @@
      mapCarouselEchart.resize();
      //下钻地图
      mapUnderEcharts.resize();
-     //大区下钻地图
+     //大区下钻地图s
      // mapRegionEcharts.resize();
 
      //K线图
