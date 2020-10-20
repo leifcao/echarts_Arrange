@@ -197,13 +197,13 @@ let mapMigrateOption = {
             return res;
         }
     },
-    // backgroundColor: "#013954",
+    backgroundColor: "#e8e8e8",
     visualMap: { //图例值控制
         min: 0,
         max: 1,
         calculable: true,
         show: true,
-        color: ['#f44336', '#fc9700', '#ffde00', '#ffde00', '#00eaff'],
+        color: ['#f44336', '#ffb65c',],
         // color: colorList,
         textStyle: {
             color: '#fff'
@@ -220,13 +220,12 @@ let mapMigrateOption = {
         roam: true, //是否允许缩放
         itemStyle: {
             normal: {
-                color: '#e4e4e4', //地图背景色
-                // color: 'rgba(51, 69, 89, .5)', //地图背景色
-                borderColor: '#a7a7a7', //省市边界线00fcff 516a89
+                color: mapTheme_item, //地图背景色
+                borderColor: mapBorder, //省市边界线00fcff 516a89
                 borderWidth: 1
             },
             emphasis: {
-                color: 'rgba(37, 43, 61, .5)' //悬浮背景
+                color: mapEmphasis_area //悬浮背景
             }
         }
     },

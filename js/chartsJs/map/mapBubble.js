@@ -1,7 +1,4 @@
 
-var mapBubble = document.getElementById('mapBubble');
-var mapBubbleEchart = echarts.init(mapBubble);
-
   var geoCoordMap = {
     '台湾': [121.5135,25.0308],
     '黑龙江': [127.9688, 45.368],
@@ -63,14 +60,16 @@ var mapBubbleEchart = echarts.init(mapBubble);
           value: geoCoord.concat(data[i].value)
         });
       }
+
     }
+
     return res;
   };
 
 
 
   let mapBubbleOption = {
-    // backgroundColor: "#013954",
+    backgroundColor: mapBackground,
     tooltip: {
       trigger: 'item',
       formatter: function (params) {
@@ -110,6 +109,7 @@ var mapBubbleEchart = echarts.init(mapBubble);
       zoom:1.2,
       label: {
         normal: {
+          fontFamily:'sans-serif',
           show: false
         },
         emphasis: {
@@ -118,70 +118,39 @@ var mapBubbleEchart = echarts.init(mapBubble);
       },
       itemStyle: {
         normal: {
-          color: '#e4e4e4', //地图背景色
-          // color: 'rgba(51, 69, 89, .5)', //地图背景色
-          borderColor: '#a7a7a7', //省市边界线00fcff 516a89
+          color: mapTheme_item, //地图背景色
+          borderColor: mapBorder, //省市边界线00fcff 516a89
           borderWidth: 1
         },
         emphasis: {
-          color: 'rgba(37, 43, 61, .5)' //悬浮背景
+          show:false,
+          color: mapTheme_item //悬浮背景
         }
       }
     },
     series : [
       {
-
         symbolSize: 5,
-        label: {
+          label: {
           normal: {
             formatter: '{b}',
             position: 'right',
-            show: true
+            show: true,
+            textStyle: {
+              color: map_label
+            },
           },
-          emphasis: {
-            show: true
-          }
+
         },
         itemStyle: {
           normal: {
-            color: textColor
+            color: map_label
           }
         },
         name: 'light',
         type: 'scatter',
         coordinateSystem: 'geo',
         data: convertBubbleData(mapBubbleData),
-
-      },
-      {
-        type: 'map',
-        map: 'china',
-        geoIndex: 0,
-        aspectScale: 0.75, //长宽比
-        showLegendSymbol: false, // 存在legend时显示
-        label: {
-          normal: {
-            show: false
-          },
-          emphasis: {
-            show: false,
-            textStyle: {
-              color: '#fff'
-            }
-          }
-        },
-        roam: true,
-        itemStyle: {
-          normal: {
-            areaColor: '#031525',
-            borderColor: '#FFFFFF',
-          },
-          emphasis: {
-            areaColor: '#2B91B7'
-          }
-        },
-        animation: false,
-        data: mapBubbleData
       },
       {
         name: 'Top 5',
@@ -193,9 +162,10 @@ var mapBubbleEchart = echarts.init(mapBubble);
           normal: {
             show: true,
             textStyle: {
-              color: '#fff',
+              color: map_label,
               fontSize: 9,
             },
+
             formatter (value){
               return value.data.value[2]
             }
@@ -203,8 +173,7 @@ var mapBubbleEchart = echarts.init(mapBubble);
         },
         itemStyle: {
           normal: {
-            // color: '#D8BC37', //标志颜色
-            color: '#4678ab', //标志颜色
+            color: '#ffb65c', //标志颜色
           }
         },
         data: convertBubbleData(mapBubbleData),
@@ -218,4 +187,10 @@ var mapBubbleEchart = echarts.init(mapBubble);
 
     ]
   };
+  var mapBubble = document.getElementById('mapBubble');
+  var mapBubbleEchart = echarts.init(mapBubble);
   mapBubbleEchart.setOption(mapBubbleOption);
+
+
+
+

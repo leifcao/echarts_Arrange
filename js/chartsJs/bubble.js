@@ -200,73 +200,61 @@ var bubbleSecond = echarts.init(bubbleTwo);
 
 let bubbleTwodatas = [{
     'name': '菜菜',
-    'period': '9.10',
     'amount': 174600,
     'orderCount': 1670,
 },
     {
         'name': '佛生',
-        'period': '13.1',
         'amount': 97477,
         'orderCount': 436,
     },
     {
         'name': '我',
-        'period': '7.5',
         'amount': 5997,
         'orderCount': 272,
     },
     {
         'name': 'Jiayin',
-        'period': '10.0',
         'amount': 55796,
         'orderCount': 544,
     },
     {
         'name': '明坤',
-        'period': '10.5',
         'amount': 210364,
         'orderCount': 979,
     },
     {
         'name': '首席',
-        'period': '6.5',
         'amount': 7305,
         'orderCount': 185,
     },
     {
         'name': '小楠子+',
-        'period': '9.1',
         'amount': 210284,
         'orderCount': 2224,
     },
     {
         'name': '康康',
-        'period': '10.10',
         'amount': 41789,
         'orderCount': 257,
     },
     {
         'name': '书记',
-        'period': '10.7',
         'amount': 36961,
         'orderCount': 452,
     },
     {
         'name': '书记夫人',
-        'period': '9.0',
         'amount': 68088,
         'orderCount': 647,
     },
     {
         'name': 'vv',
-        'period': '8.3',
         'amount': 72896,
         'orderCount': 1743,
     },
     {
         'name': 'qq',
-        'period': '6.10',
         'amount': 52276,
         'orderCount': 627,
     },

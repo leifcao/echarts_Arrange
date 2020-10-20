@@ -167,9 +167,17 @@
         <div class="picDetial" id="mapBubble"></div>
     </div>
     <div class="pic">
+        <p class="title">地图轮播</p>
+        <div class="picDetial" id="mapCarousel"></div>
+    </div>
+    <div class="pic">
         <p class="title">下钻图</p>
         <div class="back">返回</div>
         <div class="picDetial" id="mapUnder"></div>
+    </div>
+    <div class="pic">
+        <p class="title">大区下钻图</p>
+        <div class="picDetial" id="mapRegion"></div>
     </div>
 
     <h2>词云图</h2>
@@ -235,11 +243,6 @@
         <div class="picDetial" id="boxMustSecond"></div>
     </div>
 
-
-
-
-
-
     <script src="./js/echarts.min.js"></script>
     <script src="./js/jquery-3.1.1.min.js"></script>
     <!-- 此echarts-liquidfill.min.js为水环图所需 -->
@@ -270,15 +273,24 @@
     <!-- 气泡图 -->
     <script type="text/javascript" src="js/chartsJs/bubble.js"></script>
     <!-- 迁徙图 -->
-    <script type="text/javascript" src="js/chartsJs/migrate.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/migrate.js"></script>
     <!-- 人口流动图 -->
-    <script type="text/javascript" src="js/chartsJs/immigration.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/immigration.js"></script>
     <!-- 中国气泡图 -->
-    <script type="text/javascript" src="js/chartsJs/mapBubble.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/mapBubble.js"></script>
+    <!-- 中国轮播地图 -->
+    <script type="text/javascript" src="js/chartsJs/map/mapCarousel.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/mapCarousel_file/TweenMax.min.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/mapCarousel_file/easeljs.min.js"></script>
+
     <!-- 地图下钻图 -->
-    <script type="text/javascript" src="js/chartsJs/chinaMapUnder.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/chinaMapUnder.js"></script>
     <!-- 省份选择 -->
-    <script type="text/javascript" src="js/chartsJs/switchProvince.js"></script>
+    <script type="text/javascript" src="js/chartsJs/map/switchProvince.js"></script>
+
+    <!-- 地图大区下钻 -->
+<!--    <script type="text/javascript" src="js/chartsJs/map/mapRegion.js"></script>-->
+    <script type="text/javascript" src="js/chartsJs/map/mapRegion2.js"></script>
     <!-- 词云图 -->
     <script type="text/javascript" src="js/chartsJs/wordCloud.js"></script>
     <!-- 数据表格图 -->
@@ -297,7 +309,7 @@
     <script type="text/javascript" src="js/dataTool.js"></script>
     <script type="text/javascript" src="js/chartsJs/boxMustEchart.js"></script>
     <!-- 自适应配置 -->
-    <script type="text/javascript" src="js/resize.js">
+<!--    <script type="text/javascript" src="js/resize.js">-->
     </script>
 
 

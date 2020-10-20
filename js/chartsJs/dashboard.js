@@ -9,7 +9,7 @@ let dashboardOneOption = {
     series: [{
         name: '业务指标',
         type: 'gauge',
-        radius: '80%',
+        // radius: '80%',
         min: 0, //最小值
         max: 100, //最大值
         splitNumber: 10, //分几段

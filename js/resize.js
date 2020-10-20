@@ -41,9 +41,16 @@
      lineBarChart.resize();
      // 迁徙图
      mapMigrateEchart.resize();
+     // 世界迁徙图
      mapImmigrateEchart.resize();
+     // 气泡地图
      mapBubbleEchart.resize();
+     // 轮播地图
+     mapCarouselEchart.resize();
+     //下钻地图
      mapUnderEcharts.resize();
+     //大区下钻地图
+     // mapRegionEcharts.resize();
 
      //K线图
      k_lineFirst.resize();
