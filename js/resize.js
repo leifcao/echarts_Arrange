@@ -50,7 +50,9 @@
      //下钻地图
      mapUnderEcharts.resize();
      //大区下钻地图s
-     // mapRegionEcharts.resize();
+     mapRegionEchart.resize();
+     // 中国下钻地图
+     mapUnder2Echart.resize();
 
      //K线图
      k_lineFirst.resize();

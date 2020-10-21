@@ -218,7 +218,8 @@ function echartsMapClick(params) {
             if (level === 'city' || level === 'district') {
                 rootName.push(`${level}/`);
             } else {
-                proviceName(name);
+                rootName.push(proviceName(name));
+
             }
             parentCode.push(cityCode);
             cityName.push(name);
