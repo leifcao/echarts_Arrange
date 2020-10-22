@@ -14,16 +14,16 @@ function setSeriesColor(list) {
 }
 
 
-/*
-* 地图区块颜色设置
-* mapBackground  地图背景
-* mapTheme_item  地图区块色
-* mapText  地图文本颜色
-* mapBorder  地图边界
-* mapArea  区块颜色数组
-* mapEmphasis_label  地图鼠标悬浮文字颜色
-* mapEmphasis_area  地图鼠标悬浮区块颜色
-* */
+/**
+ * 地图区块颜色设置
+ * mapBackground  地图背景
+ * mapTheme_item  地图区块色
+ * mapText  地图文本颜色
+ * mapBorder  地图边界
+ * mapArea  区块颜色数组
+ * mapEmphasis_label  地图鼠标悬浮文字颜色
+ * mapEmphasis_area  地图鼠标悬浮区块颜色
+ * */
 let mapBackground = '#efefef';
 let map_label = '#ffffff';
 let mapBorder = '#ffffff';
@@ -32,6 +32,25 @@ let mapArea = ['#d7efff','#a7dcff','#7ccaff','#50b9ff','#24a7ff',];
 let mapEmphasis_label = '#234EA5';
 let mapEmphasis_area = '#E5F39B';
 
+/**
+ * 图表的默认配置设置
+ * defalutOption 默认option
+ * */
+
+let defalutOption = {
+    backgroundColor: '',  // 背景色
+    tooltip:{},   // 提示框组件
+    legend:{
+        textStyle:{
+            color:textColor,
+            fontSize:12,
+        },
+        itemWidth:15,
+        itemHeight:10,
+        data:[],
+    },
+    series:[],
+}
 
 
 //动态设置渐变色
