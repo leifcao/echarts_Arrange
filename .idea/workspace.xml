@@ -15,115 +15,38 @@
     <favorites_list name="echarts-Arrange" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.36065573">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="439">
-                  <caret line="128" column="30" selection-start-line="128" selection-start-column="30" selection-end-line="128" selection-end-column="30" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/js/chartsJs/com_setting.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="671">
-                  <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#450#631#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="378">
-                  <caret line="243" selection-start-line="243" selection-end-line="244" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/js/chartsJs/radar.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="427">
-                  <caret line="159" column="3" lean-forward="true" selection-start-line="159" selection-start-column="3" selection-end-line="159" selection-end-column="3" />
-                  <folding>
-                    <element signature="e#47#169#0" />
-                    <element signature="n#!!doc;n#initRadarEchart#0" />
-                    <element signature="e#1022#1909#0" />
-                    <element signature="e#989#1821#0" />
-                    <element signature="e#1079#1286#0" />
-                    <element signature="e#1076#1127#0" />
-                    <element signature="e#1276#1793#0" />
-                    <element signature="e#1537#1621#0" />
-                    <element signature="e#1558#1613#0" />
-                    <element signature="e#1694#1787#0" />
-                    <element signature="e#1715#1779#0" />
-                    <element signature="e#1353#1532#0" />
-                    <element signature="e#1564#1900#0" />
-                    <element signature="e#1565#1899#0" />
-                    <element signature="e#1600#1650#0" />
-                    <element signature="e#1913#1997#0" />
-                    <element signature="e#1923#1963#0" />
-                    <element signature="e#2013#2191#0" />
-                    <element signature="e#2463#3195#0" />
-                    <element signature="e#2464#2827#0" />
-                    <element signature="e#2509#2559#0" />
-                    <element signature="e#2775#2823#0" />
-                    <element signature="e#2833#3191#0" />
-                    <element signature="e#2884#2934#0" />
-                    <element signature="e#3133#3185#0" />
-                    <element signature="e#3086#3123#0" />
-                    <element signature="e#3173#3215#0" />
-                    <element signature="e#3391#3609#0" />
-                    <element signature="e#3546#4228#0" />
-                    <element signature="e#3579#3974#0" />
-                    <element signature="e#3637#3666#0" />
-                    <element signature="e#3853#3928#0" />
-                    <element signature="e#3696#3745#0" />
-                    <element signature="e#3938#3972#0" />
-                    <element signature="e#3976#4400#0" />
-                    <element signature="e#4063#4187#0" />
-                    <element signature="e#4047#4134#0" />
-                    <element signature="e#4278#4354#0" />
-                    <element signature="e#4113#4163#0" />
-                    <element signature="e#4364#4398#0" />
-                    <element signature="e#4541#4706#0" />
-                    <element signature="e#4377#4392#0" />
-                    <element signature="e#4599#4670#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/js/chartsJs/map/mapUnder.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-756">
-                  <caret line="60" column="66" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
-                  <folding>
-                    <element signature="e#548#833#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/chartsJs/dashboard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/chartsJs/com_setting.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="671">
+              <caret line="48" column="22" lean-forward="true" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+              <folding>
+                <element signature="e#450#631#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -135,8 +58,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nameList</find>
-      <find>splice</find>
       <find>setOption</find>
       <find>callback</find>
       <find>china</find>
@@ -165,6 +86,8 @@
       <find>geoJson</find>
       <find>convert_Data</find>
       <find>radar</find>
+      <find>axisTick</find>
+      <find>pointer</find>
     </findStrings>
     <replaceStrings>
       <replace>convertBubbleData</replace>
@@ -205,7 +128,6 @@
         <option value="$PROJECT_DIR$/js/china.js" />
         <option value="$PROJECT_DIR$/css/index.css" />
         <option value="$PROJECT_DIR$/js/chartsJs/mapBubble.js" />
-        <option value="$PROJECT_DIR$/js/chartsJs/dashboard.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/immigration.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/migrate.js" />
         <option value="$PROJECT_DIR$/js/chartsJs/chinaMapUnder.js" />
@@ -224,6 +146,7 @@
         <option value="$PROJECT_DIR$/js/chartsJs/com_setting.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/chartsJs/radar.js" />
+        <option value="$PROJECT_DIR$/js/chartsJs/dashboard.js" />
       </list>
     </option>
   </component>
@@ -317,12 +240,12 @@
       <workItem from="1602665178832" duration="1987000" />
       <workItem from="1602724681965" duration="10232000" />
       <workItem from="1602751759011" duration="54476000" />
-      <workItem from="1603182845856" duration="46323000" />
+      <workItem from="1603182845856" duration="47154000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171307000" />
+    <option name="totallyTimeSpent" value="172138000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -488,16 +411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="767">
           <caret line="872" selection-start-line="872" selection-end-line="872" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-          <folding>
-            <element signature="e#2885#4227#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -731,16 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/chartsJs/map/mapUnder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="60" column="66" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
-          <folding>
-            <element signature="e#548#833#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/chartsJs/pie.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
@@ -748,13 +651,6 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="128" column="30" selection-start-line="128" selection-start-column="30" selection-end-line="128" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -807,6 +703,30 @@
             <element signature="e#4377#4392#0" />
             <element signature="e#4599#4670#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/map/mapUnder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-756">
+          <caret line="60" column="66" selection-start-line="60" selection-start-column="66" selection-end-line="60" selection-end-column="66" />
+          <folding>
+            <element signature="e#548#833#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="116" lean-forward="true" selection-start-line="116" selection-end-line="116" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/chartsJs/dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
         </state>
       </provider>
     </entry>

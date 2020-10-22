@@ -13,6 +13,40 @@ let dashboardOneOption = {
         min: 0, //最小值
         max: 100, //最大值
         splitNumber: 10, //分几段
+        splitLine: {           // 分隔线
+            show:true,
+            length:20,
+            lineStyle:{
+                width:1,
+            }
+        },
+        axisLine: {  // 盘轴线
+            show: true,
+            lineStyle: {
+                width: 20,  //盘轴的宽度
+                color: [  // 颜色比例
+                    [0.3, colorList[2]],
+                    [0.7, colorList[1]],
+                    [1, colorList[0]]
+                ]
+            }
+        },
+        axisLabel: {  // 轴文字
+            textStyle: {
+                fontSize: '12',
+            }
+        },
+        axisTick: {   // 坐标轴小标记
+            show:true,
+            length:8,
+            lineStyle:{
+                width:1,
+            }
+        },
+        pointer: {  // 指针默认
+            // width:10,
+            // length:'70%'
+        },
         detail: {
             show: true,
             offsetCenter: [0, '70%'],
@@ -31,28 +65,10 @@ let dashboardOneOption = {
                     color: textColor,
                 }
             },
-            // formatter: '{value}%',
-
         },
         data: [{
             value: 60,
         }],
-        axisLine: {
-            show: true,
-            lineStyle: {
-                color: [
-                    [0.3, colorList[2]],
-                    [0.7, colorList[1]],
-                    [1, colorList[0]]
-                ]
-
-            }
-        },
-        axisLabel: {
-            textStyle: {
-                fontSize: '12',
-            }
-        },
 
     }]
 };
