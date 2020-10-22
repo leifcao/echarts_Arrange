@@ -1,5 +1,7 @@
-
-
+/**
+ * 大区地图下钻
+ * */
+// 大区的data分类颜色设置
 var allprovinceData = [{
   name: "黑龙江省",
   value: 7,
@@ -138,6 +140,31 @@ var allprovinceData = [{
   },
 
 ];
+var mapRegion_visualMap ={
+  min: 0,
+  max: 11,
+  left: 'left',
+  top: 'bottom',
+  text: ['高', '低'],
+  calculable: true,
+  seriesIndex: '1',
+  show: false,
+  inRange: {
+    color: [
+      "#ffc188",
+      "#479fd2",
+      "#fba853",
+      "#48c7c0",
+      "#fa8737",
+      "#4bbdd6",
+      "#ff6f5b",
+      "#F4D5B1",
+      "#ADE1E3",
+    ]
+  }
+};
+
+
 
 var mapRegionEchart;
 // 封装函数在mapUnder.js 文件中
@@ -149,7 +176,8 @@ $.getJSON('data/100000.json', function (geoJson) {
     goDown: true, // 是否下钻
     geoJson: geoJson,  // 地图数据
     region: true,   // 是否设置各大区
-    data:allprovinceData,
+    data:allprovinceData,  // 大区区块颜色data
+    visualMap:mapRegion_visualMap, // 大区图例
     // 下钻回调
     callback: function (name, option, instance) {
       //console.log(name, option, instance);

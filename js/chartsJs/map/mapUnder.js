@@ -42,10 +42,11 @@ echarts.extendsMap = function (id, option) {
       mapName: '中国', // 地图展示
       goDown: false, // 是否下钻
       bgColor: mapBackground, // 画布背景色
-      geoJson: '',
+      geoJson: '',  // 默认全国数据json
       region: false,
       activeArea: [], // 区域高亮,同echarts配置项
       data: [],
+      visualMap: '', // 图例设置
       // 下钻回调(点击的地图名、实例对象option、实例对象)
       callback: function (name, mapUnderOption, instance) {
       }
@@ -73,9 +74,8 @@ echarts.extendsMap = function (id, option) {
      **/
     resetOption: function (instance, opt, name) {
       // 创建按钮-地图
-      var breadcrumb = option.region ? this.setRegion(name) : this.createBreadcrumb(name);
-      // var breadcrumb = this.createBreadcrumb(name);
-      // 匹配地图
+      var breadcrumb = this.createBreadcrumb(name);
+      // 匹配地图 num 为索引
       var num = mapObj.nameList.indexOf(name);
       // 按钮内容长度
       var len = opt.graphic.length;
@@ -111,8 +111,8 @@ echarts.extendsMap = function (id, option) {
 
         if (opt.graphic.length) {
           // 按钮线的递增
-          opt.graphic[0].children[0].shape.x2 = mapObj.pos.shape_x2 * (mapObj.idx);
-          opt.graphic[0].children[1].shape.x2 = mapObj.pos.shape_x2 * (mapObj.idx);
+          opt.graphic[0].children[0].shape.x2 = mapObj.pos.shape_x2 * (num + 1);
+          opt.graphic[0].children[1].shape.x2 = mapObj.pos.shape_x2 * (num + 1);
           // opt.series[0].data = handleEvents.handleGeoData(mapObj.curGeoJson);
         }
         /**
@@ -244,11 +244,12 @@ echarts.extendsMap = function (id, option) {
             // 无大区划分时正常赋值
             mapObj.curGeoJson = response;
           } else {
-            // 有大区划分 处理所属地区数据进行显示
+            // 有大区划分 处理所属地区数据进行显示  过滤
             let list = response.features.filter((item, index) => {
-              return params.List.includes(item.properties.name)
+              return params.List.includes(item.properties.name);
             });
             mapObj.curGeoJson.features = list;
+            params.name = params.List[0]; // 大区
           }
           // 地图注册
           echarts.registerMap(params.name, mapObj.curGeoJson);
@@ -279,64 +280,30 @@ echarts.extendsMap = function (id, option) {
     },
 
     /**
-     * 各大区设置
-     * */
-    setRegion: function (n) {
-      let breadcrumb;
-      if (n == ("江苏省") || n == ("上海市")) {
-        breadcrumb = this.createBreadcrumb("江苏大区");
-      } else if (n == ("广东省") || n == ("广西壮族自治区") || n == ("海南")) {
-        breadcrumb = this.createBreadcrumb("华南大区");
-      } else if (n == ("河南省") || n == ("陕西省") || n == ("甘肃省") || n == ("青海省")) {
-        breadcrumb = this.createBreadcrumb("中西大区");
-      } else if (n == ("湖北省") || n == ("江西省") || n == ("湖南省")) {
-        breadcrumb = this.createBreadcrumb("华中大区");
-      } else if (n == ("山东省") || n == ("安徽省")) {
-        breadcrumb = this.createBreadcrumb("华东大区");
-      } else if (n == ("北京市") || n == ("河北省") || n == ("天津市")) {
-        breadcrumb = this.createBreadcrumb("华北大区");
-      } else if (n == ("黑龙江省") || n == ("吉林省") || n == ("辽宁省")) {
-        breadcrumb = this.createBreadcrumb("东北大区");
-      } else if (n == ("内蒙古自治区") || n == ("山西省") || n == ("新疆维吾尔自治区") || n == ("宁夏回族自治区")) {
-        breadcrumb = this.createBreadcrumb("北方大区");
-      } else if (n == ("浙江省") || n == ("福建省")) {
-        breadcrumb = this.createBreadcrumb("东南大区");
-      } else if (n == ("四川省") || n == ("西藏自治区") || n == ("重庆市") || n == ("云南省") || n == ("贵州省")) {
-        breadcrumb = this.createBreadcrumb("西南大区");
-      }
-      /*if (breadcrumb != null) {
-        breadcrumb.left = 265;
-      }*/
-      return breadcrumb;
-
-    },
-
-    /**
      * 大区json过滤
      * */
     filterRegion: function (params) {
       if (params.name == "江苏省" || params.name == "上海市") {
-        params.List = ['江苏省', '上海市'];
+        params.List = ['江苏大区', '江苏省', '上海市'];
       } else if (params.name == "广东省" || params.name == "广西壮族自治区" || params.name == "海南省") {
-        params.List = ['广东省', '广西壮族自治区', '海南省'];
+        params.List = ['华南大区', '广东省', '广西壮族自治区', '海南省'];
       } else if (params.name == "河南省" || params.name == "陕西省" || params.name == "甘肃省" || params.name == "青海省") {
-        params.List = ['河南省', '陕西省', '甘肃省', '青海省'];
+        params.List = ['中西大区', '河南省', '陕西省', '甘肃省', '青海省'];
       } else if (params.name == "湖北省" || params.name == "江西省" || params.name == ("湖南省")) {
-        params.List = ['湖北省', '江西省', '湖南省'];
+        params.List = ['华中大区', '湖北省', '江西省', '湖南省'];
       } else if (params.name == "山东省" || params.name == "安徽省") {
-        params.List = ['山东省', '安徽省'];
+        params.List = ['华东大区', '山东省', '安徽省'];
       } else if (params.name == "北京市" || params.name == "河北省" || params.name == "天津市") {
-        params.List = ['北京市', '河北省', '天津市'];
+        params.List = ['华北大区', '北京市', '河北省', '天津市'];
       } else if (params.name == "黑龙江省" || params.name == "吉林省" || params.name == "辽宁省") {
-        params.List = ['黑龙江省', '吉林省', '辽宁省'];
+        params.List = ['东北大区', '黑龙江省', '吉林省', '辽宁省'];
       } else if (params.name == "内蒙古自治区" || params.name == "山西省" || params.name == "新疆维吾尔自治区" || params.name == "宁夏回族自治区") {
-        params.List = ['内蒙古自治区', '山西省', '新疆维吾尔自治区', '宁夏回族自治区'];
-      } else if (params.name == "浙江省" || params.name == "福建省") {
-        params.List = ['浙江省', '河北省', '福建省'];
+        params.List = ['北方大区', '内蒙古自治区', '山西省', '新疆维吾尔自治区', '宁夏回族自治区'];
+      } else if (params.name == "浙江省" || params.name == "福建省" || params.name == "台湾省") {
+        params.List = ['东南大区', '浙江省', '福建省', '台湾省'];
       } else if (params.name == "四川省" || params.name == "西藏自治区" || params.name == "重庆市" || params.name == "云南省" || params.name == "贵州省") {
-        params.List = ['四川省', '西藏自治区', '重庆市', '云南省', '贵州省'];
+        params.List = ['西南大区', '四川省', '西藏自治区', '重庆市', '云南省', '贵州省'];
       }
-
       return params;
     }
   };
@@ -421,7 +388,6 @@ echarts.extendsMap = function (id, option) {
           },
           data: handleEvents.handleGeoData(option.geoJson),
           onclick: function () {
-
             mapUnderOption.series[0].data = option.region ? [] : this.data;
             handleEvents.resetOption(chart, mapUnderOption, '中国');
           }
@@ -461,44 +427,7 @@ echarts.extendsMap = function (id, option) {
       }
     },
     // 地图图例
-    visualMap: {
-      type: 'piecewise',
-      bottom: "3%",
-      right: '2%',
-      align: 'left',
-      itemWidth: 15,
-      itemHeight: 10,
-      textStyle: {
-        color: textColor,
-        fontSize: 12,
-      },
-      pieces: [{
-        value: 0,
-        label: '未发生',
-      }, {
-        min: 0,
-        max: 250,
-        label: '0-250',
-      }, {
-        min: 250,
-        max: 500,
-        label: '250-500',
-      }, {
-        min: 500,
-        max: 750,
-        label: '500-750',
-      }, {
-        min: 750,
-        max: 1000,
-        label: '750-1000',
-      }],
-      inRange: {
-        color: mapArea
-      },
-      outOfRange: {
-        color: ['#eeeeee']
-      }
-    },
+    visualMap: option.visualMap,
     series: [{
       type: 'map',
       name: option.mapName,
@@ -511,30 +440,16 @@ echarts.extendsMap = function (id, option) {
    * 划分大区的option处理
    * */
   if (option.region) {
-    mapUnderOption.visualMap = {
-      min: 0,
-      max: 11,
-      left: 'left',
-      top: 'bottom',
-      text: ['高', '低'],
-      calculable: true,
-      seriesIndex: '1',
-      show: false,
-      inRange: {
-        color: [
-          "#ffffff",
-          "#ffc188",
-          "#479fd2",
-          "#fba853",
-          "#48c7c0",
-          "#fa8737",
-          "#4bbdd6",
-          "#ff6f5b",
-          "#F4D5B1",
-          "#ADE1E3",
-        ]
+
+    // 大区提示文字
+    mapUnderOption.tooltip = {
+      trigger: "item",
+      formatter: p => {
+        p = handleEvents.filterRegion(p)
+        return p.List[0];
       }
     };
+    // 增加大区高亮区块数据
     mapUnderOption.series.unshift({
       type: 'effectScatter',
       coordinateSystem: 'geo',
@@ -548,9 +463,10 @@ echarts.extendsMap = function (id, option) {
       },
       data: []
     });
-
+    // 地图数据赋值
     mapUnderOption.series[1].data = option.data;
 
+    //  echarts 设置option
     chart.setOption(mapUnderOption);
 
     /**
@@ -682,7 +598,7 @@ echarts.extendsMap = function (id, option) {
           name: "安徽省"
         });
       }
-      if (city == "浙江省" || city == "福建省") {
+      if (city == "浙江省" || city == "福建省" || city == "台湾省") {
         chart.dispatchAction({
           type: "highlight",
           name: "浙江省"
@@ -690,6 +606,10 @@ echarts.extendsMap = function (id, option) {
         chart.dispatchAction({
           type: "highlight",
           name: "福建省"
+        });
+        chart.dispatchAction({
+          type: "highlight",
+          name: "台湾省"
         });
       }
       if (city == "内蒙古自治区" || city == "山西省" || city == "新疆维吾尔自治区" || city == "宁夏回族自治区") {
@@ -837,7 +757,7 @@ echarts.extendsMap = function (id, option) {
           name: "安徽省"
         });
       }
-      if (city == "浙江省" || city == "福建省") {
+      if (city == "浙江省" || city == "福建省" || city == "台湾省") {
         chart.dispatchAction({
           type: "downplay",
           name: "浙江省"
@@ -845,6 +765,10 @@ echarts.extendsMap = function (id, option) {
         chart.dispatchAction({
           type: "downplay",
           name: "福建省"
+        });
+        chart.dispatchAction({
+          type: "downplay",
+          name: "台湾省"
         });
       }
       if (city == "内蒙古自治区" || city == "山西省" || city == "新疆维吾尔自治区" || city == "宁夏回族自治区") {
@@ -901,9 +825,47 @@ echarts.extendsMap = function (id, option) {
   return chart;
 }
 
+// 图例
+var mapUnder2_visualMap = {
+  type: 'piecewise',
+  bottom: "3%",
+  right: '2%',
+  align: 'left',
+  itemWidth: 15,
+  itemHeight: 10,
+  textStyle: {
+    color: textColor,
+    fontSize: 12,
+  },
+  pieces: [{
+    value: 0,
+    label: '未发生',
+  }, {
+    min: 0,
+    max: 250,
+    label: '0-250',
+  }, {
+    min: 250,
+    max: 500,
+    label: '250-500',
+  }, {
+    min: 500,
+    max: 750,
+    label: '500-750',
+  }, {
+    min: 750,
+    max: 1000,
+    label: '750-1000',
+  }],
+  inRange: {
+    color: mapArea
+  },
+  outOfRange: {
+    color: ['#eeeeee']
+  }
+}
 
 var mapUnder2Echart;
-
 $.getJSON('data/100000.json', function (geoJson) {
   echarts.registerMap('中国', geoJson);
   mapUnder2Echart = echarts.extendsMap('mapUnder2', {
@@ -912,6 +874,7 @@ $.getJSON('data/100000.json', function (geoJson) {
     goDown: true, // 是否下钻
     // 下钻回调
     geoJson: geoJson,
+    visualMap: mapUnder2_visualMap,
     callback: function (name, option, instance) {
       //console.log(name, option, instance);
     },
