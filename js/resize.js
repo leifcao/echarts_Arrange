@@ -30,6 +30,8 @@
      dashboardFirst.resize();
      dashboardSecond.resize();
      dashboardThird.resize();
+     dashboardFourth.resize();
+     dashboardFifth.resize();
 
      // 气泡图
      bubblesFirst.resize();
@@ -47,12 +49,10 @@
      mapBubbleEchart.resize();
      // 轮播地图
      mapCarouselEchart.resize();
-     //下钻地图
-     mapUnderEcharts.resize();
      //大区下钻地图s
      mapRegionEchart.resize();
      // 中国下钻地图
-     mapUnder2Echart.resize();
+     mapUnderEchart.resize();
 
      //K线图
      k_lineFirst.resize();
