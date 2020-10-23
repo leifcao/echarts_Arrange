@@ -179,6 +179,8 @@ var mapMigrateSeries = [];
 });
 
 let mapMigrateOption = {
+    // backgroundColor: "#e8e8e8",
+    backgroundColor:mapBackground,
     tooltip: {
         trigger: 'item',
         // backgroundColor: 'rgba(166, 200, 76, 0.82)',
@@ -197,13 +199,12 @@ let mapMigrateOption = {
             return res;
         }
     },
-    backgroundColor: "#e8e8e8",
     visualMap: { //图例值控制
         min: 0,
         max: 1,
         calculable: true,
         show: true,
-        color: ['#f44336', '#ffb65c',],
+        color: ['#f44336', '#fc9700',],
         // color: colorList,
         textStyle: {
             color: '#fff'

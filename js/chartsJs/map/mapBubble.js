@@ -173,7 +173,7 @@
         },
         itemStyle: {
           normal: {
-            color: '#ffb65c', //标志颜色
+            color: '#fc9700', //标志颜色
           }
         },
         data: convertBubbleData(mapBubbleData),
