@@ -16,15 +16,15 @@ function setSeriesColor(list) {
 
 /**
  * 地图区块颜色设置
- * mapBackground  地图背景
- * mapTheme_item  地图区块色
- * mapText  地图文本颜色
- * mapBorder  地图边界
- * mapArea  区块颜色数组
- * mapEmphasis_label  地图鼠标悬浮文字颜色
- * mapEmphasis_area  地图鼠标悬浮区块颜色
+ * @mapBackground  地图背景
+ * @mapTheme_item  地图区块色
+ * @mapText  地图文本颜色
+ * @mapBorder  地图边界
+ * @mapArea  区块颜色数组
+ * @mapEmphasis_label  地图鼠标悬浮文字颜色
+ * @mapEmphasis_area  地图鼠标悬浮区块颜色
  * */
-let mapBackground = '#efefef';
+let mapBackground = '#013954';
 let map_label = '#ffffff';
 let mapBorder = '#ffffff';
 let mapTheme_item = '#50b9ff';
@@ -52,6 +52,18 @@ let defalutOption = {
     series:[],
 }
 
+
+/**
+ * 初始化封装echarts
+ * @id  dom树的id
+ * */
+
+function initEcharts(id,opt){
+    let chart = echarts.init(document.getElementById(id));
+
+
+    return  chart;
+}
 
 //动态设置渐变色
 function setLinearGradient(list, key) {
