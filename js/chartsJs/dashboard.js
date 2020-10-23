@@ -82,41 +82,99 @@ dashboardFirst.setOption(dashboardOneOption);
 var dashboardThree = document.getElementById('dashboardThird')
 var dashboardThird = echarts.init(dashboardThree);
 
+let liquidFill = {
+    color:['#10B9FF', '#10B9FF', '#10B9FF'], //水波
+    thin_Radius:['84%', '84.5%'],  // 外层细环
+    thick_Radius:['82%', '86.5%'], // 外层粗环
+    total_Value:100,  // 总数
+    value:30  // 数值
+}
 
-var dashboardThreeValue = 0.49;
-var dashboardThreeData = [dashboardThreeValue, dashboardThreeValue, dashboardThreeValue, dashboardThreeValue, dashboardThreeValue, ];
-dashboardThreeOption = {
+let dashboardThreeOption = {
 
     series: [{
         type: 'liquidFill',
-        radius: '70%',
-        center: ['50%', '45%'],
-        data: dashboardThreeData,
-        // data: [],
-        color: ['#2aaf66', '#38b470', '#49d088'],
+        radius: '78%',
+        center: ['50%', '50%'],
+        color: liquidFill.color,//水波
+        data: [0.5, 0.5, 0.5], // data个数代表波浪数
         backgroundStyle: {
-            borderWidth: 2,
-            borderColor: 'rgb(214, 193, 0)',
-            color: 'rgb(255,0,255,0.01)'
+            borderWidth: 1,
+            color: 'transparent'
         },
-        outline: { //外边
-            // show: false
-            borderDistance: 5,
+        outline: {
+            show: true,
             itemStyle: {
-                borderWidth: 4,
-                borderColor: 'rgb(25, 230, 117)',
+                borderColor: '#10B9FF',
+                borderWidth: 2
             },
+            borderDistance: 3
         },
         label: {
             normal: {
                 // formatter: (utilizationValue * 100).toFixed(0) + '%',
-                formatter: dashboardThreeValue * 100 + '%',
+                formatter: (liquidFill.value /liquidFill.total_Value)*100 + '%',
                 textStyle: {
                     fontSize: 12
                 }
             }
         }
-    }],
+    },
+        {
+            name: '外层细环',
+            type: 'pie',
+            radius: liquidFill.thin_Radius,
+            center: ["50%", "50%"],
+            hoverAnimation: false,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: false,
+                    },
+                }
+            },
+            data: [{
+                value: liquidFill.total_Value,
+                itemStyle: {
+                    normal: {
+                        color: "#10B9FF",
+                    }
+                }
+            }]
+        },
+        {
+            name: '外层粗环',
+            type: 'pie',
+            radius: liquidFill.thick_Radius,//使得细环位于粗环中间
+            center: ["50%", "50%"],
+            hoverAnimation: false,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: false,
+                    },
+                }
+            },
+            data: [{
+                value: liquidFill.value,
+                itemStyle: {
+                    normal: {
+                        color: "#10B9FF"
+                    }
+                }
+            },
+                {
+                    value: liquidFill.total_Value-liquidFill.value,
+                    itemStyle: {
+                        normal: {
+                            color: 'transparent',
+                        }
+                    }
+                }
+            ]
+        }
+
+    ]
 };
 
 
@@ -127,9 +185,9 @@ dashboardThird.setOption(dashboardThreeOption);
 var dashboardTwo = document.getElementById('dashboardSecond');
 var dashboardSecond = echarts.init(dashboardTwo);
 
-/*
+/**
  * 仪表盘所需数据
- */
+ * */
 var gaugeData = {
     value: 0.90,
     total: 125000
@@ -196,3 +254,198 @@ var dashboardTwoOption = {
 }
 
 dashboardSecond.setOption(dashboardTwoOption);
+
+
+
+/**
+ * 多个仪表盘
+ * */
+
+
+
+let dashboardFourOption = {
+    backgroundColor:'',
+    series : [
+        {
+            type: 'gauge',
+            z: 3,
+            min: 0,
+            max: 15,
+            startAngle:200,
+            endAngle:-20,
+            radius: '70%',
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    width: 25,
+                    shadowColor:'#0092EE',
+                    shadowBlur:50,
+                    color:[[0.2, '#0092EE'], [1, '#BECAD8']],
+                }
+            },
+            axisLabel:{
+                show:false,
+                fontSize: 34,
+
+            },
+            axisTick: {            // 坐标轴小标记
+                show:true,
+                length:10,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            pointer: {
+                width:20,
+                length:'70%'
+            },
+            splitLine: {           // 分隔线
+                show:true,
+                length:30,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            title: {
+                offsetCenter: [0, '-20%'],       // x, y，单位px
+                fontSize:45,
+                color:'#fff',
+            },
+            detail: {
+                fontSize:40,
+                color:'#fff',
+                formatter: function (value) {
+                    return '{a|'+value+'}亿元';
+                },
+                rich:{
+                    a:{
+                        fontSize:45,
+                        color:'#0093EE'
+                    }
+                }
+            },
+            data:[{value:3.15, name: '利润总额'}]
+        },
+        {
+            type: 'gauge',
+            center: ['18%', '58%'],    // 默认全局居中
+            radius: '55%',
+            min:0,
+            max:12,
+            startAngle:200,
+            endAngle:50,
+            splitNumber:8,
+            axisLabel:{
+                show:false,
+                fontSize:34,
+            },
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    width: 18,
+                    shadowColor:'#0092EE',
+                    shadowBlur:50,
+                    color:[[0.2, '#0092EE'], [0.8, '#0092EE'], [1, '#BECAD8']],
+                }
+            },
+            axisTick: {            // 坐标轴小标记
+                show:true,
+                length:7,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            pointer: {
+                width:13,
+                length:'70%'
+            },
+            splitLine: {           // 分隔线
+                show:true,
+                length:23,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            title: {
+                offsetCenter: [0, '-20%'],       // x, y，单位px
+                fontSize:45,
+                color:'#fff',
+            },
+            detail: {
+                fontSize:40,
+                color:'#fff',
+                formatter: function (value) {
+                    return '{a|'+value+'}亿元';
+                },
+                rich:{
+                    a:{
+                        fontSize:45,
+                        color:'#0093EE'
+                    }
+                }
+            },
+            data:[{value: 2.36, name: '母公司'}]
+        },
+        {
+            type: 'gauge',
+            center: ['82%', '58%'],    // 默认全局居中
+            radius: '55%',
+            min:0,
+            max:2,
+            startAngle:130,
+            endAngle:-20,
+            splitNumber:4,
+            axisLabel:{
+                show:false,
+                fontSize:34,
+            },
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    width: 18,
+                    shadowColor:'#0092EE',
+                    shadowBlur:50,
+                    color:[[0.2, '#BECAD8'], [0.8, '#0092EE'], [1, '#25C0C8']],
+                }
+            },
+            axisTick: {            // 坐标轴小标记
+                show:true,
+                length:7,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            pointer: {
+                width:13,
+                length:'70%'
+            },
+            splitLine: {           // 分隔线
+                show:true,
+                length:23,
+                lineStyle:{
+                    width:3,
+                }
+            },
+            title: {
+                offsetCenter: [0, '-20%'],       // x, y，单位px
+                fontSize:45,
+                color:'#fff',
+            },
+            detail: {
+                fontSize:40,
+                color:'#fff',
+                formatter: function (value) {
+                    return '{a|'+value+'}亿元';
+                },
+                rich:{
+                    a:{
+                        fontSize:45,
+                        color:'#0093EE'
+                    }
+                }
+            },
+            data:[{value: 0.79, name: '子公司'}]
+        },
+
+    ]
+};
+
+var dashboardFourth = initEcharts('dashboardFouth',)
+dashboardFourth.setOption(dashboardFourOption);
