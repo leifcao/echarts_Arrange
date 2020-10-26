@@ -485,7 +485,7 @@ let barChartFiveOption = {
  * 增加下面的数值显示
  * */
 var myData = ['一审服', '撤诉率', '调解率', '实际', '裁判率', '执行标', '再审']
-var lineData = [100, 100, 100, 100, 100, 100, 100]
+var barChartSixData = [100, 100, 100, 100, 100, 100, 100]
 var lastYearData = {
   1: [3, 20, 62, 34, 55, 65, 33]
 }
@@ -648,7 +648,7 @@ barChartSixOption.options.push({
       }
     },
     barWidth: 10,
-    data: lineData,
+    data: barChartSixData,
     barGap: '-100%',
     barCategoryGap: 0,
     label: {
@@ -704,7 +704,7 @@ barChartSixOption.options.push({
       barWidth: 10,
       symbolRepeat: true,
       symbolSize: 14,
-      data: lineData,
+      data: barChartSixData,
       barGap: '-100%',
       barCategoryGap: 0,
       label: {
