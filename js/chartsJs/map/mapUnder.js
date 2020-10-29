@@ -36,7 +36,7 @@ echarts.extendsMap = function (id, option) {
       shape_x2: 65,  // 线条长度
       arrows_left: -90, // 箭头距离左侧
       text_left: -68,  // 文字距离左侧
-      text_top: -4,  //  文字距离顶部
+      text_top: -10,  //  文字距离顶部
     },
     defaultOpt: {
       mapName: '中国', // 地图展示
