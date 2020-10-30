@@ -250,6 +250,7 @@ function configProperty(config, option) {
     if (obj.series) {
       obj.series = [obj.series];
     }
+    console.log(obj)
     // 递归拷贝赋值
     option = $.extend(true, option, obj);
   }
@@ -261,6 +262,8 @@ function configProperty(config, option) {
 /**
  * 递归赋值属性
  * */
+
+/*
 function recursive(obj, property, value) {
   for (var i = 0; i < property.length; i++) {
     // key键值
@@ -270,6 +273,19 @@ function recursive(obj, property, value) {
     if (i === property.length - 1) obj[key] = value;
     // console.log(i, property)
     property.shift();
+    recursive(obj[key], property, value);
+  }
+  return obj;
+}
+*/
+
+function recursive(obj, property, value) {
+//  key键值
+  if (property.length) {
+    let key = property[0];
+    obj[key] = {};
+    property.shift();
+    if (property.length === 0) obj[key] = value;
     recursive(obj[key], property, value);
   }
   return obj;
