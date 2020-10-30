@@ -1,24 +1,7 @@
  // 自适应
  window.onresize = function() {
-     // 饼图
-     pieChirtFirst.resize();
-     pieChirtSecond.resize();
-     pieChirtThird.resize();
-     pieChirtFourth.resize();
-     pieChirtFifth.resize();
-     pieChirtSixth.resize();
+     resize(Echarts_List);
 
-     // 柱状图
-     histogramFirst.resize();
-     histogramSecond.resize();
-     histogramThird.resize();
-     histogramFourth.resize();
-     // 条形图
-     barChartFirst.resize();
-     barChartSecond.resize();
-     barChartThird.resize();
-     barChartFourth.resize();
-     barChartFifth.resize();
      // 雷达图
      radarFirst.resize();
      radarSecond.resize();
@@ -36,11 +19,6 @@
      // 气泡图
      bubblesFirst.resize();
      bubbleSecond.resize();
-     // 折线图
-     lineChart.resize();
-     areaLineChart.resize();
-     doubleLinesChart.resize();
-     lineBarChart.resize();
      // 迁徙图
      mapMigrateEchart.resize();
      // 世界迁徙图
