@@ -85,9 +85,8 @@ function fn_test() {
 }
 
 // 条形图通用模板option {条形多柱图，条形堆积图，政府条形图}
-let barChartOption = (id,type) => {
+let barChartOption = () => {
   const option = {
-    id: id,
     legend: {
       data: [],
     },
@@ -129,72 +128,9 @@ let barChartOption = (id,type) => {
       },
     ]
   }
-  if (type === '堆积'){
-    option.series[0].label.normal.position = 'insideRight';
-    option.series[0].stack = '总量';
-
-  }
-
   return option
 };
-// 特殊条形图1
-let barChartOneOption = (id) => {
-  const option = {
-    id: id,
-    grid: {
-      left: '1%',
-      right: '8%',
-      bottom: '5%',
-      top: '5%',
-    },
-    xAxis: {
-      type: 'value',
-      axisLabel: {
-        show: false
-      },
-      axisTick: {
-        show: false //取消坐标轴刻度线
-      },
-    },
-    yAxis: {
-      type: 'category',
-      // inverse:true,
-      data: [],
-      axisTick: {
-        show: false
-      },
-    },
-    series: [{ //百分比
-      show: true,
-      type: 'bar',
-      barWidth: '50%',
-      itemStyle: { //柱子颜色
-        normal: {
-          color: function (data) {
-            return colorList[data.dataIndex];
-          },
-          barBorderRadius: [0, 8, 8, 0],
-        }
-      },
-      label: {
-        normal: {
-          show: true,
-          textAlign: 'center',
-          textStyle: {
-            fontSize: 12,
-            fontWeight: 'normal',
-          },
-          position: 'right',
-          formatter: function (data) {
-            return data.value;
-          },
-        }
-      },
-      data: []
-    },]
-  };
-  return option
-}
+
 // 特殊条形图2
 let barChartTwoOption = (id) => {
   const option = {
@@ -436,19 +372,22 @@ let barChartThreeOption = (id) => {
 
 // 特殊条形图1数据
 let barChartOneData = {
+  id: 'barChartFirst',
   yAxis: ['角鲨烷', '水解胶原', '羟苯甲酯', '羊毛脂', '咪唑烷基脲', '泛醇', '矿油'],
   seriesData: [{name: '', type: 'bar', data: [120, 150, 180, 200, 220, 250, 300]}]
 }
 
 // 特殊条形图2数据
 let barChartTwoData = {
+  id: 'barChartSecond',
   yAxis: [['太原市残联', '太原市报社', '太原市民政局', '太原市运输局', '太原市司法局'], [683, 234, 234, 523, 345]],
   seriesData: [{name: '条', type: 'bar', data: [70, 34, 60, 78, 69]},
-    {name: '框', type: 'bar', data: [100, 100, 100, 100, 100],}]
+    {name: '框', type: 'bar', data: [100, 100, 100, 100, 100]}]
 }
 
 // 特殊条形图3数据
 let barChartThreeData = {
+  id: 'barChartThird',
   yAxis: [['物理', '生物', '化学', '英语', '数学', '语文'], ['6', '5', '4', '3', '2', '1']],
   seriesData: [{name: '条', type: 'bar', data: [74, 79, 85, 90, 92, 95]},
     {name: '白框', type: 'bar', data: [99, 99.5, 99.5, 99.5, 99.5, 99.5]},
@@ -460,6 +399,7 @@ let barChartThreeData = {
 
 // 条形多柱图数据
 let barChartFourData = {
+  id: 'barChartFourth',
   legend: ['2019年', '2020年'],
   yAxis: ['巴西', '印尼', '美国', '印度', '中国',],
   seriesData: [{name: '2019年', type: 'bar', data: [18203, 23489, 29034, 104970, 131744]},
@@ -469,6 +409,7 @@ let barChartFourData = {
 
 // 条形堆积图数据
 let barChartFiveData = {
+  id: 'barChartFifth',
   legend: ['猪肉类', '牛羊肉类', '鸡鸭类', '三文鱼及产品', '其他水产品'],
   yAxis: ['陕西', '山西', '四川', '北京', '河北', '甘肃', '内蒙'],
   seriesData: [{name: '猪肉类', type: 'bar', data: [320, 302, 301, 334, 390, 330, 120]},
@@ -480,6 +421,7 @@ let barChartFiveData = {
 
 // 正负条形图数据
 let barChartSevenData = {
+  id: 'barChartSeventh',
   legend: ['等待中', '生产中'],
   yAxis: ['分拣', '清洗', '抛光', '研磨', '脱膜', '切割', '压膜', '压膜分配',],
   seriesData: [{name: '等待中', type: 'bar', data: [400, 241, 360, 320, 302, 341, 374, 390]},
@@ -759,16 +701,24 @@ barChartSixOption.options.push({
 
 
 // 条形图
-var barChartFirst = new BarEchart(GetOpiton(barChartOneData, barChartOneOption('barChartFirst')));
+let barOneData = dataFormat(barChartOneData, '条形图1');
+var barChartFirst = new BarEchart(GetOpiton(barOneData, barChartOption()));
+
 // 条形图2
-var barChartSecond = new BarEchart(GetOpiton(barChartTwoData, barChartTwoOption('barChartSecond')));
+var barChartSecond = new BarEchart(GetOpiton(barChartTwoData, barChartTwoOption()));
 // 条形图3
-var barChartThird = new BarEchart(GetOpiton(barChartThreeData, barChartThreeOption('barChartThird')));
+var barChartThird = new BarEchart(GetOpiton(barChartThreeData, barChartThreeOption()));
 // 条形多柱图
-var barChartFourth = new BarEchart(GetOpiton(barChartFourData, barChartOption('barChartFourth')));
+let barFourData = dataFormat(barChartFourData, '条形图');
+var barChartFourth = new BarEchart(GetOpiton(barFourData, barChartOption()));
+
 // 条形堆积图
-var barChartFifth = new BarEchart(GetOpiton(barChartFiveData, barChartOption('barChartFifth','堆积')));
+let barFiveData = dataFormat(barChartFiveData, '条形堆积图');
+var barChartFifth = new BarEchart(GetOpiton(barFiveData, barChartOption()));
+
 // 正负条形图
-var barChartSeventh = new BarEchart(GetOpiton(barChartSevenData, barChartOption('barChartSeventh','堆积')));
+let barSevenData = dataFormat(barChartSevenData, '正负条形图');
+var barChartSeventh = new BarEchart(GetOpiton(barSevenData, barChartOption()));
+
 // 双向条形图
 var barChartSixth = new BarEchart(barChartSixOption);
