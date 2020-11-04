@@ -212,9 +212,11 @@ let lineBarData2 = {
  * */
 // 折线图
 let lineChart = new BarEchart(GetOpiton(lineData, lineOption()));
+
 // 区域折线图
 let area_data = dataFormat(areaData,'区域折线图');
 let areaLineChart = new BarEchart(GetOpiton(area_data, lineOption()));
+
 // 双Y折线图
 let doubleLines_data = dataFormat(doubleLinesData,'双折线图');
 let doubleLinesChart = new BarEchart(GetOpiton(doubleLinesData, lineBarOption()));
