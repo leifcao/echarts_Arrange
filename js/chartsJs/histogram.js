@@ -2,9 +2,8 @@
 /*柱状图模板Option
 * @{柱状图, 多柱图 ,堆积柱图}
 * */
-let histogramOption = (id, type) => {
+let histogramOption = (type) => {
   const option = {
-    id: id,
     legend: {
       data: [],
     },
@@ -50,17 +49,12 @@ let histogramOption = (id, type) => {
       }
     }]
   };
-  if (type === '堆积') {
-    option.series[0].label.normal.position = 'inside';
-    option.series[0].stack = '总量';
-  }
   return option;
 }
 
 // 阶梯瀑布图 模板
-let histogramLadderOption = (id) => {
+let histogramLadderOption = () => {
   const option = {
-    id: id,
     tooltip: {},
     legend: {
       data: [],
@@ -120,9 +114,8 @@ let histogramLadderOption = (id) => {
 };
 
 // 多系列柱图 模板
-let histogramFiveOption = (id) => {
+let histogramFiveOption = () => {
   const option = {
-    id: id,
     legend: {
       right: 'center',
       data: []
@@ -256,12 +249,14 @@ let histogramFiveOption = (id) => {
 
 // ----柱状图数据----------
 let histogramOneData = {
+  id:'histogramFirst',
   xAxis: ['制造业', '建筑业', '农林牧渔', '房地产', '金融业'],
   seriesData: [{name: '2019', type: 'bar', data: [5000, 2600, 1300, 1300, 1250]}]
 }
 
 // ------多系列柱图数据------------
 let histogramTwoData = {
+  id:'histogramSecond',
   legend: ['健康度', '可用度'],
   xAxis: ['22:18', '22:23', '22:25', '22:28', '22:30', '22:33', '22:35'],
   seriesData: [{name: '健康度', type: 'bar', data: [20, 25, 40, 55, 65, 70, 80]},
@@ -270,6 +265,7 @@ let histogramTwoData = {
 
 // ------堆积柱图数据------------
 var histogramThreeData = {
+  id:'histogramThird',
   legend: ['因病', '因残', '因学', '因灾', '缺水',],
   xAxis: ['新荣区', '平城区', '云冈区', '云州区'],
   seriesData: [
@@ -283,6 +279,7 @@ var histogramThreeData = {
 
 // 阶梯瀑布图
 let hisogramFourData = {
+  id:'histogramFourth',
   legend: ['支出', '收入'],
   xAxis: ["11月1日", "11月2日", "11月3日", "11月4日", "11月5日", "11月6日", "11月7日", "11月8日", "11月9日", "11月10日", "11月11日"],
   seriesData: [
@@ -294,6 +291,7 @@ let hisogramFourData = {
 
 // 多系列柱图
 let histogramFiveData = {
+  id:'histogramFifth',
   legend: ['均值', '峰值'],
   xAxis: [['cpu', '内存', '磁盘', 'cpu', '内存', '磁盘', 'cpu', '内存', '磁盘', 'cpu', '内存', '磁盘']],
   seriesData: [
@@ -307,12 +305,13 @@ let histogramFiveData = {
 }
 
 // 柱状图
-var histogramFirst = new BarEchart(GetOpiton(histogramOneData, histogramOption('histogramFirst')));
+var histogramFirst = new BarEchart(GetOpiton(histogramOneData, histogramOption()));
 // 多柱图
-var histogramSecond = new BarEchart(GetOpiton(histogramTwoData, histogramOption('histogramSecond')));
+var histogramSecond = new BarEchart(GetOpiton(histogramTwoData, histogramOption()));
 // 堆积柱图
-var histogramThird = new BarEchart(GetOpiton(histogramThreeData, histogramOption('histogramThird', '堆积')));
+var histogramThree_data = dataFormat(histogramThreeData,'堆积柱图')
+var histogramThird = new BarEchart(GetOpiton(histogramThree_data, histogramOption()));
 // 阶梯瀑布图
-var histogramFourth = new BarEchart(GetOpiton(hisogramFourData, histogramLadderOption('histogramFourth')));
+var histogramFourth = new BarEchart(GetOpiton(hisogramFourData, histogramLadderOption()));
 // 多系列柱图
-var histogramFifth = new BarEchart(GetOpiton(histogramFiveData, histogramFiveOption('histogramFifth')));
+var histogramFifth = new BarEchart(GetOpiton(histogramFiveData, histogramFiveOption()));
