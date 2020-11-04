@@ -1,7 +1,6 @@
 // 折线图模板Option {折线图，区域折线图}
-let lineOption = function (id, type) {
+let lineOption = function () {
   const option = {
-    id: id,
     legend: {
       data: [],
       textStyle: {
@@ -48,16 +47,12 @@ let lineOption = function (id, type) {
     ],
     animationDuration: 2500, //控制渲染速度
   };
-  if (type === '区域折线') {
-    option.series[0].areaStyle = {};
-  }
   return option;
 }
 
 // 线柱混搭option模板
-let lineBarOption = function (id) {
+let lineBarOption = function () {
   const option = {
-    id: id,
     legend: {
       data: [],
     },
@@ -155,6 +150,7 @@ let lineBarOption = function (id) {
 
 // 折线图数据
 let lineData = {
+  id:'lines',
   legend: ["调用次数", "成功次数", "失败次数"],
   xAxis: ['2020-09-01', '2020-09-02', '2020-09-03', '2020-09-04'],
   seriesData: [{name: '调用次数', type: 'line', data: [120, 1000, 101, 500]},
@@ -163,6 +159,7 @@ let lineData = {
 }
 //区域堆积图数据
 let areaData = {
+  id:'areaLine',
   legend: ["入库数量", "出库数量",],
   xAxis: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
   seriesData: [{name: '入库数量', type: 'line', data: [180, 160, 140, 88, 30, 75, 100, 86, 78, 28, 39, 67]},
@@ -170,24 +167,26 @@ let areaData = {
 }
 // 双Y轴折线数据
 let doubleLinesData = {
+  id:'doubleLines',
   legend: ["机房温度", "机房湿度"],
   xAxis: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   seriesData: [{
     name: '机房温度',
     type: 'line',
     data: [10, 10.9, 12.4, 13.6, '', '', 24.6, 18.5, 18.7, 19.9, 30.8, 15.4],
-    yAxisIndex: 0,
+    // yAxisIndex: 0,
   },
     {
       name: '机房湿度',
       type: 'line',
       data: [12.6, 13.6, 11.6, 15.7, 16.6, 17.6, 16.7, 15.1, 22.4, 23.5, 13.6, 16.6],
-      yAxisIndex: 1,
+      // yAxisIndex: 1,
     }
   ]
 }
 // 线柱混搭数据
 let lineBarData = {
+  id:'lineBar',
   legend: ['实际用量', '占比', '预计用量'],
   xAxis: ['12-01', '12-02', '12-03', '12-04', '12-05', '12-06'],
   seriesData: [{name: '占比', type: 'line', data: [160, 207, 220, 229, 206, 203]},
@@ -196,6 +195,7 @@ let lineBarData = {
 }
 // 线柱混搭数据 正负
 let lineBarData2 = {
+  id:'lineBar2',
   legend: ["总变化", "群转变化", "单独成交变化", "转介绍变化", "环比增长率"],
   xAxis: ["3月第4期", "3月第5期", "4月第1期", "4月第2期", "4月第3期"],
   seriesData: [{name: '总变化', type: 'bar', data: [700, -300, 600, -200, 400]},
@@ -211,15 +211,16 @@ let lineBarData2 = {
  * 折线图和柱形图可共用类
  * */
 // 折线图
-let lineChart = new BarEchart(GetOpiton(lineData, lineOption('lines')));
+let lineChart = new BarEchart(GetOpiton(lineData, lineOption()));
 // 区域折线图
-let areaLineChart = new BarEchart(GetOpiton(areaData, lineOption('areaLine', '区域折线')));
+let area_data = dataFormat(areaData,'区域折线图');
+let areaLineChart = new BarEchart(GetOpiton(area_data, lineOption()));
 // 双Y折线图
-// let doubleLinesChart = new BarEchart(GetOpiton(doubleLinesData,doubleLinesOption()));
-let doubleLinesChart = new BarEchart(GetOpiton(doubleLinesData, lineBarOption('doubleLines')));
+let doubleLines_data = dataFormat(doubleLinesData,'双折线图');
+let doubleLinesChart = new BarEchart(GetOpiton(doubleLinesData, lineBarOption()));
 // 线柱混搭
-let lineBarChart = new BarEchart(GetOpiton(lineBarData, lineBarOption('lineBar')));
+let lineBarChart = new BarEchart(GetOpiton(lineBarData, lineBarOption()));
 // 线柱混搭2
-let lineBarChart2 = new BarEchart(GetOpiton(lineBarData2, lineBarOption('lineBar2')));
+let lineBarChart2 = new BarEchart(GetOpiton(lineBarData2, lineBarOption()));
 
 
