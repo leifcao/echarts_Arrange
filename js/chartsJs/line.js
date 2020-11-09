@@ -59,6 +59,8 @@ let lineBarOption = function () {
     grid: {
       top: '12%',
       bottom: '2%',
+      left: '0%',
+      right: '0%',
     },
     xAxis: {
       data: [],
@@ -214,11 +216,11 @@ let lineBarData2 = {
 let lineChart = new BarEchart(GetOpiton(lineData, lineOption()));
 
 // 区域折线图
-let area_data = dataFormat(areaData,'区域折线图');
+let area_data = dataFormat(areaData,'areaLine');
 let areaLineChart = new BarEchart(GetOpiton(area_data, lineOption()));
 
 // 双Y折线图
-let doubleLines_data = dataFormat(doubleLinesData,'双折线图');
+let doubleLines_data = dataFormat(doubleLinesData,'doubleLine');
 let doubleLinesChart = new BarEchart(GetOpiton(doubleLinesData, lineBarOption()));
 // 线柱混搭
 let lineBarChart = new BarEchart(GetOpiton(lineBarData, lineBarOption()));
