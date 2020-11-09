@@ -144,22 +144,22 @@ let pieChartSixData = {
 // 饼图
 let pieChartFirst = new PieEchart(GetOpiton(pieChartOneData, pieChartOption()))
 // 环形饼图
-let pieTwoData = dataFormat(pieChartTwoData,'环形图');
+let pieTwoData = dataFormat(pieChartTwoData,'annular');
 let pieChartSecond = new PieEchart(GetOpiton(pieTwoData, pieChartOption()));
 // 玫瑰饼图
-let pieThreeData = dataFormat(pieChartThreeData,'玫瑰图');
+let pieThreeData = dataFormat(pieChartThreeData,'rose');
 let pieChartThird = new PieEchart(GetOpiton(pieThreeData, pieChartOption()));
 // 环形跑道图
-let pieSixData = dataFormat(pieChartSixData,'跑道图');
+let pieSixData = dataFormat(pieChartSixData,'runway');
 let pieChartSixth = new PieEchart(GetOpiton(pieSixData, pieChartOption()))
 // 嵌套饼图
-let pieFiveData = dataFormat(pieChartFiveData, '嵌套饼图');
+let pieFiveData = dataFormat(pieChartFiveData, 'nestPie');
 let nestPieOption = GetOpiton(pieFiveData, pieChartOption());
 setSeriesColor(nestPieOption.series[1].data);
 let pieChartFifth = new PieEchart(nestPieOption);
 
 //轮播饼图
-let pieFourData = dataFormat(pieChartTwoData,'环形图');
+let pieFourData = dataFormat(pieChartTwoData,'annular');
 pieFourData.id = 'pieChartFourth';
 let pieChartFourOption = GetOpiton(pieFourData, pieChartOption());
 let pieChartFourth = new PieEchart(pieChartFourOption);
