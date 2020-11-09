@@ -1,66 +1,112 @@
-var sankey = document.getElementById('sankey');
-var sankeyEchart = echarts.init(sankey);
+//桑基图
 
 
 
-let data_name = ['男', '女', '体育特长生', '艺术特长生', '管弦乐类', '民乐类', '舞蹈类', '声乐类', '田径', '游泳', '排球', '击剑'];
-let linkssource = ['男', '男', '女', '女', '体育特长生', '体育特长生', '体育特长生', '体育特长生', '艺术特长生', '艺术特长生', '艺术特长生', '艺术特长生']
-let linkstarget = ['体育特长生', '艺术特长生', '体育特长生', '艺术特长生', '管弦乐类', '民乐类', '舞蹈类', '声乐类', '田径', '游泳', '排球', '击剑']
-let linkvalue = [55, 44, 45, 56, 28, 27, 23, 22, 29, 28, 22, 21]
-
-
-let sankeyColor = [];
-for (var i = 0; i < data_name.length; i++) {
-  if (i <= 4) {
-    sankeyColor[i] = colorList[i]
-  } else {
-    sankeyColor[i] = colorList[i % 5]
-  }
-}
-
-var sankeyData = [];
-for (var i = 0; i < data_name.length; i++) {
-  sankeyData.push({
-    name: data_name[i],
-    itemStyle: {
-      color: sankeyColor[i]
-    }
-  })
-}
-var links = [];
-for (var i = 0; i < linkssource.length; i++) {
-  links.push({
-    source: linkssource[i],
-    target: linkstarget[i],
-    value: linkvalue[i],
-  })
-}
-let sankeyOption = {
-  tooltip: {
-    trigger: 'item',
-    formatter: "{b} :{c}人"
-
+let sanKeyLink = [
+  {
+    "source": "男",
+    "target": "体育特长生",
+    "value": 55
   },
-  series: {
-    type: 'sankey',
-    layout: 'none',
-    data: sankeyData,
-    links: links,
-    label: {
-      normal: {
-        color: "#656565",
-        fontSize: 14,
-      }
-    },
-    itemStyle: {
-      borderWidth: 0,
-    },
-    lineStyle: {
-      color: 'source',
-      opacity: 0.25
-    }
-
+  {
+    "source": "男",
+    "target": "艺术特长生",
+    "value": 44
+  },
+  {
+    "source": "女",
+    "target": "体育特长生",
+    "value": 45
+  },
+  {
+    "source": "女",
+    "target": "艺术特长生",
+    "value": 56
+  },
+  {
+    "source": "体育特长生",
+    "target": "管弦乐类",
+    "value": 28
+  },
+  {
+    "source": "体育特长生",
+    "target": "民乐类",
+    "value": 27
+  },
+  {
+    "source": "体育特长生",
+    "target": "舞蹈类",
+    "value": 23
+  },
+  {
+    "source": "体育特长生",
+    "target": "声乐类",
+    "value": 22
+  },
+  {
+    "source": "艺术特长生",
+    "target": "田径",
+    "value": 29
+  },
+  {
+    "source": "艺术特长生",
+    "target": "游泳",
+    "value": 28
+  },
+  {
+    "source": "艺术特长生",
+    "target": "排球",
+    "value": 22
+  },
+  {
+    "source": "艺术特长生",
+    "target": "击剑",
+    "value": 21
   }
-};
+]
 
-sankeyEchart.setOption(sankeyOption);
+let sankeyOneData = {
+  id: 'sankey',
+  seriesData: [{
+    name: '', type: 'sankey', data: [
+      {"name": "男"}, {"name": "女",}, {"name": "体育特长生"}, {"name": "艺术特长生"},
+      {"name": "管弦乐类"}, {"name": "民乐类"}, {"name": "舞蹈类"}, {"name": "声乐类"},
+      {"name": "田径"}, {"name": "游泳"}, {"name": "排球"}, {"name": "击剑"},
+    ], links: sanKeyLink
+  }]
+}
+
+
+let sankeyOption = () => {
+  const option = {
+    tooltip: {
+      trigger: 'item',
+      formatter: "{b} :{c}人"
+    },
+    series: [{
+      type: 'sankey',
+      layout: 'none',
+      data: [],
+      links: [],
+      label: {
+        normal: {
+          color: textColor,
+          fontSize: 14,
+        }
+      },
+      itemStyle: {
+        borderWidth: 0,
+      },
+      lineStyle: {
+        color: 'source',
+        opacity: 0.25
+      }
+    }]
+  };
+  return option;
+}
+
+
+let sankeyOne_data = dataFormat(sankeyOneData, 'sankey');
+let sankeyEchart = new Echarts(GetOpiton(sankeyOne_data, sankeyOption()));
+sankeyEchart.setOption();
