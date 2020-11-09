@@ -15,12 +15,12 @@ function dataFormat(data, type) {
 var dataList = new Object();
 
 // 饼图data模板
-dataList['饼图'] = function pieDefault_data(data) {
+dataList['pie'] = (data) => {
   return data;
 }
 
 // 环形饼图data模板
-dataList['环形图'] = function pieDefault_data(data) {
+dataList['annular'] = (data) => {
   const {legend, seriesData} = data;
   let series = [];
   seriesData.forEach((item, index) => {
@@ -28,8 +28,9 @@ dataList['环形图'] = function pieDefault_data(data) {
   })
   return data
 }
+
 // 玫瑰饼图data模板
-dataList['玫瑰图'] = function pieDefault_data(data) {
+dataList['rose'] = (data) => {
   const {legend, seriesData} = data;
   let series = [];
   seriesData.forEach((item, index) => {
@@ -40,7 +41,7 @@ dataList['玫瑰图'] = function pieDefault_data(data) {
 }
 
 // 嵌套饼图data模板
-dataList['嵌套饼图'] = function pieNest_data(data) {
+dataList['nestPie'] = (data) => {
   /**
    * seriesData的长度确定段数
    * @num 默认外圈数值
@@ -59,7 +60,8 @@ dataList['嵌套饼图'] = function pieNest_data(data) {
   return data
 }
 
-dataList['跑道图'] = function annular_data(data) {
+// 跑道图
+dataList['runway'] = (data) => {
   /**
    * seriesData的长度确定段数
    * @num 默认外圈数值
@@ -81,10 +83,13 @@ dataList['跑道图'] = function annular_data(data) {
   return data;
 }
 
-dataList['条形图'] = function barChart(data) {
+// 条形图
+dataList['bar'] = (data) => {
   return data;
 }
-dataList['条形堆积图'] = function barChart(data) {
+
+//条形堆积图
+dataList['barStack'] = (data) => {
   const {legend, yAxis, seriesData} = data;
   seriesData.forEach((item, index) => {
     // 字体文本位置
@@ -95,7 +100,8 @@ dataList['条形堆积图'] = function barChart(data) {
 
 }
 
-dataList['正负条形图'] = function barChart(data) {
+// 正负条形图
+dataList['barPlusMinus'] = (data) => {
   const {legend, yAxis, seriesData} = data;
   seriesData.forEach((item, index) => {
     item.stack = '总量';
@@ -104,13 +110,14 @@ dataList['正负条形图'] = function barChart(data) {
   return data;
 }
 
-dataList['条形图1'] = function barChart(data) {
+// 条形图1
+dataList['bar1'] = (data) => {
   const {legend, yAxis, seriesData, config} = data;
   seriesData.forEach((item, index) => {
     // 柱子颜色
     item.itemStyle = {
       normal: {
-        color: function (data) {
+        color: (data) => {
           return colorList[data.dataIndex];
         }
       }
@@ -126,18 +133,23 @@ dataList['条形图1'] = function barChart(data) {
   return data;
 }
 
-dataList['条形图2'] = function barChart(data) {
-  return data;
-}
-dataList['条形图3'] = function barChart(data) {
-  return data;
-}
-
-dataList['柱状图'] = function barChart(data) {
+//胶囊条形图
+dataList['capsule'] = (data) => {
   return data;
 }
 
-dataList['堆积柱图'] = function barChart(data) {
+// 温度条形图
+dataList['temperature'] = (data) => {
+  return data;
+}
+
+//柱状图
+dataList['columnar'] = (data) => {
+  return data;
+}
+
+//柱状堆积图
+dataList['columnarStack'] = (data) => {
   const {seriesData} = data;
   seriesData.forEach(item => {
     // 字体文本位置
@@ -147,11 +159,175 @@ dataList['堆积柱图'] = function barChart(data) {
   return data;
 }
 
-dataList['折线图'] = function barChart(data) {
+// 3d柱状图通用属性
+dataList['columnar3d_common'] = (data) => {
+  const {seriesData} = data;
+  let _seriesData = [];
+  seriesData.forEach((item, index) => {
+    let labelTop = {"normal": {"show": false}};
+    let symbolSize = [20, 10];
+    // 构建3d柱状图数据 --- 共有属性
+    _seriesData.push(
+      {
+        name: item.name,
+        type: "pictorialBar",
+        data: item.data,
+        symbol: item.symbol,
+        symbolSize: symbolSize,
+        symbolOffset: [0, -5],
+        symbolPosition: "end",
+        label: labelTop,
+        tooltip: {show: false}
+      },
+      {
+        name: item.name,
+        type: "pictorialBar",
+        data: item.data,
+        symbol: item.symbol,
+        symbolSize: symbolSize,
+        symbolOffset: [0, 5],
+        label: labelTop,
+        tooltip: {show: false}
+      },
+    )
+  })
+
+  data.seriesData = seriesData.concat(_seriesData);
+  // console.log(data.seriesData)
   return data;
 }
 
-dataList['区域折线图'] = function barChart(data) {
+// 3d柱状图
+dataList['columnar3d'] = (data) => {
+  // 调用公用的3d属性
+  data = dataList['columnar3d_common'](data);
+  const {seriesData} = data;
+  let itemStyle = {"normal": {"opacity": 0.7, "barBorderRadius": 0,}};
+  // 构建3d柱状图数据
+  data.seriesData.push(
+    {"name": seriesData[0].name, "type": "bar", "barWidth": "20", "data": seriesData[0].data, "itemStyle": itemStyle}
+  );
+  // 移除初始传入数据
+  data.seriesData.shift();
+  return data;
+}
+
+//3d柱状图 - 波纹ripple
+dataList['columnar3d_ripple'] = (data) => {
+  // 调用公用的3d属性
+  data = dataList['columnar3d_common'](data);
+  const {seriesData} = data;
+  // 圆形大小
+  let symbolSize = [20, 10];
+  let itemStyle = {"normal": {"opacity": 0.7, "barBorderRadius": 0,}};
+
+  // 构建3d柱状图数据
+  data.seriesData.push(
+    {
+      name: seriesData[0].name,
+      type: "bar",
+      barWidth: "20",
+      data: seriesData[0].data,
+      itemStyle: itemStyle,
+      markLine: {
+        silent: true,
+        symbol: "none",
+        data: [{
+          name: "目标值",
+          yAxis: seriesData[0].target,
+          lineStyle: {
+            color: "#ffc832"
+          },
+          label: {
+            position: "end",
+            distance: -60,
+            formatter: "{b}：{c}"
+          }
+        }]
+      }
+    },
+    {
+      type: 'effectScatter',
+      silent: true,
+      tooltip: {show: false},
+      zlevel: 3,
+      symbol: seriesData[0].symbol,
+      symbolSize: symbolSize,
+      showEffectOn: 'render',
+      rippleEffect: {
+        brushType: 'stroke',
+        color: '#3cefff',
+        scale: 3
+      },
+      itemStyle: {
+        color: '#3cefff'
+      },
+      hoverAnimation: true,
+      data: seriesData[0].data.map(item => 0), // 根据数据匹配相应个数波纹
+    },
+  )
+  // 移除初始传入数据
+  data.seriesData.shift();
+  return data;
+}
+
+//3d柱状图 - 阴影shadow
+dataList['columnar3d_shadow'] = (data) => {
+  // 调用公用的3d属性
+  data = dataList['columnar3d_common'](data);
+  const {seriesData} = data;
+  // 圆形大小
+  let symbolSize = [20, 10];
+  // 数据的item颜色
+  let itemStyle_data = {normal: {opacity: 0.7, barBorderRadius: 0,}};
+  // 阴影柱子的item颜色
+  let itemStyle_shadow = {normal: {opacity: 0.7, barBorderRadius: 0, color: colorList[1]}};
+  let label = {normal: {show: false}};
+
+  // 构建3d柱状图数据
+  data.seriesData.push(
+    {
+      data: seriesData[0].data.map(item => seriesData[0].max), //设置最大值的柱形阴影
+      type: "bar",
+      // barMaxWidth: "auto",
+      barWidth: 20,
+      barGap: "-100%",
+      itemStyle: itemStyle_shadow,
+      zlevel: -1,
+      label: label,
+      tooltip:{show:false}
+    },
+    {
+      data: seriesData[0].data.map(item => seriesData[0].max), //设置最大值的柱形圆形阴影
+      type: "pictorialBar",
+      symbolPosition: "end",
+      symbol: seriesData[0].symbol,
+      symbolOffset: [0, -5],
+      itemStyle: itemStyle_shadow,
+      symbolSize: symbolSize,
+      label: label,
+      zlevel: -1,
+      tooltip:{show:false}
+    },
+    {
+      name: seriesData[0].name,
+      type: "bar",
+      barWidth: "20",
+      data: seriesData[0].data,
+      itemStyle: itemStyle_data,
+    },)
+  // 移除初始传入数据
+  data.seriesData.shift();
+  return data;
+}
+
+// 折线图
+dataList['line'] = (data) => {
+  return data;
+}
+
+//区域折线图
+dataList['areaLine'] = (data) => {
   const {seriesData} = data;
   seriesData.forEach(item => {
     // 区域颜色配置
@@ -160,7 +336,8 @@ dataList['区域折线图'] = function barChart(data) {
   return data;
 }
 
-dataList['双折线图'] = function barChart(data) {
+// 双Y折线图
+dataList['doubleLine'] = (data) => {
   const {seriesData} = data;
   seriesData.forEach((item, index) => {
     // 对应两个y轴
@@ -169,12 +346,13 @@ dataList['双折线图'] = function barChart(data) {
   return data;
 }
 
-
-dataList['线柱混搭'] = function barChart(data) {
+//线柱混搭
+dataList['lineBar'] = (data) => {
   return data;
 }
 
-dataList['水环图'] = function barChart(data) {
+//水环图
+dataList['liquid'] = (data) => {
   const {seriesData} = data;
   seriesData.forEach((item, index) => {
     // 水环图data属性单独设置
@@ -189,17 +367,85 @@ dataList['水环图'] = function barChart(data) {
   return data;
 }
 
-// 仪表盘
-dataList['仪表盘2'] = function barChart(data) {
-  const {seriesData,config} = data;
+//仪表盘2
+dataList['dashboard2'] = (data) => {
+  //config为配置属性
+  const {seriesData, config} = data;
   // 设置仪表盘文字的显示
   let defalut = {
-    "title.text":seriesData[0].data[0].value+'%',
-    "title.subtext":seriesData[0].data[0].name,
+    "title.text": seriesData[0].data[0].value + '%',
+    "title.subtext": seriesData[0].data[0].name,
   }
   data.config = config ? $.extend(defalut, config) : defalut;
   return data;
 }
 
+//雷达图
+dataList['radar'] = (data) => {
+  //radar为雷达图的范围，config为配置属性
+  const {seriesData, radar, config} = data;
+  seriesData.forEach((item, index) => {
+    item.itemStyle = {color: colorList[index], borderColor: textColor, borderWidth: 1};
+    item.lineStyle = {color: colorList[index], width: 3};
+  });
+  let defalut = {
+    "radar.indicator": radar,
+  }
+  data.config = config ? $.extend(defalut, config) : defalut;
+  return data;
+}
 
+//数据图表
+dataList['dataChart'] = (data) => {
+  const {legend, seriesData, config} = data;
+  // 数据图表 title显示内容
+  let title_str = '';
+  legend.forEach(item => title_str += `\n${item}`);
 
+  // 计算graphic 线条数组
+  let len = legend.length;
+  let lineList = getTableLine(len + 1);
+
+  // 默认属性配置
+  let defalut = {
+    // x轴的文本显示方法
+    "xAxis.axisLabel.formatter": (value, index) => {
+      let datas = seriesData;
+      let str = '{table|' + value + '}';
+      // 数据遍历，添加相应的数值,x轴文本数据填充
+      datas.forEach((item, i) => {
+        str += '\n{table|' + item.data[index] + '}'
+      })
+      return str;
+    },
+    "grid.bottom": lineList[0].bottom + 25,
+    "title.text": title_str, // title设置
+    "graphic": lineList,  // 配置graphic 线条数组
+    "xAxis.axisTick.length": 21 * (len + 1),  //计算tick长度
+  }
+  data.config = config ? $.extend(defalut, config) : defalut;
+  return data;
+}
+
+//桑基图
+dataList['sankey'] = (data) => {
+  const {seriesData} = data;
+  seriesData[0].data.forEach((item, i) => {
+    item.itemStyle = {color: color = i <= 4 ? colorList[i] : colorList[i % 5]};
+  })
+
+  return data;
+}
+
+//关系图
+dataList['relation'] = (data) => {
+  const {seriesData} = data;
+  // 数组长度
+  // let len = seriesData[0].categories;
+  let len = colorList.length;
+  seriesData[0].categories.forEach((item, index) => {
+    let color = index < len ? colorList[index] : colorList[index % 2];
+    item.itemStyle = {normal: {color: color}};
+  })
+  return data;
+}
