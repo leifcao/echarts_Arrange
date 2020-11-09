@@ -79,15 +79,7 @@ class Echarts {
     this.default = {
       backgroundColor: '',
       id: '',
-      tooltip: {
-        trigger: 'axis', // 坐标轴指示器，坐标轴触发有效
-        axisPointer: {
-          type: 'shadow',  // 默认为直线，可选为：'line' | 'shadow'
-          textStyle: {
-            color: textColor
-          }
-        },
-      },   // 提示框组件
+      tooltip: {},   // 提示框组件
       legend: {
         textStyle: {
           color: textColor,
@@ -153,7 +145,7 @@ class Echarts {
     });
   }
 
-  show() {
+  showOption() {
     const {id, color} = this.option;
     console.log(this.option)
   }
@@ -231,6 +223,7 @@ function GetOpiton(data, option) {
  *
  * */
 var _config = {
+  "background": 'red',
   "legend.left": 'left',
   "series.label.normal.show": true,
 }
@@ -247,10 +240,8 @@ function configProperty(config, option) {
     let obj = {};
     // 递归生成一个对象
     obj = recursive(obj, property, value);
-    if (obj.series) {
-      obj.series = [obj.series];
-    }
-    console.log(obj)
+    // 将series和多y轴的，封装成数组对象
+    obj = transition(obj);
     // 递归拷贝赋值
     option = $.extend(true, option, obj);
   }
@@ -261,32 +252,34 @@ function configProperty(config, option) {
 
 /**
  * 递归赋值属性
- * */
-
-/*
+ **/
 function recursive(obj, property, value) {
-  for (var i = 0; i < property.length; i++) {
-    // key键值
-    let key = property[i];
-    obj[key] = {};
-    // 判断是否为最后一个属性
-    if (i === property.length - 1) obj[key] = value;
-    // console.log(i, property)
+  if (property.length) {
+    //  key键值
+    let key = property[0];
+    //最后值为数值
+    if (property.length === 1) obj[key] = value;
+    else obj[key] = {};
     property.shift();
     recursive(obj[key], property, value);
   }
   return obj;
 }
-*/
 
-function recursive(obj, property, value) {
-//  key键值
-  if (property.length) {
-    let key = property[0];
-    obj[key] = {};
-    property.shift();
-    if (property.length === 0) obj[key] = value;
-    recursive(obj[key], property, value);
+
+/**
+ * 将对象变为数组yAxis,series
+ **/
+function transition(obj) {
+  let {yAxis1, yAxis2, series} = obj;
+  if (yAxis1) {
+    obj.yAxis = [yAxis1];
+    delete obj.yAxis1;
   }
+  if (yAxis2) {
+    obj.yAxis = [{}, yAxis2];
+    delete obj.yAxis2;
+  }
+  if (series) obj.series = [obj.series];
   return obj;
 }
