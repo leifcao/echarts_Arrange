@@ -1,19 +1,14 @@
-// 矩形树图
-
-
-
-let RICH = {
-  name: {
-    color: '#fdfa3e',
-    fontSize: 14,
-    lineHeight: 16
-  },
-  basic: {
-    color: '#fff',
-    fontSize: 12,
-    lineHeight: 12
+/**
+ * 矩形树图
+ * @opt 图表的option
+ * @fn  图表的点击方法
+ **/
+class RectTreeEchart extends Echarts {
+  constructor(opt, fn) {
+    super(opt, fn);
+    this.setOption();
   }
-};
+}
 
 /**
  * 数据源
@@ -39,7 +34,6 @@ var info2 = {
           'manage': 'liang-02',
         }
       ],
-
     },
     {
       'asset_num': 45000,
@@ -77,7 +71,6 @@ var info2 = {
               'manage': 'liang-01',
             }
           ],
-
         }
       ],
 
@@ -265,100 +258,110 @@ function format_struct_data(children, structs_datas) {
   }
 
 }
-
 format_struct_data(info2.children, structs_datas);
-let rectTreeOption =  {
-  title: {
-    text: '',
-    subtext: '',
-    left: 'leafDepth'
-  },
-  grid: {
-    left: '0%',
-    top:'0%',
-    right: '0%',
-    bottom: '0%',
-    containLabel: true
-  },
-  tooltip: {
-    formatter: function(info) {
-      var asset_num = info.data.asset_num;
-      var name = info.name;
-      return [
-        '<h4>' + name + '</h4>',
-        '<div>占比：' + asset_num + '</div>',
-      ].join('\n');
-    },
-  },
 
-  color:colorList,
-  series: [{
-    name: '行业汇总',
-    type: 'treemap',
-    visibleMin: 300,
-    data: structs_datas,
-    leafDepth: 1,
-    label: {
-      normal: {
-        show: true,
-        position: 'insideTopLeft',
-        formatter: function(a) {
-          return '{name|' + a.name + '}' + "\n\n" + "{basic|占比 : " + a.data.asset_num  + '人}';
-        },
-        textStyle: {
-          fontSize: '13',
-          fontWeight: 'bold'
-        },
-        rich: RICH,
 
-      },
+//矩形树图option模板
+let rectTreeOption = () => {
+  // 矩形树图label配置属性
+  let RICH = {
+    name: {
+      color: '#fdfa3e',
+      fontSize: 14,
+      lineHeight: 16
     },
-    levels: [{
-      itemStyle: {
+    basic: {
+      color: '#fff',
+      fontSize: 12,
+      lineHeight: 12
+    }
+  };
+  const option = {
+    title: {
+      text: '',
+      subtext: '',
+      left: 'leafDepth'
+    },
+    grid: {
+      left: '0%',
+      top: '1%',
+      right: '0%',
+      bottom: '0%',
+      containLabel: true
+    },
+    tooltip: {},
+    color: colorList,
+    series: [{
+      name: '',
+      type: 'treemap',
+      visibleMin: 300,
+      drillDownIcon: '', //图标
+      data:[] ,
+      leafDepth: 1,
+      label: {
         normal: {
-          borderWidth: 0,
-          gapWidth: 1,
-          borderColor:mapBorder
-        }
-      }
-    }, {
-      itemStyle: {
-        normal: {
-          gapWidth: 1,
-          borderColor:'#fff'
-        }
-      }
-    }],
-    breadcrumb: {
-      show: true,
-      // "height": 22,
-      left: "5%",
-      top: "0%",
-      emptyItemWidth: 25,
-      itemStyle: {
-        normal: {
-          color: "#fff",
-          borderColor: "rgba(13,25,33,0)",
-          borderWidth: 1,
-          shadowColor: "rgba(150,150,150,0)",
-          shadowBlur: 3,
-          shadowOffsetX: 0,
-          shadowOffsetY: 0,
+          show: true,
+          position: 'insideTopLeft',
+          formatter: function (a) {
+            return '{name|' + a.name + '}' + "\n\n" + "{basic|" + a.data.asset_num + '人}';
+          },
           textStyle: {
-            color: "#000",
+            fontSize: '13',
             fontWeight: 'bold'
-          }
-        },
-        emphasis: {
-          textStyle: {}
-        }
-      }
-    },
-  }]
+          },
+          rich: RICH,
 
+        },
+      },
+      levels: [{
+        itemStyle: {
+          normal: {
+            borderWidth: 0,
+            gapWidth: 1,
+            borderColor: mapBorder
+          }
+        }
+      }, {
+        itemStyle: {
+          normal: {
+            gapWidth: 1,
+            borderColor: '#fff'
+          }
+        }
+      }],
+      breadcrumb: {
+        show: true,
+        // "height": 22,
+        left: "5%",
+        top: "1%",
+        emptyItemWidth: 25,
+        itemStyle: {
+          normal: {
+            color: "#efefef",
+            borderColor: "rgba(13,25,33,0)",
+            borderWidth: 1,
+            shadowColor: "rgba(150,150,150,0)",
+            shadowBlur: 3,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            textStyle: {
+              color: "#000",
+              fontWeight: 'bold'
+            }
+          },
+          emphasis: {
+            textStyle: {}
+          }
+        }
+      },
+    }]
+  };
+  return option;
 }
 
-var rectTree = document.getElementById('rectTree');
-var rectTreeEchart = echarts.init(rectTree);
-
-rectTreeEchart.setOption(rectTreeOption);
+//矩形树图
+let rectTreeOneData = {
+  id: 'rectTree',
+  seriesData: [{name: '行业汇总', type: 'treemap', data: structs_datas}]
+}
+let rectTreeFirst = new RectTreeEchart(GetOpiton(rectTreeOneData,rectTreeOption()))
