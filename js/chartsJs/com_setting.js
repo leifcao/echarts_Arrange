@@ -36,13 +36,50 @@ let mapEmphasis_area = '#E5F39B';
 
 
 /**
- * 初始化封装echarts
- * @id  dom树的id
- * */
-function initEcharts(id, opt) {
-  let chart = echarts.init(document.getElementById(id));
-  return chart;
-}
+ * 3d柱状图颜色块
+ * @color3d  [0]阴影部分  [1]主体圆形末尾部分  [2]主体柱子部分  [3]主体圆形开始部分
+ **/
+
+// let color3d = ['#168efe',]
+let color3d = [new echarts.graphic.LinearGradient(0,0,0,1,
+  [{
+    offset: 0,
+    color: "rgba(54,127,223,1)"
+  },
+    {
+      offset: 1,
+      color: "rgba(94,162,254,1)"
+    }
+  ],
+  false
+),new echarts.graphic.LinearGradient(0,0,0,1,
+  [{
+    offset: 0,
+    color: "rgba(89,211,255,1)"
+  },
+    {
+      offset: 1,
+      color: "rgba(23,237,194,1)"
+    }
+  ],
+  false
+),{
+  "x": 0,
+  "y": 0,
+  "x2": 0,
+  "y2": 1,
+  "type": "linear",
+  "global": false,
+  "colorStops": [{//第一节下面
+    "offset": 0,
+    "color": "#2e9fdc"
+  }, {
+    "offset": 1,
+    "color": "#26ebba"
+  }]
+},'#26ebba']
+
+
 
 //动态设置渐变色
 function setLinearGradient(list, key) {
