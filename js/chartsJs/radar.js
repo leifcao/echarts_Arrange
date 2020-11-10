@@ -98,15 +98,14 @@ let radarThreeData = {
   id: 'radarThird',
   legend: ["2019年", "2020年"],
   radar: [
-    {name: "三无、五保", max: 88},
-    {name: "低保", max: 88},
-    {name: "残疾", max: 88},
-    {name: "失独", max: 88},
-    {name: "高龄", max: 88},
-    {name: "突出贡献", max: 88}
+    {name: "家政服务", max: 88},
+    {name: "助餐服务", max: 88},
+    {name: "助医服务", max: 88},
+    {name: "助行服务", max: 88},
+    {name: "待办服务", max: 88}
   ],
-  seriesData: [{name: '2019年', type: 'radar', data: [[80, 50, 55, 80, 50, 80]]},
-    {name: '2020年', type: 'radar', data: [[60, 60, 65, 60, 70, 40]]}],
+  seriesData: [{name: '2019年', type: 'radar', data: [[80, 50, 80, 50, 80]]},
+    {name: '2020年', type: 'radar', data: [[60, 60, 60, 70, 40]]}],
   config: {
     'radar.shape': 'circle',//圆雷达图配置
   }
