@@ -346,7 +346,7 @@ let dashboardFourOption = () => {
             }
           }
         },
-        data: [{value: 3.15, name: '利润总额'}]
+        data: []
       },
       {
         name: '左仪表盘',
@@ -404,7 +404,7 @@ let dashboardFourOption = () => {
             }
           }
         },
-        data: [{value: 2.36, name: '母公司'}]
+        data: []
       },
       {
         name: '右仪表盘',
@@ -462,7 +462,7 @@ let dashboardFourOption = () => {
             }
           }
         },
-        data: [{value: 0.79, name: '子公司'}]
+        data: []
       },
     ]
   };
