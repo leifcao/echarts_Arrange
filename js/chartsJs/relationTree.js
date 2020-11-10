@@ -1,16 +1,10 @@
-var horizontalTree = document.getElementById('horizontalTree');
-var horizontalTreeEchart = echarts.init(horizontalTree);
-
-
-horizontalTreeEchart.showLoading();
-$.get('js/treeJson/HorizontalTree.json', function (data) {
-  horizontalTreeEchart.hideLoading();
-
+// 关系树图-垂直
+let horizontalTreeOption = (data, id) => {
   echarts.util.each(data.children, function (datum, index) {
     index % 2 === 0 && (datum.collapsed = true);
   });
-
-  horizontalTreeEchart.setOption(horizontalTreeOption = {
+  const option = {
+    id: id,
     tooltip: {
       trigger: 'item',
       triggerOn: 'mousemove'
@@ -29,10 +23,10 @@ $.get('js/treeJson/HorizontalTree.json', function (data) {
           verticalAlign: 'middle',
           align: 'right',
           fontSize: 9,
-          color:textColor,
+          color: textColor,
         },
-        itemStyle:{
-          borderColor:colorList[0]
+        itemStyle: {
+          borderColor: colorList[0]
         },
 
         leaves: {
@@ -41,8 +35,8 @@ $.get('js/treeJson/HorizontalTree.json', function (data) {
             verticalAlign: 'middle',
             align: 'left'
           },
-          itemStyle:{
-            borderColor:colorList[0]
+          itemStyle: {
+            borderColor: colorList[0]
           },
         },
         expandAndCollapse: true,
@@ -50,25 +44,25 @@ $.get('js/treeJson/HorizontalTree.json', function (data) {
         animationDurationUpdate: 750
       }
     ]
-  });
+  };
+  return option;
+}
+
+let horizontalTreeEchart;
+$.get('js/treeJson/HorizontalTree.json', (data) => {
+  horizontalTreeEchart = new Echarts(horizontalTreeOption(data, 'horizontalTree'));
+  horizontalTreeEchart.setOption();
 });
 
-
-
-var verticalTree = document.getElementById('verticalTree');
-var verticalTreeEchart = echarts.init(verticalTree);
-
-
-verticalTreeEchart.showLoading();
-$.get('js/treeJson/VerticalTree.json', function (data) {
-  verticalTreeEchart.hideLoading();
-
-  verticalTreeEchart.setOption(option = {
+// 关系树图-水平
+let hverticalTreeOption = (data, id) => {
+  const option = {
+    id:id,
     tooltip: {
       trigger: 'item',
       triggerOn: 'mousemove'
     },
-    series:[
+    series: [
       {
         type: 'tree',
         data: [data],
@@ -89,10 +83,10 @@ $.get('js/treeJson/VerticalTree.json', function (data) {
           verticalAlign: 'middle',
           align: 'center',
           fontSize: 9,
-          color:textColor,
+          color: textColor,
         },
-        itemStyle:{
-          borderColor:colorList[0]
+        itemStyle: {
+          borderColor: colorList[0]
         },
 
         leaves: {
@@ -102,15 +96,27 @@ $.get('js/treeJson/VerticalTree.json', function (data) {
             verticalAlign: 'middle',
             align: 'left'
           },
-          itemStyle:{
-            borderColor:colorList[0]
+          itemStyle: {
+            borderColor: colorList[0]
           }
         },
 
         animationDurationUpdate: 750
       }
     ]
-  });
+  };
+  return option;
+}
+$.get('js/treeJson/HorizontalTree.json', (data) => {
+  verticalTreeEchart = new Echarts(hverticalTreeOption(data, 'verticalTree'));
+  verticalTreeEchart.setOption();
 });
+
+
+
+/*
+verticalTreeEchart.showLoading();
+  verticalTreeEchart.hideLoading();*/
+
 
 
