@@ -27,7 +27,11 @@ let pieChartOption = () => {
   const option = {
     tooltip: {
       trigger: 'item',
-      formatter: '{b} : {c} ({d}%)',
+      // formatter: '{b} : {c} ({d}%)',
+      formatter: (params) => {
+        let str = params.seriesName ? '</br>' : '';
+        return `${params.seriesName}${str}${params.name}:${params.value}(${params.percent}%)`
+      },
     },
     legend: {
       left: 'center',
@@ -56,10 +60,10 @@ let pieChartOption = () => {
 
 // 饼图
 let pieChartOneData = {
-  id:'pieChartFirst',
+  id: 'pieChartFirst',
   legend: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
   seriesData: [{
-    name: '访问来源', type: 'pie', data: [{value: 335, name: '直接访问',},
+    name: '', type: 'pie', data: [{value: 335, name: '直接访问',},
       {value: 310, name: '邮件营销'},
       {value: 135, name: '联盟广告'},
       {value: 800, name: '视频广告'},
@@ -69,10 +73,10 @@ let pieChartOneData = {
 
 // 环形饼图data
 let pieChartTwoData = {
-  id:'pieChartSecond',
+  id: 'pieChartSecond',
   legend: ['华为', '中兴', '爱立信', '索尼', '联想', '小米'],
   seriesData: [{
-    name: '环形饼图', type: 'pie',  data: [{value: 10, name: '华为',},
+    name: '', type: 'pie', data: [{value: 10, name: '华为',},
       {value: 15, name: '中兴'},
       {value: 25, name: '索尼'},
       {value: 10, name: '联想'},
@@ -82,10 +86,10 @@ let pieChartTwoData = {
 
 // 玫瑰饼图data
 let pieChartThreeData = {
-  id:'pieChartThird',
+  id: 'pieChartThird',
   legend: ['北京', '广州', '上海', '南京', '深圳', '海外', '长沙'],
   seriesData: [{
-    name: '城市', type: 'pie',  data: [{value: 10, name: '南京'},
+    name: '城市', type: 'pie', data: [{value: 10, name: '南京'},
       {value: 5, name: '海外'},
       {value: 15, name: '广州'},
       {value: 25, name: '上海'},
@@ -97,7 +101,7 @@ let pieChartThreeData = {
 
 // 嵌套饼图数据  name为必须值
 let pieChartFiveData = {
-  id:'pieChartFifth',
+  id: 'pieChartFifth',
   legend: ['直达', '营销广告', '搜索引擎'],
   seriesData: [{
     name: '', type: 'pie', data: [
@@ -120,7 +124,7 @@ let pieChartFiveData = {
 
 // 展示环形图固定数据 = 跑道
 let pieChartSixData = {
-  id:'pieChartSixth',
+  id: 'pieChartSixth',
   legend: ["其他", "资源加工工业", "轻纺工业", "机械电子制造业"],
   seriesData: [{  // radius可去掉
     name: '机械电子制造业', type: 'pie', radius: ['75%', '85%'],
@@ -144,13 +148,13 @@ let pieChartSixData = {
 // 饼图
 let pieChartFirst = new PieEchart(GetOpiton(pieChartOneData, pieChartOption()))
 // 环形饼图
-let pieTwoData = dataFormat(pieChartTwoData,'annular');
+let pieTwoData = dataFormat(pieChartTwoData, 'annular');
 let pieChartSecond = new PieEchart(GetOpiton(pieTwoData, pieChartOption()));
 // 玫瑰饼图
-let pieThreeData = dataFormat(pieChartThreeData,'rose');
+let pieThreeData = dataFormat(pieChartThreeData, 'rose');
 let pieChartThird = new PieEchart(GetOpiton(pieThreeData, pieChartOption()));
 // 环形跑道图
-let pieSixData = dataFormat(pieChartSixData,'runway');
+let pieSixData = dataFormat(pieChartSixData, 'runway');
 let pieChartSixth = new PieEchart(GetOpiton(pieSixData, pieChartOption()))
 // 嵌套饼图
 let pieFiveData = dataFormat(pieChartFiveData, 'nestPie');
@@ -159,7 +163,7 @@ setSeriesColor(nestPieOption.series[1].data);
 let pieChartFifth = new PieEchart(nestPieOption);
 
 //轮播饼图
-let pieFourData = dataFormat(pieChartTwoData,'annular');
+let pieFourData = dataFormat(pieChartTwoData, 'annular');
 pieFourData.id = 'pieChartFourth';
 let pieChartFourOption = GetOpiton(pieFourData, pieChartOption());
 let pieChartFourth = new PieEchart(pieChartFourOption);
@@ -188,12 +192,10 @@ let pieChartFlag = setInterval(function () {
 }, 1000);
 
 
-
-
 /**
  * 以下数据为测试数据
  * */
 
 let test_option = pieChartOption();
 
-configProperty(_config,test_option);
+configProperty(_config, test_option);
