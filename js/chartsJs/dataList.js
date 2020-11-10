@@ -150,7 +150,7 @@ dataList['columnar'] = (data) => {
   seriesData.length === 1 && (seriesData[0].itemStyle = {
     normal: {
       color: (params) => {
-        console.log(params)
+        // console.log(params)
         let num = colorList.length;
         return colorList[params.dataIndex % num];
       }
