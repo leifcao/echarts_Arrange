@@ -145,6 +145,17 @@ dataList['temperature'] = (data) => {
 
 //柱状图
 dataList['columnar'] = (data) => {
+  const {seriesData} = data;
+  // 对单一柱图的颜色进行设置
+  seriesData.length === 1 && (seriesData[0].itemStyle = {
+    normal: {
+      color: (params) => {
+        console.log(params)
+        let num = colorList.length;
+        return colorList[params.dataIndex % num];
+      }
+    }
+  })
   return data;
 }
 
