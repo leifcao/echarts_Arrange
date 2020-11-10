@@ -159,14 +159,31 @@ dataList['columnarStack'] = (data) => {
   return data;
 }
 
+//阶梯瀑布图
+dataList['columnarLadder'] = (data) => {
+  const {seriesData} = data;
+  seriesData.some((item, index) => {
+    // 设置辅助data
+    if (index === 0) {
+      item.itemStyle = {normal: {barBorderColor: 'rgba(0,0,0,0)', color: 'rgba(0,0,0,0)'}}
+      item.emphasis = {itemStyle: {barBorderColor: 'rgba(0,0,0,0)', color: 'rgba(0,0,0,0)'}};
+    }
+    item.stack = '总量';
+  })
+  return data;
+}
+
 // 3d柱状图通用属性
 dataList['columnar3d_common'] = (data) => {
   const {seriesData} = data;
   let _seriesData = [];
   seriesData.forEach((item, index) => {
     let labelTop = {"normal": {"show": false}};
-    let symbolSize = [20, 10];
+    let symbolSize = [30, 15];
     // 构建3d柱状图数据 --- 共有属性
+    // let itemStyle = {normal: {color: '#8b98f2', opacity: '1'}};
+    let itemStyle_end = {normal: {color: color3d[1]}};
+    let itemStyle_start = {normal: {color: color3d[3]}};
     _seriesData.push(
       {
         name: item.name,
@@ -174,10 +191,12 @@ dataList['columnar3d_common'] = (data) => {
         data: item.data,
         symbol: item.symbol,
         symbolSize: symbolSize,
-        symbolOffset: [0, -5],
+        symbolOffset: item.symbol === 'diamond' ? [0, -8] : [0, -9],
         symbolPosition: "end",
+        itemStyle: itemStyle_end,
+        zlevel: 4,
         label: labelTop,
-        tooltip: {show: false}
+        tooltip: {show: false},
       },
       {
         name: item.name,
@@ -185,9 +204,11 @@ dataList['columnar3d_common'] = (data) => {
         data: item.data,
         symbol: item.symbol,
         symbolSize: symbolSize,
-        symbolOffset: [0, 5],
+        symbolOffset: item.symbol === 'diamond' ? [0, 8] : [0, 5],
         label: labelTop,
-        tooltip: {show: false}
+        tooltip: {show: false},
+        zlevel: 1,
+        itemStyle: itemStyle_start,
       },
     )
   })
@@ -197,91 +218,19 @@ dataList['columnar3d_common'] = (data) => {
   return data;
 }
 
-// 3d柱状图
-dataList['columnar3d'] = (data) => {
-  // 调用公用的3d属性
-  data = dataList['columnar3d_common'](data);
-  const {seriesData} = data;
-  let itemStyle = {"normal": {"opacity": 0.7, "barBorderRadius": 0,}};
-  // 构建3d柱状图数据
-  data.seriesData.push(
-    {"name": seriesData[0].name, "type": "bar", "barWidth": "20", "data": seriesData[0].data, "itemStyle": itemStyle}
-  );
-  // 移除初始传入数据
-  data.seriesData.shift();
-  return data;
-}
-
-//3d柱状图 - 波纹ripple
-dataList['columnar3d_ripple'] = (data) => {
-  // 调用公用的3d属性
-  data = dataList['columnar3d_common'](data);
-  const {seriesData} = data;
-  // 圆形大小
-  let symbolSize = [20, 10];
-  let itemStyle = {"normal": {"opacity": 0.7, "barBorderRadius": 0,}};
-
-  // 构建3d柱状图数据
-  data.seriesData.push(
-    {
-      name: seriesData[0].name,
-      type: "bar",
-      barWidth: "20",
-      data: seriesData[0].data,
-      itemStyle: itemStyle,
-      markLine: {
-        silent: true,
-        symbol: "none",
-        data: [{
-          name: "目标值",
-          yAxis: seriesData[0].target,
-          lineStyle: {
-            color: "#ffc832"
-          },
-          label: {
-            position: "end",
-            distance: -60,
-            formatter: "{b}：{c}"
-          }
-        }]
-      }
-    },
-    {
-      type: 'effectScatter',
-      silent: true,
-      tooltip: {show: false},
-      zlevel: 3,
-      symbol: seriesData[0].symbol,
-      symbolSize: symbolSize,
-      showEffectOn: 'render',
-      rippleEffect: {
-        brushType: 'stroke',
-        color: '#3cefff',
-        scale: 3
-      },
-      itemStyle: {
-        color: '#3cefff'
-      },
-      hoverAnimation: true,
-      data: seriesData[0].data.map(item => 0), // 根据数据匹配相应个数波纹
-    },
-  )
-  // 移除初始传入数据
-  data.seriesData.shift();
-  return data;
-}
-
 //3d柱状图 - 阴影shadow
 dataList['columnar3d_shadow'] = (data) => {
   // 调用公用的3d属性
   data = dataList['columnar3d_common'](data);
   const {seriesData} = data;
   // 圆形大小
-  let symbolSize = [20, 10];
+  let symbolSize = [30, 15];
   // 数据的item颜色
-  let itemStyle_data = {normal: {opacity: 0.7, barBorderRadius: 0,}};
+  // let itemStyle_data = {normal: {opacity: 1, barBorderRadius: 0,}};
+  let itemStyle_data = {normal: {barBorderRadius: 0, color: color3d[2]}};
   // 阴影柱子的item颜色
-  let itemStyle_shadow = {normal: {opacity: 0.7, barBorderRadius: 0, color: colorList[1]}};
+  // let itemStyle_shadow = {normal: {opacity: 0.3, barBorderRadius: 0, color: colorList[1]}};
+  let itemStyle_shadow = {normal: {barBorderRadius: 0, color: color3d[0]}};
   let label = {normal: {show: false}};
 
   // 构建3d柱状图数据
@@ -290,29 +239,30 @@ dataList['columnar3d_shadow'] = (data) => {
       data: seriesData[0].data.map(item => seriesData[0].max), //设置最大值的柱形阴影
       type: "bar",
       // barMaxWidth: "auto",
-      barWidth: 20,
+      barWidth: symbolSize[0],
       barGap: "-100%",
       itemStyle: itemStyle_shadow,
-      zlevel: -1,
+      zlevel: 1,
       label: label,
-      tooltip:{show:false}
+      tooltip: {show: false}
     },
     {
       data: seriesData[0].data.map(item => seriesData[0].max), //设置最大值的柱形圆形阴影
       type: "pictorialBar",
       symbolPosition: "end",
       symbol: seriesData[0].symbol,
-      symbolOffset: [0, -5],
+      symbolOffset: seriesData[0].symbol === 'diamond' ? [0, -8] : [0, -9],
       itemStyle: itemStyle_shadow,
       symbolSize: symbolSize,
       label: label,
-      zlevel: -1,
-      tooltip:{show:false}
+      zlevel: 2,
+      tooltip: {show: false}
     },
     {
       name: seriesData[0].name,
       type: "bar",
-      barWidth: "20",
+      zlevel: 3,
+      barWidth: symbolSize[0],
       data: seriesData[0].data,
       itemStyle: itemStyle_data,
     },)
