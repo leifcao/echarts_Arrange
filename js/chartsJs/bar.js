@@ -39,6 +39,9 @@ class BarEchart extends Echarts {
         },
         splitLine: {
           show: true,
+          lineStyle:{
+            color:textColor,
+          }
         },
       },
       yAxis: {
