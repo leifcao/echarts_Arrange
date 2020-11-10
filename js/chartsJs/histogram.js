@@ -60,7 +60,7 @@ let histogramOption = () => {
 let histogramOneData = {
   id: 'histogramFirst',
   xAxis: ['制造业', '建筑业', '农林牧渔', '房地产', '金融业'],
-  seriesData: [{name: '2019', type: 'bar', data: [5000, 2600, 1300, 1300, 1250]}]
+  seriesData: [{name: '2019', type: 'bar', data: [3000, 2600, 1300, 1300, 1250]}]
 }
 
 // ------多系列柱图数据------------
