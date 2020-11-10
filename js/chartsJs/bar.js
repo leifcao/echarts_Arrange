@@ -41,6 +41,7 @@ class BarEchart extends Echarts {
           show: true,
           lineStyle:{
             color:textColor,
+            opacity: 0.3,
           }
         },
       },
