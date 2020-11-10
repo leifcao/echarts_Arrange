@@ -115,7 +115,7 @@ var histogramTenData = {
 // 柱状图
 var histogramOne_data = dataFormat(histogramOneData,'columnar');
 var histogramFirst = new BarEchart(GetOpiton(histogramOne_data, histogramOption()));
-histogramFirst.showOption()
+// histogramFirst.showOption()
 
 // 多柱图
 var histogramSecond = new BarEchart(GetOpiton(histogramTwoData, histogramOption()));
