@@ -113,7 +113,10 @@ var histogramTenData = {
 
 
 // 柱状图
-var histogramFirst = new BarEchart(GetOpiton(histogramOneData, histogramOption()));
+var histogramOne_data = dataFormat(histogramOneData,'columnar');
+var histogramFirst = new BarEchart(GetOpiton(histogramOne_data, histogramOption()));
+histogramFirst.showOption()
+
 // 多柱图
 var histogramSecond = new BarEchart(GetOpiton(histogramTwoData, histogramOption()));
 // 堆积柱图
@@ -122,7 +125,6 @@ var histogramThird = new BarEchart(GetOpiton(histogramThree_data, histogramOptio
 // 阶梯瀑布图
 var hisogramFour_data = dataFormat(hisogramFourData, 'columnarLadder');
 var histogramFourth = new BarEchart(GetOpiton(hisogramFour_data, histogramOption()));
-histogramFourth.showOption()
 
 //3d柱状图 - 阴影shadow
 let histogramEight_data = dataFormat(histogramEightData, 'columnar3d_shadow')
