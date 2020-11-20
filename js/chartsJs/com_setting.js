@@ -25,12 +25,14 @@ function setSeriesColor(list) {
  * @mapArea  区块颜色数组
  * @mapEmphasis_label  地图鼠标悬浮文字颜色
  * @mapEmphasis_area  地图鼠标悬浮区块颜色
+ * @regionArea 大区颜色区块
  * */
 let mapBackground = '#013954';
 let map_label = '#ffffff';
 let mapBorder = '#ffffff';
 let mapTheme_item = '#50b9ff';
 let mapArea = ['#d7efff', '#a7dcff', '#7ccaff', '#50b9ff', '#24a7ff',];
+let regionArea = ['#eba75f','#479fd2','#69c1ac','#ff6f5b','#5bb6cb'];
 let mapEmphasis_label = '#234EA5';
 let mapEmphasis_area = '#E5F39B';
 
