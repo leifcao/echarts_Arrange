@@ -48,7 +48,7 @@ echarts.extendsMap = function (id, option) {
       data: [],
       visualMap: '', // 图例设置
       // 下钻回调(点击的地图名、实例对象option、实例对象)
-      callback: function (name, mapUnderOption, instance) {
+      callback: function (name, mapOption, instance) {
       }
     },
     line: [[0, 0], [10, 10], [0, 20]],
@@ -64,7 +64,6 @@ echarts.extendsMap = function (id, option) {
   /**
    * handleEvents  处理事件对象
    * */
-
   var handleEvents = {
     /**
      * 重置Option
@@ -86,7 +85,7 @@ echarts.extendsMap = function (id, option) {
         opt.graphic[0].children[1].shape.x2 = mapObj.pos.shape_x2 * (mapObj.idx + 2);
         if (opt.graphic.length > 2) {
           let cityData = [];
-          for (var x = 0; x < option.length; x++) {
+          for (var x = 0; x < option.data.length; x++) {
             if (name === option.data[x].city) {
               console.log('进入处理数据')
               // 数据处理
@@ -159,7 +158,7 @@ echarts.extendsMap = function (id, option) {
           },
           onclick: function () {
             var name = this.style.key;
-            handleEvents.resetOption(chart, mapUnderOption, name);
+            handleEvents.resetOption(chart, mapOption, name);
           }
         }, {
           type: 'text',
@@ -176,8 +175,8 @@ echarts.extendsMap = function (id, option) {
           onclick: function () {
             // 点击事件
             var name = this.style.text;
-            mapUnderOption.series[0].data = this.data;
-            handleEvents.resetOption(chart, mapUnderOption, name);
+            mapOption.series[0].data = this.data;
+            handleEvents.resetOption(chart, mapOption, name);
           }
         }]
       };
@@ -185,7 +184,6 @@ echarts.extendsMap = function (id, option) {
       mapObj.pos.leftCur += mapObj.pos.leftPlus;
       return breadcrumb;
     },
-
 
     /**
      * 设置数据格式/初始化data
@@ -213,12 +211,12 @@ echarts.extendsMap = function (id, option) {
      * */
     handleGeoData: function (Json) {
       let mapData = Json.features.map(item => {
-        return ({
+        return {
           name: item.properties.name,
           value: item.properties.center.concat(Math.random() * 1000),
           level: item.properties.level,
           cityCode: item.properties.adcode
-        })
+        }
       });
       return mapData;
     },
@@ -253,7 +251,7 @@ echarts.extendsMap = function (id, option) {
           }
           // 地图注册
           echarts.registerMap(params.name, mapObj.curGeoJson);
-          handleEvents.resetOption(self, mapUnderOption, params.name);
+          handleEvents.resetOption(self, mapOption, params.name);
         },
         error: () => {
           alert('小编正在努力开发中');
@@ -280,25 +278,40 @@ echarts.extendsMap = function (id, option) {
     },
 
     /**
+     * 大区数据分类
+     **/
+    arrangeRegion: function (data) {
+      let regionObj = {};
+      data.forEach((item, index) => {
+        // 大区分类遍历归类
+        regionObj[item.region] ? regionObj[item.region].push(item.name) : regionObj[item.region] = [item.name];
+      })
+      return regionObj;
+    },
+
+    /**
      * 大区json过滤
      * */
     filterRegion: function (params) {
-      if (params.name == "江苏省" || params.name == "上海市" || params.name == "山东省" || params.name == "安徽省" || params.name == "河南省" || params.name == "湖北省") {
-        params.List = ['中部大区', '江苏省', '上海市', '山东省', '安徽省', '河南省', '湖北省'];
-      } else if (params.name == "广东省" || params.name == "广西壮族自治区" || params.name == "海南省" || params.name == "云南省" || params.name == "贵州省" || params.name == "四川省" || params.name == "西藏自治区") {
-        params.List = ['西南大区', '广东省', '广西壮族自治区', '海南省', '云南省', '贵州省', '四川省', '西藏自治区',];
-      } else if (params.name == "黑龙江省" || params.name == "吉林省" || params.name == "辽宁省" || params.name == "内蒙古自治区" || params.name == "北京市" || params.name == "河北省" || params.name == "天津市") {
-        params.List = ['东北大区', '黑龙江省', '吉林省', '辽宁省', '内蒙古自治区', '北京市', '河北省', '天津市'];
-      } else if (params.name == "山西省" || params.name == "新疆维吾尔自治区" || params.name == "宁夏回族自治区" || params.name == "陕西省" || params.name == "甘肃省" || params.name == "青海省") {
-        params.List = ['西北大区', '山西省', '新疆维吾尔自治区', '宁夏回族自治区', '陕西省', '甘肃省', '青海省'];
-      } else if (params.name == "浙江省" || params.name == "福建省" || params.name == "台湾省" || params.name == "重庆市" || params.name == "江西省" || params.name == "湖南省") {
-        params.List = ['东南大区', '浙江省', '福建省', '台湾省', '重庆市', '江西省', '湖南省'];
-      }
+      // 获取动态分类大区
+      let regionObj = this.arrangeRegion(option.data);
+      Object.keys(regionObj).some(item => {
+        if (regionObj[item].includes(params.name)) {
+          // 深拷贝
+          let list = JSON.parse(JSON.stringify(regionObj[item]));
+          // 数组首部增加大区
+          list.unshift(item);
+          params.List = list;
+          // 跳出循环
+          return true;
+        }
+      })
       return params;
-    }
+    },
+
   };
 
-  var mapUnderOption = {
+  var mapOption = {
     backgroundColor: option.bgColor,
     // 提示框
     tooltip: {
@@ -364,7 +377,7 @@ echarts.extendsMap = function (id, option) {
           },
           onclick: function () {
             var name = this.style.key;
-            handleEvents.resetOption(chart, mapUnderOption, name);
+            handleEvents.resetOption(chart, mapOption, name);
           }
         }, {
           type: 'text',
@@ -378,8 +391,8 @@ echarts.extendsMap = function (id, option) {
           },
           data: handleEvents.handleGeoData(option.geoJson),
           onclick: function () {
-            mapUnderOption.series[0].data = option.region ? [] : this.data;
-            handleEvents.resetOption(chart, mapUnderOption, '中国');
+            mapOption.series[0].data = option.region ? [] : this.data;
+            handleEvents.resetOption(chart, mapOption, '中国');
           }
         }]
       }],
@@ -412,7 +425,6 @@ echarts.extendsMap = function (id, option) {
           textStyle: {
             color: mapEmphasis_label
           },
-
         }
       }
     },
@@ -425,22 +437,62 @@ echarts.extendsMap = function (id, option) {
       data: handleEvents.handleGeoData(option.geoJson),
     }],
   };
+  // 地图配置信息;
+  option.config && (mapOption = configProperty(option.config, mapOption));
 
+  // console.log(mapOption,option.config)
   /**
    * 划分大区的option处理
    * */
   if (option.region) {
-
+    // 获取动态的大区分类
+    let regionObj = handleEvents.arrangeRegion(option.data);
     // 大区提示文字
-    mapUnderOption.tooltip = {
+    mapOption.tooltip = {
       trigger: "item",
+      //显示大区名称
       formatter: p => {
-        p = handleEvents.filterRegion(p)
+        p = handleEvents.filterRegion(p);
         return p.List[0];
       }
     };
+    /**
+     *根据大区进行匹配划分图例
+     **/
+    let splitList = []
+    Object.keys(regionObj).forEach(item => {
+      let max = 0, min;
+      option.data.forEach((o, i) => {
+        // 区域匹配，获取最大最小值
+        if (o.region === item) {
+          max = Math.max(max, o.value);
+          min = min ? Math.min(min, o.value) : max;
+        }
+      })
+      splitList.push({
+        start: min,
+        end: max,
+        label: item,
+      })
+    })
+    // console.log(splitList, '数组')
+    mapOption.dataRange = {
+      bottom: "3%",
+      right: '2%',
+      align: 'left',
+      itemWidth: 15,
+      itemHeight: 10,
+      textStyle: {
+        color: textColor,
+        fontSize: 12,
+      },
+      splitList: splitList,
+      inRange: {
+        color: regionArea
+      },
+    };
     // 增加大区高亮区块数据
-    mapUnderOption.series.unshift({
+    mapOption.series.unshift({
       type: 'effectScatter',
       coordinateSystem: 'geo',
       hoverAnimation: true,
@@ -454,123 +506,55 @@ echarts.extendsMap = function (id, option) {
       data: []
     });
     // 地图数据赋值
-    mapUnderOption.series[1].data = option.data;
+    mapOption.series[1].data = option.data;
 
     //  echarts 设置option
-    chart.setOption(mapUnderOption);
+    chart.setOption(mapOption);
 
     /**
-     * 大区联动事件
+     * 大区联动事件鼠标滑过，滑出
      * */
     chart.on("mouseover", function (params) {
-      var city = params.name;
-      if (city == "黑龙江省" || city == "吉林省" || city == "辽宁省" || city == "北京市" || city == "河北省" || city == "天津市" || city == "内蒙古自治区") {
-        chart.dispatchAction({type: "highlight", name: "黑龙江省"});
-        chart.dispatchAction({type: "highlight", name: "吉林省"});
-        chart.dispatchAction({type: "highlight", name: "辽宁省"});
-        chart.dispatchAction({type: "highlight", name: "河北省"});
-        chart.dispatchAction({type: "highlight", name: "北京市"});
-        chart.dispatchAction({type: "highlight", name: "天津市"});
-        chart.dispatchAction({type: "highlight", name: "内蒙古自治区"});
+        var city = params.name;
+        Object.keys(regionObj).forEach((item, index) => {
+          // 数组中是否存在对应的城市
+          if (regionObj[item].indexOf(city) !== -1) {
+            // 该大区的所有身份高亮
+            regionObj[item].forEach(obj => {
+              chart.dispatchAction({type: "highlight", name: obj});
+            })
+          }
+        })
       }
-      if (city == "上海市" || city == "江苏省" || city == "山东省" || city == "安徽省" || city == "湖北省" ||city == "河南省" ) {
-        chart.dispatchAction({type: "highlight", name: "上海市"});
-        chart.dispatchAction({type: "highlight", name: "江苏省"});
-        chart.dispatchAction({type: "highlight", name: "山东省"});
-        chart.dispatchAction({type: "highlight", name: "安徽省"});
-        chart.dispatchAction({type: "highlight", name: "湖北省"});
-        chart.dispatchAction({type: "highlight", name: "河南省"});
-      }
-      if (city == "广东省" || city == "广西壮族自治区" || city == "海南省" || city == "香港特别行政区" || city == "澳门特别行政区" || city == "四川省" || city == "贵州省" || city == "云南省" || city == "西藏自治区") {
-        chart.dispatchAction({type: "highlight", name: "广东省"});
-        chart.dispatchAction({type: "highlight", name: "广西壮族自治区"});
-        chart.dispatchAction({type: "highlight", name: "海南省"});
-        chart.dispatchAction({type: "highlight", name: "香港特别行政区"});
-        chart.dispatchAction({type: "highlight", name: "澳门特别行政区"});
-        chart.dispatchAction({type: "highlight", name: "四川省"});
-        chart.dispatchAction({type: "highlight", name: "贵州省"});
-        chart.dispatchAction({type: "highlight", name: "云南省"});
-        chart.dispatchAction({type: "highlight", name: "西藏自治区"});
-      }
-
-      if (city == "浙江省" || city == "福建省" || city == "台湾省"  || city == "湖南省" || city == "江西省" || city == "重庆市") {
-        chart.dispatchAction({type: "highlight", name: "浙江省"});
-        chart.dispatchAction({type: "highlight", name: "福建省"});
-        chart.dispatchAction({type: "highlight", name: "台湾省"});
-        chart.dispatchAction({type: "highlight", name: "湖南省"});
-        chart.dispatchAction({type: "highlight", name: "江西省"});
-        chart.dispatchAction({type: "highlight", name: "重庆市"});
-      }
-      if (city == "山西省" || city == "新疆维吾尔自治区" || city == "宁夏回族自治区" || city == "陕西省" || city == "甘肃省" || city == "青海省") {
-        chart.dispatchAction({type: "highlight", name: "山西省"});
-        chart.dispatchAction({type: "highlight", name: "新疆维吾尔自治区"});
-        chart.dispatchAction({type: "highlight", name: "宁夏回族自治区"});
-        chart.dispatchAction({type: "highlight", name: "陕西省"});
-        chart.dispatchAction({type: "highlight", name: "甘肃省"});
-        chart.dispatchAction({type: "highlight", name: "青海省"});
-      }
-    });
+    );
     chart.on("mouseout", function (params) {
       var city = params.name;
-      if (city == "黑龙江省" || city == "吉林省" || city == "辽宁省" || city == "北京市" || city == "河北省" || city == "天津市" ||city == "内蒙古自治区" ) {
-        chart.dispatchAction({type: "downplay", name: "黑龙江省"});
-        chart.dispatchAction({type: "downplay", name: "吉林省"});
-        chart.dispatchAction({type: "downplay", name: "辽宁省"});
-        chart.dispatchAction({type: "downplay", name: "河北省"});
-        chart.dispatchAction({type: "downplay", name: "北京市"});
-        chart.dispatchAction({type: "downplay", name: "天津市"});
-        chart.dispatchAction({type: "downplay", name: "内蒙古自治区"});
-
-      }
-      if (city == "上海市" || city == "江苏省" || city == "山东省" || city == "安徽省" || city == "湖北省" ||city == "河南省" ) {
-        chart.dispatchAction({type: "downplay", name: "上海市"});
-        chart.dispatchAction({type: "downplay", name: "江苏省"});
-        chart.dispatchAction({type: "downplay", name: "山东省"});
-        chart.dispatchAction({type: "downplay", name: "安徽省"});
-        chart.dispatchAction({type: "downplay", name: "湖北省"});
-        chart.dispatchAction({type: "downplay", name: "河南省"});
-      }
-      if (city == "广东省" || city == "广西壮族自治区" || city == "海南省" || city == "香港特别行政区" || city == "澳门特别行政区" || city == "四川省" || city == "贵州省" || city == "云南省" || city == "西藏自治区") {
-        chart.dispatchAction({type: "downplay", name: "广东省"});
-        chart.dispatchAction({type: "downplay", name: "广西壮族自治区"});
-        chart.dispatchAction({type: "downplay", name: "海南省"});
-        chart.dispatchAction({type: "downplay", name: "香港特别行政区"});
-        chart.dispatchAction({type: "downplay", name: "澳门特别行政区"});
-        chart.dispatchAction({type: "downplay", name: "四川省"});
-        chart.dispatchAction({type: "downplay", name: "贵州省"});
-        chart.dispatchAction({type: "downplay", name: "云南省"});
-        chart.dispatchAction({type: "downplay", name: "西藏自治区"});
-      }
-
-      if (city == "浙江省" || city == "福建省" || city == "台湾省"  || city == "湖南省" || city == "江西省" || city == "重庆市") {
-        chart.dispatchAction({type: "downplay", name: "浙江省"});
-        chart.dispatchAction({type: "downplay", name: "福建省"});
-        chart.dispatchAction({type: "downplay", name: "台湾省"});
-        chart.dispatchAction({type: "downplay", name: "湖南省"});
-        chart.dispatchAction({type: "downplay", name: "江西省"});
-        chart.dispatchAction({type: "downplay", name: "重庆市"});
-      }
-      if (city == "山西省" || city == "新疆维吾尔自治区" || city == "宁夏回族自治区" || city == "陕西省" || city == "甘肃省" || city == "青海省") {
-        chart.dispatchAction({type: "downplay", name: "山西省"});
-        chart.dispatchAction({type: "downplay", name: "新疆维吾尔自治区"});
-        chart.dispatchAction({type: "downplay", name: "宁夏回族自治区"});
-        chart.dispatchAction({type: "downplay", name: "陕西省"});
-        chart.dispatchAction({type: "downplay", name: "甘肃省"});
-        chart.dispatchAction({type: "downplay", name: "青海省"});
-      }
+      Object.keys(regionObj).forEach((item, index) => {
+        // 数组中是否存在对应的城市
+        if (regionObj[item].indexOf(city) !== -1) {
+          // 该大区的所有身份高亮
+          regionObj[item].forEach(obj => {
+            chart.dispatchAction({type: "downplay", name: obj});
+          })
+        }
+      })
     });
   } else {
-    chart.setOption(mapUnderOption);
+    chart.setOption(mapOption);
   }
+
+  handleEvents.arrangeRegion(option.data)
 
 
 // 添加点击事件
   chart.on('click', function (params) {
     var _self = this;
-    let name = params.name
+    let name = params.name;
+    //大区过滤
     if (option.region) {
       handleEvents.filterRegion(params);
     }
+    // 下钻
     if (option.goDown && name !== mapObj.nameList[mapObj.idx]) {
       if (name) {
         let code = params.data.cityCode
@@ -632,7 +616,8 @@ var mapUnder_visualMap = {
   outOfRange: {
     color: ['#eeeeee']
   }
-}
+};
+
 
 var mapUnderEchart;
 $.getJSON('data/100000.json', function (geoJson) {
@@ -643,11 +628,11 @@ $.getJSON('data/100000.json', function (geoJson) {
     goDown: true, // 是否下钻
     // 下钻回调
     geoJson: geoJson,
+    // data:allprovinceData1,
     visualMap: mapUnder_visualMap,
     callback: function (name, option, instance) {
       //console.log(name, option, instance);
     },
   });
-
 })
 
