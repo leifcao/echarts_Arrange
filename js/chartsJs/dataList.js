@@ -410,3 +410,48 @@ dataList['relation'] = (data) => {
   })
   return data;
 }
+
+//k线图
+dataList['kLine'] = data => {
+  const {seriesData} = data;
+  seriesData.push(
+    {name: 'MA5', type: 'line', data: calculateMA(5, seriesData[0].data)},
+    {name: 'MA10', type: 'line', data: calculateMA(10, seriesData[0].data)},
+    {name: 'MA20', type: 'line', data: calculateMA(20, seriesData[0].data)},
+    {name: 'MA30', type: 'line', data: calculateMA(30, seriesData[0].data)},
+  )
+  return data;
+}
+
+// 迁徙图
+dataList['migrate'] = data => {
+  const {seriesData} = data;
+  // 设置迁徙图的seriesData
+  data.seriesData = setMigrationSeries({
+    geoCoordMap: seriesData.geoCoordMap, // 坐标
+    data: seriesData.data, // 数据
+  })
+  return data;
+}
+
+// 气泡图
+dataList['mapBubble'] = data => {
+  const {seriesData} = data;
+  // 设置气泡的seriesData
+  data.seriesData = setBubbleSeries({
+    geoCoordMap: seriesData.geoCoordMap, // 坐标
+    data: seriesData.data, // 数据
+  })
+  return data;
+}
+
+// 轮播地图
+dataList['mapCarousel'] = data => {
+  const {seriesData} = data;
+  // 设置气泡的seriesData
+  data.seriesData = setCarouselSeries({
+    geoCoordMap: seriesData.geoCoordMap, // 坐标
+    data: seriesData.data, // 数据
+  })
+  return data;
+}
