@@ -1,5 +1,5 @@
 //地图轮播
-let mapCarousel_data = [
+let mapCarouselData = [
   {name: '鄂尔多斯', value: 12},
   {name: '招远', value: 12},
   {name: '舟山', value: 12},
@@ -218,19 +218,50 @@ let mapCarousel_Map = {
   '大庆': [125.03, 46.58]
 };
 
-let convert_Data = function (data) {
-  let res = [];
-  for (let i = 0; i < data.length; i++) {
-    let geoCoord = mapCarousel_Map[data[i].name];
-    if (geoCoord) {
-      res.push({
-        name: data[i].name,
-        value: geoCoord.concat(data[i].value)
-      });
-    }
-  }
-  return res;
-};
+//设置轮播地图的series
+function setCarouselSeries(obj) {
+  const {geoCoordMap, data} = obj;
+  // 排序
+  let sortData = data.sort((a, b) => {
+    return b.value - a.value;
+  }).slice(0, 50);
+  // 数据转化，匹配相应坐标
+  let CarouselData = convert_Data(sortData, geoCoordMap);
+  let seriesData = [];
+  seriesData.push({
+    name: 'Tooltip Test',
+    type: 'effectScatter',
+    coordinateSystem: 'geo',
+    data: CarouselData,
+    symbolSize: function (val) {
+      return val[2] / 5;
+    },
+    showEffectOn: 'render',
+    rippleEffect: {
+      brushType: 'stroke'
+    },
+    hoverAnimation: true,
+    label: {
+      normal: {
+        formatter: '{b}',
+        position: 'right',
+        show: true,
+        textStyle: {
+          color: map_label
+        }
+      }
+    },
+    itemStyle: {
+      normal: {
+        color: '#ffb65c',
+        shadowBlur: 1,
+        shadowColor: '#ffb65c'
+      }
+    },
+    zlevel: 1
+  })
+  return seriesData;
+}
 
 /**
  * priority  tooltip朝向（top/bottom）
@@ -262,84 +293,58 @@ let config = {
     backgroundColor: 'rgba(50, 50, 50, 0.8)'
   }
 }
-let mapCarouselOption = {
-  backgroundColor: mapBackground,
-  tooltip: {
-    trigger: 'item',
-    triggerOn: 'click',
-    backgroundColor: 'transparent',
-    alwaysShowContent: true,
-    position(pos) {
-      let position = getPosOrSize('pos', pos)
-      return position
-    },
-    formatter(params, p, a) {
-      canvasAnimation(params)
-      let size = getPosOrSize('size')
-      let tooltipDom = `<canvas id="tCanvas" width="${size.width}" height="${size.height}">123</canvas>`
-      return tooltipDom
-    }
-  },
-  legend: {
-    show: false
-  },
-  geo: {
-    map: 'china',
-    zoom: 1.2,
-    label: {
-      emphasis: {
-        show: false
+// 地图轮播的option
+let mapCarouselOption = (obj)=>{
+  const {id, config, seriesData} = obj;
+  let option = {
+    id:id,
+    backgroundColor: mapBackground,
+    tooltip: {
+      trigger: 'item',
+      triggerOn: 'click',
+      backgroundColor: 'transparent',
+      alwaysShowContent: true,
+      position(pos) {
+        let position = getPosOrSize('pos', pos)
+        return position
+      },
+      formatter(params, p, a) {
+        canvasAnimation(params)
+        let size = getPosOrSize('size')
+        let tooltipDom = `<canvas id="tCanvas" width="${size.width}" height="${size.height}">123</canvas>`
+        return tooltipDom
       }
     },
-    roam: true,
-    itemStyle: {
-      normal: {
-        areaColor: mapTheme_item,
-        borderColor: mapBorder
-      },
-      emphasis: {
-        areaColor: mapEmphasis_area
-      }
-    }
-  },
-  series: [
-    {
-      name: 'Tooltip Test',
-      type: 'effectScatter',
-      coordinateSystem: 'geo',
-      data: convert_Data(mapCarousel_data.sort(function (a, b) {
-        return b.value - a.value;
-      }).slice(0, 50)),
-      symbolSize: function (val) {
-        return val[2] / 5;
-      },
-      showEffectOn: 'render',
-      rippleEffect: {
-        brushType: 'stroke'
-      },
-      hoverAnimation: true,
+    legend: {
+      show: false
+    },
+    geo: {
+      map: '',
+      zoom: 1.2,
       label: {
-        normal: {
-          formatter: '{b}',
-          position: 'right',
-          show: true,
-          textStyle: {
-            color: map_label
-          }
+        emphasis: {
+          show: false
         }
       },
+      roam: true,
       itemStyle: {
         normal: {
-          color: '#ffb65c',
-          shadowBlur: 1,
-          shadowColor: '#ffb65c'
+          areaColor: mapTheme_item,
+          borderColor: mapBorder
+        },
+        emphasis: {
+          areaColor: mapEmphasis_area
         }
-      },
-      zlevel: 1
-    }
-  ]
+      }
+    },
+    series: seriesData
+  }
+  // 配置属性
+  config && (option = configProperty(config, option));
+  return option;
 };
 
+// canvas 动画
 const canvasAnimation = params => {
   setTimeout(function () {
     config.text.text = `地点：${params.name}\n数量：${params.value[2]}`
@@ -532,9 +537,18 @@ class myTooltip {
   }
 }
 
-var mapCarousel = document.getElementById('mapCarousel');
-var mapCarouselEchart = echarts.init(mapCarousel);
-mapCarouselEchart.setOption(mapCarouselOption);
+//地图轮播图数据
+let mapCarouselDatas = {
+  id: 'mapCarousel',
+  config: {"geo.map": 'china'},
+  seriesData: {
+    geoCoordMap: mapCarousel_Map, // 坐标
+    data: mapCarouselData, // 数据
+  }
+}
+// 数据格式化
+let mapCarousel_data = dataFormat(mapCarouselDatas, 'mapCarousel');
+let mapCarouselEchart = new MapEcharts(mapCarouselOption(mapCarousel_data));
 
 let EC = echarts.getInstanceByDom(document.getElementById("mapCarousel"));
 
@@ -546,7 +560,7 @@ setInterval(_ => {
     dataIndex: index
   })
   index++
-  if (index >= mapCarousel_data.length) {
+  if (index >= mapCarouselDatas.seriesData.data.length) {
     index = 0
   }
 }, 3000)
