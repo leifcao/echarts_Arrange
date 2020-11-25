@@ -11,57 +11,21 @@ var geoCoordMap2 = {
   加拿大: [-123.023921, 49.311753],
   日本: [139.4428, 35.3929],
 };
-var SHData = [
-  [{
-    name: "武汉",
-    value: 6616,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "美国",
-    value: 1253,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "埃及",
-    value: 1369,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "俄罗斯",
-    value: 2000,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "西班牙",
-    value: 1800,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "澳大利亚",
-    value: 1600,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }],
-  [{
-    name: "日本",
-    value: 1985,
-  }, {
-    name: "武汉",
-    value: 6616,
-  }]
-];
+
+let worldData = [{
+  from: "美国", value: 1253, to: "武汉"
+},{
+  from: "埃及", value: 1369, to: "武汉"
+},{
+  from: "俄罗斯", value: 2000, to: "武汉"
+},{
+  from: "西班牙", value: 1800, to: "武汉"
+},{
+  from: "日本", value: 1985, to: "武汉"
+},{
+  from: "澳大利亚", value: 1600, to: "武汉"
+},]
+
 
 // 世界迁徙图数据
 let ImmigrateData = {
@@ -69,7 +33,7 @@ let ImmigrateData = {
   config: {"geo.map": 'world', 'visualMap.max': 2000},
   seriesData: {
     geoCoordMap: geoCoordMap2, // 坐标
-    data: SHData, // 数据
+    data: worldData, // 数据
   },
 }
 // 数据格式化
