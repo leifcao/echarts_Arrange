@@ -270,34 +270,37 @@ function setCarouselSeries(obj) {
  */
 let toolleft = false, tooltop = false, priority = 'top'
 // 自定义tooltip配置属性
-let config = {
-  ecBoxId: 'mapCarousel',
-  lineColor: '#fff',
-  L1: {
-    time: 0.3,
-    long: 40
-  },
-  L2: {
-    time: 0.3,
-    long: 40
-  },
-  text: {
-    time: 0.5,
-    text: '',
-    font: '14px Arial',
-    color: '#fff',
-    padding: [10, 10],
-    width: 120,
-    height: 60,
-    lineHeight: 24,
-    backgroundColor: 'rgba(50, 50, 50, 0.8)'
-  }
+let configs = id => {
+  const config = {
+    ecBoxId:id,
+    lineColor: '#fff',
+    L1: {
+      time: 0.3,
+      long: 40
+    },
+    L2: {
+      time: 0.3,
+      long: 40
+    },
+    text: {
+      time: 0.5,
+      text: '',
+      font: '14px Arial',
+      color: '#fff',
+      padding: [10, 10],
+      width: 120,
+      height: 60,
+      lineHeight: 24,
+      backgroundColor: 'rgba(50, 50, 50, 0.8)'
+    }
+  };
+  return config;
 }
 // 地图轮播的option
-let mapCarouselOption = (obj)=>{
+let mapCarouselOption = (obj) => {
   const {id, config, seriesData} = obj;
   let option = {
-    id:id,
+    id: id,
     backgroundColor: mapBackground,
     tooltip: {
       trigger: 'item',
@@ -548,8 +551,8 @@ let mapCarouselDatas = {
 }
 // 数据格式化
 let mapCarousel_data = dataFormat(mapCarouselDatas, 'mapCarousel');
+let config = configs(mapCarousel_data.id);
 let mapCarouselEchart = new MapEcharts(mapCarouselOption(mapCarousel_data));
-
 let EC = echarts.getInstanceByDom(document.getElementById("mapCarousel"));
 
 var index = 0
@@ -559,8 +562,9 @@ setInterval(_ => {
     seriesIndex: 0,
     dataIndex: index
   })
-  index++
-  if (index >= mapCarouselDatas.seriesData.data.length) {
+  index++;
+  // console.log(mapCarouselDatas)
+  if (index >= mapCarouselData.length) {
     index = 0
   }
 }, 3000)
