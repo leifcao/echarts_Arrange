@@ -11,29 +11,31 @@ class MapEcharts extends Echarts {
 }
 
 // 数据data添加城市坐标
-var convertData =  (data, geoCoordMap) =>{
+var convertData = (data, geoCoordMap) => {
   var res = [];
   var targetList = [];
   for (var i = 0; i < data.length; i++) {
     var dataItem = data[i];
-    var fromCoord = geoCoordMap[dataItem[0].name];
-    var toCoord = geoCoordMap[dataItem[1].name];
+    // from为出发点，to为目的点，value为值
+    var fromCoord = geoCoordMap[dataItem.from];
+    var toCoord = geoCoordMap[dataItem.to];
     // 重组新数据，匹配坐标库
     if (fromCoord && toCoord) {
       res.push([{
-        name: dataItem[0].name,
+        name: dataItem.from,
         coord: fromCoord,
-        value: dataItem[0].value
+        value: dataItem.value
       }, {
-        name: dataItem[1].name,
+        name: dataItem.to,
         coord: toCoord,
-        value: dataItem[1].value
+        value: ''
       }
       ]);
       // 过滤生成目标地点数组
+      if (!targetList.length) targetList.push(dataItem.to);
       targetList.some(item => {
-        if (item.name !== dataItem[1].name)
-          targetList.push(dataItem[1]);
+        if (item !== dataItem.to)
+          targetList.push(dataItem.to);
       })
     }
   }
@@ -111,8 +113,8 @@ function setMigrationSeries(obj) {
       },
       data: data.map(function (dataItem) {
         return {
-          name: dataItem[0].name,
-          value: geoCoordMap[dataItem[0].name].concat([dataItem[0].value])
+          name: dataItem.from,
+          value: geoCoordMap[dataItem.from].concat([dataItem.value])
         };
       })
     },
@@ -128,7 +130,7 @@ function setMigrationSeries(obj) {
       },
       label: {
         normal: {
-          show: false,
+          show: true,
           color: "red",
           position: "right",
           formatter: "{b}",
@@ -152,8 +154,8 @@ function setMigrationSeries(obj) {
       },
       data: targetData.map(o => {
         return {
-          name: o.name,
-          value: geoCoordMap[o.name].concat([o.value]),
+          name: o,
+          value: geoCoordMap[o].concat([0]),
           visualMap: false
         }
       })
@@ -181,78 +183,22 @@ var chinaGeoCoordMap = {
   "海南": [110.3893, 19.8516],
   '上海': [121.4648, 31.2891]
 };
-var chinaDatas = [
-  [{
-    name: '黑龙江',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '北京',
-    value: 0.83
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '云南',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '四川',
-    value: 1
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '浙江',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '湖南',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '广东',
-    value: 1
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '海南',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '新疆',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }],
-  [{
-    name: '上海',
-    value: 0
-  }, {
-    name: "北京",
-    value: 0.83,
-  }]
-];
+
+let chinaData = [{
+  from: "黑龙江", value: 0, to: "北京"
+}, {
+  from: "云南", value: 1, to: "北京"
+}, {
+  from: "浙江", value: 0.5, to: "北京"
+}, {
+  from: "湖南", value: 0.6, to: "北京"
+}, {
+  from: "广东", value: 0.8, to: "北京"
+}, {
+  from: "海南", value: 1, to: "北京"
+}, {
+  from: "新疆", value: 1, to: "北京"
+}]
 
 // 迁徙图 && 气泡图
 let mapOption = (obj) => {
@@ -262,7 +208,6 @@ let mapOption = (obj) => {
     backgroundColor: mapBackground,
     tooltip: {
       trigger: 'item',
-      // backgroundColor: 'rgba(166, 200, 76, 0.82)',
       borderColor: '#FFFFCC',
       showDelay: 0,
       hideDelay: 0,
@@ -273,8 +218,15 @@ let mapOption = (obj) => {
         //根据业务自己拓展要显示的内容
         var res = "";
         var name = params.name;
-        var value = params.value[params.seriesIndex + 1];
-        res = "<span style='color:#fff;'>" + name + "</span><br/>数据：" + value;
+        // console.log(params)
+        if (params.seriesType == "lines") {
+          res = "<span style='color:#fff;'> 出发地：" + params.data.fromName + "</span>" +
+            "<br/><span style='color:#fff;'> 目的地：" + params.data.toName + "</span><br/>数据:" + params.data.value;
+        } else if (params.seriesType == "effectScatter") {
+          res = "<span style='color:#fff;'> 出发地:" + name + "</span><br/>数据:" + params.data.value[2];
+        } else {
+          res = "<span style='color:#fff;'> " + name + "</span><br/>数据:" + params.data.value[2];
+        }
         return res;
       }
     },
@@ -321,7 +273,7 @@ let mapMigrateData = {
   config: {"geo.map": 'china', 'visualMap.max': 1},
   seriesData: {
     geoCoordMap: chinaGeoCoordMap, // 坐标
-    data: chinaDatas, // 数据
+    data: chinaData, // 数据
   },
 }
 // 数据格式化
