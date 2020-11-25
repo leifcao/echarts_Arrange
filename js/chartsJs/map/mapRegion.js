@@ -175,8 +175,6 @@ var allprovinceData = [{
   },
 
 ];
-var mapRegion_visualMap = {};
-
 
 var mapRegionEchart;
 // 封装函数在mapUnder.js 文件中
@@ -190,7 +188,7 @@ $.getJSON('data/100000.json', function (geoJson) {
     region: true,   // 是否设置各大区
     // config: {'backgroundColor': 'red'},
     data: allprovinceData,  // 大区区块颜色data
-    visualMap: mapRegion_visualMap, // 大区图例
+    visualMap: {}, // 大区图例
     // 下钻回调
     callback: function (name, option, instance) {
       //console.log(name, option, instance);
