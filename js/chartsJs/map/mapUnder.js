@@ -210,14 +210,26 @@ echarts.extendsMap = function (id, option) {
      *
      * */
     handleGeoData: function (Json) {
-      let mapData = Json.features.map(item => {
-        return {
-          name: item.properties.name,
-          value: item.properties.center.concat(Math.random() * 1000),
-          level: item.properties.level,
-          cityCode: item.properties.adcode
-        }
-      });
+      //data为数据源
+      const {data} = option;
+      let mapData = Json.features.map((item, i) => {
+        let newObj = {}
+        data.some(obj => { // 匹配数据源相同的名称
+          if (obj.name === item.properties.name) {
+            newObj.value = item.properties.center.concat(obj.value);
+            return false;
+          }
+        })
+        // 添加共同属性
+        newObj.name = item.properties.name;
+        newObj.level = item.properties.level;
+        newObj.cityCode = item.properties.adcode;
+        // 名称没有赋值到的数值，拼接数据0
+        !newObj.value && (newObj.value = item.properties.center.concat(Math.random() * 2000));
+        // !newObj.value && (newObj.value = item.properties.center.concat(0));
+        return newObj
+      })
+      // console.log(mapData)
       return mapData;
     },
 
@@ -232,31 +244,51 @@ echarts.extendsMap = function (id, option) {
       if (option.region) {
         url = `data/100000.json`;
       }
-      $.ajax({
-        type: 'get',
-        async: false,
-        url: url,
-        success: (response) => {
-          // 地图数据赋值
-          if (!option.region) {
-            // 无大区划分时正常赋值
-            mapObj.curGeoJson = response;
-          } else {
-            // 有大区划分 处理所属地区数据进行显示  过滤
-            let list = response.features.filter((item, index) => {
-              return params.List.includes(item.properties.name);
-            });
-            mapObj.curGeoJson.features = list;
-            params.name = params.List[0]; // 大区
-          }
-          // 地图注册
-          echarts.registerMap(params.name, mapObj.curGeoJson);
-          handleEvents.resetOption(self, mapOption, params.name);
-        },
-        error: () => {
-          alert('小编正在努力开发中');
+      $.getJSON(url, (response) => {
+        // 地图数据赋值
+        if (!option.region) {
+          // 无大区划分时正常赋值
+          mapObj.curGeoJson = response;
+        } else {
+          // 有大区划分 处理所属地区数据进行显示  过滤
+          let list = response.features.filter((item, index) => {
+            return params.List.includes(item.properties.name);
+          });
+          mapObj.curGeoJson.features = list;
+          params.name = params.List[0]; // 大区
         }
+        // 地图注册
+        echarts.registerMap(params.name, mapObj.curGeoJson);
+        handleEvents.resetOption(self, mapOption, params.name);
+
+      }).fail(() => {
+        alert('小编正在努力开发中');
       })
+      /* $.ajax({
+         type: 'get',
+         async: false,
+         url: url,
+         success: (response) => {
+           // 地图数据赋值
+           if (!option.region) {
+             // 无大区划分时正常赋值
+             mapObj.curGeoJson = response;
+           } else {
+             // 有大区划分 处理所属地区数据进行显示  过滤
+             let list = response.features.filter((item, index) => {
+               return params.List.includes(item.properties.name);
+             });
+             mapObj.curGeoJson.features = list;
+             params.name = params.List[0]; // 大区
+           }
+           // 地图注册
+           echarts.registerMap(params.name, mapObj.curGeoJson);
+           handleEvents.resetOption(self, mapOption, params.name);
+         },
+         error: () => {
+           alert('小编正在努力开发中');
+         }
+       })*/
     },
 
 
@@ -317,7 +349,8 @@ echarts.extendsMap = function (id, option) {
     tooltip: {
       trigger: "item",
       formatter: p => {
-        let val = p.value;
+        let val = p.data.value[2];
+        // console.log(p)
         if (window.isNaN(val)) {
           val = 0;
         }
@@ -429,7 +462,22 @@ echarts.extendsMap = function (id, option) {
       }
     },
     // 地图图例
-    visualMap: option.visualMap,
+    visualMap: {
+      type: 'piecewise',
+      bottom: "3%",
+      right: '2%',
+      align: 'left',
+      itemWidth: 15,
+      itemHeight: 10,
+      pieces: [],
+      textStyle: {
+        color: textColor,
+        fontSize: 12,
+      },
+      outOfRange: {
+        color: ['#eeeeee']
+      }
+    },
     series: [{
       type: 'map',
       name: option.mapName,
@@ -476,21 +524,9 @@ echarts.extendsMap = function (id, option) {
       })
     })
     // console.log(splitList, '数组')
-    mapOption.dataRange = {
-      bottom: "3%",
-      right: '2%',
-      align: 'left',
-      itemWidth: 15,
-      itemHeight: 10,
-      textStyle: {
-        color: textColor,
-        fontSize: 12,
-      },
-      splitList: splitList,
-      inRange: {
-        color: regionArea
-      },
-    };
+    //图例设置分类
+    mapOption.visualMap.pieces = splitList;
+    mapOption.visualMap.inRange = {color: regionArea};
     // 增加大区高亮区块数据
     mapOption.series.unshift({
       type: 'effectScatter',
@@ -507,7 +543,6 @@ echarts.extendsMap = function (id, option) {
     });
     // 地图数据赋值
     mapOption.series[1].data = option.data;
-
     //  echarts 设置option
     chart.setOption(mapOption);
 
@@ -540,6 +575,8 @@ echarts.extendsMap = function (id, option) {
       })
     });
   } else {
+    mapOption.visualMap.inRange = {color: mapArea};
+    mapOption.visualMap = $.extend(true,mapOption.visualMap,option.visualMap)
     chart.setOption(mapOption);
   }
 
@@ -580,16 +617,6 @@ echarts.extendsMap = function (id, option) {
 
 // 图例
 var mapUnder_visualMap = {
-  type: 'piecewise',
-  bottom: "3%",
-  right: '2%',
-  align: 'left',
-  itemWidth: 15,
-  itemHeight: 10,
-  textStyle: {
-    color: textColor,
-    fontSize: 12,
-  },
   pieces: [{
     value: 0,
     label: '未发生',
@@ -609,15 +636,15 @@ var mapUnder_visualMap = {
     min: 750,
     max: 1000,
     label: '750-1000',
+  }, {
+    min: 1000,
+    label: '>1000',
   }],
-  inRange: {
-    color: mapArea
-  },
-  outOfRange: {
-    color: ['#eeeeee']
-  }
 };
 
+mapUnderData = [{name: '广东省', value: 111},
+  {name: '台湾省', value: 500}, {name: '湖南省', value: 800},
+  {name: '广州市', value: 250},]
 
 var mapUnderEchart;
 $.getJSON('data/100000.json', function (geoJson) {
@@ -628,7 +655,7 @@ $.getJSON('data/100000.json', function (geoJson) {
     goDown: true, // 是否下钻
     // 下钻回调
     geoJson: geoJson,
-    // data:allprovinceData1,
+    data: mapUnderData,
     visualMap: mapUnder_visualMap,
     callback: function (name, option, instance) {
       //console.log(name, option, instance);
