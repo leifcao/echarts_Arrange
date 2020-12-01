@@ -32,7 +32,7 @@ let map_label = '#ffffff';
 let mapBorder = '#ffffff';
 let mapTheme_item = '#50b9ff';
 let mapArea = ['#d7efff', '#a7dcff', '#7ccaff', '#50b9ff', '#24a7ff',];
-let regionArea = ['#eba75f','#479fd2','#69c1ac','#ff6f5b','#5bb6cb'];
+let regionArea = ['#eba75f', '#479fd2', '#69c1ac', '#ff6f5b', '#5bb6cb'];
 let mapEmphasis_label = '#234EA5';
 let mapEmphasis_area = '#E5F39B';
 
@@ -43,7 +43,7 @@ let mapEmphasis_area = '#E5F39B';
  **/
 
 // let color3d = ['#168efe',]
-let color3d = [new echarts.graphic.LinearGradient(0,0,0,1,
+let color3d = [new echarts.graphic.LinearGradient(0, 0, 0, 1,
   [{
     offset: 0,
     color: "rgba(54,127,223,1)"
@@ -54,7 +54,7 @@ let color3d = [new echarts.graphic.LinearGradient(0,0,0,1,
     }
   ],
   false
-),new echarts.graphic.LinearGradient(0,0,0,1,
+), new echarts.graphic.LinearGradient(0, 0, 0, 1,
   [{
     offset: 0,
     color: "rgba(89,211,255,1)"
@@ -65,7 +65,7 @@ let color3d = [new echarts.graphic.LinearGradient(0,0,0,1,
     }
   ],
   false
-),{
+), {
   "x": 0,
   "y": 0,
   "x2": 0,
@@ -79,8 +79,7 @@ let color3d = [new echarts.graphic.LinearGradient(0,0,0,1,
     "offset": 1,
     "color": "#26ebba"
   }]
-},'#26ebba']
-
+}, '#26ebba']
 
 
 //动态设置渐变色
@@ -310,7 +309,7 @@ function recursive(obj, property, value) {
  * 将对象变为数组yAxis,series
  **/
 function transition(obj) {
-  let {yAxis1, yAxis2, series} = obj;
+  let {yAxis1, yAxis2} = obj;
   if (yAxis1) {
     obj.yAxis = [yAxis1];
     delete obj.yAxis1;
@@ -319,6 +318,25 @@ function transition(obj) {
     obj.yAxis = [{}, yAxis2];
     delete obj.yAxis2;
   }
-  if (series) obj.series = [obj.series];
+
+  //series的数组的配置  区obj里面的键值
+  Object.keys(obj).forEach(item => {
+    if (item.indexOf('series') !== -1) {
+      var numString = item.slice(6);
+      if (numString) {  //截取不为空时
+        let seriesList = [];
+        for (var i = 0; i < numString.length; i++) {
+          seriesList.push({});
+        }
+        seriesList.push(obj[item]);   // [{},obj[item]]
+        obj.series = seriesList;
+        delete obj[item];
+      } else {
+        obj.series = [obj.series]; //默认一个series时，成立数组
+      }
+    }
+  })
+
+  // if (series) obj.series = [obj.series];
   return obj;
 }
