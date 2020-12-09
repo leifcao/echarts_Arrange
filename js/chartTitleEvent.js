@@ -16,6 +16,7 @@ bodyMain.onclick = ev =>{
       case '堆积柱图': titleLink('柱状图-堆积柱图');break;
       case '阶梯瀑布图': titleLink('柱状图-阶梯瀑布图');break;
       case '3d柱状图-阴影': titleLink('柱状图-3D阴影柱状图');break;
+      case '3d柱状图-方形阴影': titleLink('柱状图-3D方形阴影柱状图');break;
       case '条形图': titleLink('条形图-条形图');break;
       case '胶囊条形图': titleLink('条形图-胶囊条形图');break;
       case '温度条形图': titleLink('条形图-温度条形图');break;
