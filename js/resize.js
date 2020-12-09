@@ -1,4 +1,4 @@
- // 自适应
+ // 图表自适应
  window.onresize = function() {
      resize(Echarts_List);
      //大区下钻地图

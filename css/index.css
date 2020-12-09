@@ -83,6 +83,18 @@ h2 {
     border-bottom: 1px solid #2C3468;
 }
 
+.pic .title:after{
+    content: '';
+    position: absolute;
+    background: url(../img/more.png);
+    background-size: 100% 100%;
+    width: 30px;
+    height: 25px;
+    margin-top: 2px;
+    right: 0px;
+    cursor: pointer;
+}
+
 /*echarts 内容区*/
 .picDetial {
     width: 100%;
