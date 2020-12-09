@@ -62,20 +62,20 @@ let radarOption = () => {
 }
 
 // 普通雷达图
-let radarOneData = {
-  id: 'radarFirst',
-  radar: [
-    {name: '资金周转', max: 6500},
-    {name: '金融理财', max: 30000},
-    {name: '投资', max: 38000},
-    {name: '个人消费', max: 52000},
-    {name: '固定资产', max: 25000},
-    {name: '生产经营', max: 25000}
-  ],
-  seriesData: [{name: '因素', type: 'radar', data: [[4300, 28000, 35000, 50000, 19000, 21000]]}]
-}
-let radarOne_data = dataFormat(radarOneData, 'radar');
-let radarFirst = new radarEcharts(GetOpiton(radarOne_data, radarOption()));
+// let radarOneData = {
+//   id: 'radarFirst',
+//   radar: [
+//     {name: '资金周转', max: 6500},
+//     {name: '金融理财', max: 30000},
+//     {name: '投资', max: 38000},
+//     {name: '个人消费', max: 52000},
+//     {name: '固定资产', max: 25000},
+//     {name: '生产经营', max: 25000}
+//   ],
+//   seriesData: [{name: '因素', type: 'radar', data: [[4300, 28000, 35000, 50000, 19000, 21000]]}]
+// }
+// let radarOne_data = dataFormat(radarOneData, 'radar');
+// let radarFirst = new radarEcharts(GetOpiton(radarOne_data, radarOption()));
 
 // 双重雷达图
 let radarTwoData = {

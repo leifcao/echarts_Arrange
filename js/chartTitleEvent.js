@@ -25,7 +25,7 @@ bodyMain.onclick = ev =>{
       case '正负条形图': titleLink('条形图-正负条形图');break;
       case '折线图': titleLink('折线图-折线图');break;
       case '区域堆积图': titleLink('折线图-区域堆积图');break;
-      case '双Y轴折线图': titleLink('折线图-双Y轴折线图');break;
+      case '双Y折线图': titleLink('折线图-双Y折线图');break;
       case '线柱混搭图': titleLink('折线图-线柱混搭图');break;
       case '正负线柱混搭图': titleLink('折线图-正负线柱混搭图');break;
       case '等分仪表盘': titleLink('仪表盘-仪表盘');break;
@@ -34,7 +34,6 @@ bodyMain.onclick = ev =>{
       case '水环图': titleLink('仪表盘-水环图');break;
       case '圆形仪表盘': titleLink('仪表盘-圆形仪表盘');break;
       case '雷达图': titleLink('雷达图-雷达图');break;
-      case '多边雷达图': titleLink('雷达图-多边雷达图');break;
       case '圆形雷达图': titleLink('雷达图-圆形雷达图');break;
       case '漏斗图': titleLink('漏斗图-漏斗图');break;
       case '气泡图': titleLink('气泡图-气泡图');break;
@@ -50,9 +49,9 @@ bodyMain.onclick = ev =>{
       case 'k线图': titleLink('k线图-k线图');break;
       case '矩形树图': titleLink('矩形树图-矩形树图');break;
       case '桑基图': titleLink('桑基图-桑基图');break;
-      case '关系图': titleLink('关系图-关系图');break;
-      case '横向-树图': titleLink('树图-横向树图');break;
-      case '纵向-树图': titleLink('树图-纵向树图');break;
+      // case '关系图': titleLink('关系图-关系图');break;
+      case '横向树图': titleLink('树图-横向树图');break;
+      case '纵向树图': titleLink('树图-纵向树图');break;
     }
     // console.log(target.innerHTML,target.className)
   }
