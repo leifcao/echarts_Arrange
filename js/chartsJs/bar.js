@@ -119,7 +119,7 @@ let barChartOption = () => {
       {
         name: '',
         type: 'bar',
-        barWidth: '15',
+        barWidth: '40%',
         itemStyle: {
           normal: {
             barBorderRadius: 8,
@@ -383,8 +383,8 @@ let barChartThreeOption = (id) => {
 // 特殊条形图1数据
 let barChartOneData = {
   id: 'barChartFirst',
-  yAxis: ['角鲨烷', '水解胶原', '羟苯甲酯', '羊毛脂', '咪唑烷基脲', '泛醇', '矿油'],
-  seriesData: [{name: '', type: 'bar', data: [120, 150, 180, 200, 220, 250, 300]}]
+  yAxis: ['角鲨烷', '水解胶原', '羟苯甲酯', '羊毛脂', '咪唑烷基脲'],
+  seriesData: [{name: '', type: 'bar', data: [120, 150, 180, 200, 220]}]
 }
 
 // 胶囊条形图数据
@@ -411,9 +411,9 @@ let barChartThreeData = {
 let barChartFourData = {
   id: 'barChartFourth',
   legend: ['2019年', '2020年'],
-  yAxis: ['巴西', '印尼', '美国', '印度', '中国',],
-  seriesData: [{name: '2019年', type: 'bar', data: [18203, 23489, 29034, 104970, 131744]},
-    {name: '2020年', type: 'bar', data: [19325, 23438, 31000, 121594, 134141]},
+  yAxis: [ '印尼', '美国', '印度', '中国'],
+  seriesData: [{name: '2019年', type: 'bar', data: [23489, 29034, 104970, 131744]},
+    {name: '2020年', type: 'bar', data: [23438, 31000, 121594, 134141]},
   ]
 }
 
@@ -421,10 +421,10 @@ let barChartFourData = {
 let barChartFiveData = {
   id: 'barChartFifth',
   legend: ['猪肉类', '牛羊肉类', '鸡鸭类'],
-  yAxis: ['陕西', '山西', '四川', '北京', '河北', '甘肃', '内蒙'],
-  seriesData: [{name: '猪肉类', type: 'bar', data: [320, 302, 301, 334, 390, 330, 120]},
-    {name: '牛羊肉类', type: 'bar', data: [120, 132, 101, 134, 90, 230, 210]},
-    {name: '鸡鸭类', type: 'bar', data: [220, 182, 191, 234, 290, 330, 310]},
+  yAxis: ['陕西', '山西', '四川', '北京'],
+  seriesData: [{name: '猪肉类', type: 'bar', data: [320, 302, 301, 334]},
+    {name: '牛羊肉类', type: 'bar', data: [120, 132, 101, 134]},
+    {name: '鸡鸭类', type: 'bar', data: [220, 182, 191, 234]},
   ]
 }
 
@@ -432,9 +432,9 @@ let barChartFiveData = {
 let barChartSevenData = {
   id: 'barChartSeventh',
   legend: ['等待中', '生产中'],
-  yAxis: ['分拣', '清洗', '抛光', '研磨', '脱膜', '切割', '压膜', '压膜分配',],
-  seriesData: [{name: '等待中', type: 'bar', data: [400, 241, 360, 320, 302, 341, 374, 390]},
-    {name: '生产中', type: 'bar', data: [-120, -180, -120, -120, -132, -101, -134, -190]},
+  yAxis: ['分拣', '清洗', '抛光', '研磨',],
+  seriesData: [{name: '等待中', type: 'bar', data: [400, 241, 360, 320,]},
+    {name: '生产中', type: 'bar', data: [-120, -180, -120, -120]},
   ]
 }
 
