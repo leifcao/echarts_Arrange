@@ -156,6 +156,10 @@ dataList['columnar'] = (data) => {
       }
     }
   })
+  seriesData.forEach((item)=>{
+    // 字体文本位置
+    item.barMaxWidth = '35%';
+  });
   return data;
 }
 
@@ -166,6 +170,7 @@ dataList['columnarStack'] = (data) => {
     // 字体文本位置
     item.label = {normal: {position: 'inside'}};
     item.stack = '总量';
+    item.barMaxWidth = '35%';
   })
   return data;
 }
@@ -180,6 +185,7 @@ dataList['columnarLadder'] = (data) => {
       item.emphasis = {itemStyle: {barBorderColor: 'rgba(0,0,0,0)', color: 'rgba(0,0,0,0)'}};
     }
     item.stack = '总量';
+    item.barMaxWidth = '30%';
   })
   return data;
 }
@@ -392,7 +398,7 @@ dataList['dataChart'] = (data) => {
 dataList['sankey'] = (data) => {
   const {seriesData} = data;
   seriesData[0].data.forEach((item, i) => {
-    item.itemStyle = {color: color = i <= 4 ? colorList[i] : colorList[i % 5]};
+    item.itemStyle = {color:  i <= 4 ? colorList[i] : colorList[i % 5]};
   })
 
   return data;
