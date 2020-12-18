@@ -34,7 +34,6 @@ let histogramOption = () => {
     series: [{
       name: '',
       type: 'bar',
-      barWidth: '15',
       label: {
         normal: {
           show: true,
