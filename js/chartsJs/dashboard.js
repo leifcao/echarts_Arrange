@@ -172,7 +172,7 @@ var dashboardTwoOption = () => {
     //圆环位置和大小
     polar: {
       center: ['50%', '50%'],
-      radius: '180'
+      radius: '140%'
     },
     series: [{
       name: '内环值',
