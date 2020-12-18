@@ -4,7 +4,7 @@ let horizontalTreeOption = (data, id) => {
     index % 2 === 0 && (datum.collapsed = true);
   });
   const option = {
-    id: id,
+    id: '',
     tooltip: {
       trigger: 'item',
       triggerOn: 'mousemove'
@@ -12,7 +12,7 @@ let horizontalTreeOption = (data, id) => {
     series: [
       {
         type: 'tree',
-        data: [data],
+        data: [],
         top: '1%',
         left: '7%',
         bottom: '1%',
@@ -50,14 +50,20 @@ let horizontalTreeOption = (data, id) => {
 
 let horizontalTreeEchart;
 $.get('js/treeJson/HorizontalTree.json', (data) => {
-  horizontalTreeEchart = new Echarts(horizontalTreeOption(data, 'horizontalTree'));
+  let datas = {
+    id:'horizontalTree',
+    seriesData:[{data:[data]}],
+  }
+  // horizontalTreeEchart = new Echarts(horizontalTreeOption(data, 'horizontalTree'));
+  horizontalTreeEchart = new Echarts(GetOpiton(datas,horizontalTreeOption(data)));
+
   horizontalTreeEchart.setOption();
 });
 
 // 关系树图-水平
-let hverticalTreeOption = (data, id) => {
+let verticalTreeOption = () => {
   const option = {
-    id:id,
+    id:'',
     tooltip: {
       trigger: 'item',
       triggerOn: 'mousemove'
@@ -65,7 +71,7 @@ let hverticalTreeOption = (data, id) => {
     series: [
       {
         type: 'tree',
-        data: [data],
+        data: [],
         left: '2%',
         right: '2%',
         top: '15%',
@@ -107,11 +113,17 @@ let hverticalTreeOption = (data, id) => {
   };
   return option;
 }
+let verticalTreeEchart;
 $.get('js/treeJson/HorizontalTree.json', (data) => {
-  verticalTreeEchart = new Echarts(hverticalTreeOption(data, 'verticalTree'));
+  let datas = {
+    id:'verticalTree',
+    seriesData:[{data:[data]}],
+  }
+  // verticalTreeEchart = new Echarts(verticalTreeOption(data, 'verticalTree'));
+  verticalTreeEchart = new Echarts(GetOpiton(datas,verticalTreeOption()));
   verticalTreeEchart.setOption();
+  verticalTreeEchart.showOption()
 });
-
 
 
 /*
