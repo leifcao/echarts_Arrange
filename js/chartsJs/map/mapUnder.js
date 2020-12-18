@@ -642,7 +642,7 @@ var mapUnder_visualMap = {
   }],
 };
 
-mapUnderData = [{name: '广东省', value: 111},
+let mapUnderData = [{name: '广东省', value: 111},
   {name: '台湾省', value: 500}, {name: '湖南省', value: 800},
   {name: '广州市', value: 250},]
 
