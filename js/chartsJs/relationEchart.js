@@ -186,6 +186,6 @@ let relationOneOption = () => {
 }
 
 //关系图1
-relationOne_data = dataFormat(relationOneData,'relation')
+let relationOne_data = dataFormat(relationOneData,'relation')
 let relationFirst = new relationEchart(GetOpiton(relationOne_data, relationOneOption()));
 // relationFirst.showOption();
